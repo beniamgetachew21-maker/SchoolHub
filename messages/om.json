@@ -1,0 +1,58 @@
+{
+    "Marketing": {
+        "Hero": {
+            "title": "Barnoota Itoophiyaa <br></br> Jijjiiru",
+            "subtitle": "Qindeessaa odeeffannoo addaan cite haqi. Platformii teeknooloojii barnootaa Itoophiyaaf ijaarame fayyadamuuf dhaabbatoota join godhaa.",
+            "getDemo": "AGARSIISA ARGADHAA",
+            "explore": "FURMAATAALEE SAKATTA'AA",
+            "badge": "Barnoota Itoophiyaa Jijjiiraa Jirra"
+        },
+        "Nav": {
+            "solutions": "Furmaataalee",
+            "impact": "Dhiibbaa",
+            "plans": "Karooraawwan",
+            "resources": "Maddaawwan",
+            "getDemo": "AGARSIISA ARGADHAA",
+            "signup": "GALMEESSAA",
+            "login": "Customer Login",
+            "parentsStudents": "Warra fi Barattoota"
+        },
+        "Stakeholders": {
+            "title": "Hirmaattota Hundaaf Kan Qophaa'e",
+            "subtitle": "Muuxannoowwan miseensa hawaasa barnootaa keessan hunda jabeessan.",
+            "admins": "Bulchiinsaaf",
+            "adminsDesc": "Hubannoowwan dhaabbata hunda qaqqabaa, galmeewwan kaampaasii hedduu bulchaa, fi adeemsa hojii faayinaansii xaxamaa ta'an dashboard tokko irraa bifa otomaatikiin raawwadhaa.",
+            "adminsLink": "Furmaataalee Distriiktii",
+            "educators": "Barsiisotaaf",
+            "educatorsDesc": "Qabxii harkaatiin kennamu %40 hir'isaa. Meeshaalee madaallii AI fi hordoffii argama barattootaa otomaatikiin barsiisuu irratti xiyyeeffadhaa.",
+            "educatorsLink": "Meeshaalee Barsiisotaa",
+            "parents": "Warra fi Barattootaaf",
+            "parentsDesc": "Qabxii waqtaawaa, sagantaa barnootaa fi madaallii kaffaltii qaqqabaa. Ergaa kallattii fi beeksisa bilbilaa waliin walitti hidhata qabaadhaa.",
+            "parentsLink": "Portaalii Sakatta'aa"
+        },
+        "Landing": {
+            "platformBadge": "Platformii Walitti Hidhame",
+            "platformTitle": "Dhaabbata Beekamaa Geggeessuuf <br></br> Waan Isin Barbaachisu Hunda",
+            "analyticsTitle": "Xiinxala Addunyaa",
+            "analyticsDesc": "Safartuuwwan raawwii wal bira qabaman kaampaasota fi naannolee gidduutti.",
+            "mobileTitle": "Appilikeeshinii Moobaayilaa Walitti Hidhame",
+            "mobileDesc": "Akeekkachiisni waqtaawaa warra fi barattootaaf meeshaa kamiyyuu irratti.",
+            "securityTitle": "Nageenya Gamtaa",
+            "securityDesc": "Addaan baafama odeeffannoo subdomain irratti hundaa'e fi galmee deebii gadi fagoo.",
+            "platformLink": "WAA'EE FURMAATAA HEECHISEE BARADHUU",
+            "insightBadge": "Hubannoo Waqtaawaa",
+            "testimonial": "\"Akkuma Oromoon jedhu, 'Barumsi bu'uura jireenyaati.' EthioEdu bu'uura kana distriiktii keenyaaf jabeessera. Erga portaalii moobaayilaa jalqabnee as hirmaannaan warraa <spanTag>%30 dabaleera</spanTag>.\"",
+            "testimonialAuthor": "Dr. Saamu'eel Kafaalee",
+            "testimonialRole": "Superintendent, Distriiktii Finfinnee",
+            "ctaTitle": "Mana Barumsaa Keessan Jijjiiruuf Qophiidhaa?",
+            "ctaDesc": "Barnoota Itoophiyaa jijjiiruuf dhaabbatoota gara fuulduraa yaadan dhibba malee lakkaa'aman kanneen kanaan dura gara EthioEdu ol guddan join godhaa. Har'a agarsiisa dhuunfaa gaafadhaa.",
+            "ctaPrimary": "AGARSIISA ARGADHAA",
+            "ctaSecondary": "OOGESSA WALIIN HAASA'AA"
+        }
+    },
+    "Common": {
+        "attendance": "Argamuu",
+        "grades": "Bu'aa",
+        "student_registration": "Galmee Barataa"
+    }
+}

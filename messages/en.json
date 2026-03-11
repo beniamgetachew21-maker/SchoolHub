@@ -1,0 +1,58 @@
+{
+    "Marketing": {
+        "Hero": {
+            "title": "Transforming Ethiopian <br></br> Education",
+            "subtitle": "Move beyond data silos. Join forward-thinking institutions using the most connected, innovative educational technology platform built for Ethiopia.",
+            "getDemo": "GET A DEMO",
+            "explore": "EXPLORE SOLUTIONS",
+            "badge": "Transforming Ethiopian Education"
+        },
+        "Nav": {
+            "solutions": "Solutions",
+            "impact": "Impact",
+            "plans": "Plans",
+            "resources": "Resources",
+            "getDemo": "GET A DEMO",
+            "signup": "SIGN UP",
+            "login": "Customer Login",
+            "parentsStudents": "Parents & Students"
+        },
+        "Stakeholders": {
+            "title": "Personalized for Every Stakeholder",
+            "subtitle": "Tailored experiences that empower every member of your educational community.",
+            "admins": "For Administrators",
+            "adminsDesc": "Gain institution-wide insights, manage multi-campus records, and automate complex financial workflows from one dashboard.",
+            "adminsLink": "District Solutions",
+            "educators": "For Educators",
+            "educatorsDesc": "Reduce manual grading by 40%. Focus on teaching with AI-powered assessment tools and automated attendance tracking.",
+            "educatorsLink": "Teacher Tools",
+            "parents": "For Parents & Students",
+            "parentsDesc": "Access real-time grades, schedules, and fee balance. Stay connected with direct messaging and push notifications.",
+            "parentsLink": "Explore Portals"
+        },
+        "Landing": {
+            "platformBadge": "The Unified Platform",
+            "platformTitle": "Everything You Need <br></br> To Run a Smart Institution",
+            "analyticsTitle": "Global Analytics",
+            "analyticsDesc": "Comparative performance metrics across campuses and regions.",
+            "mobileTitle": "Connected Mobile App",
+            "mobileDesc": "Real-time alerts for parents and students on any device.",
+            "securityTitle": "Enterprise Security",
+            "securityDesc": "Subdomain-based data isolation and deep audit logging.",
+            "platformLink": "LEARN MORE ABOUT SOLUTIONS",
+            "insightBadge": "Real-Time Insights",
+            "testimonial": "\"As the Ethiopian saying goes, 'Education is the foundation of life.' EthioEdu has strengthened that foundation for our district. We've seen a <spanTag>30% increase</spanTag> in parent engagement since launching the mobile portal.\"",
+            "testimonialAuthor": "Dr. Samuel Kefale",
+            "testimonialRole": "Superintendent, Addis Ababa District",
+            "ctaTitle": "Ready to Transform Your School?",
+            "ctaDesc": "Join hundreds of forward-thinking institutions that have already upgraded to EthioEdu to transform Ethiopian education. Request a personalized demo today.",
+            "ctaPrimary": "REQUEST A DEMO",
+            "ctaSecondary": "TALK TO AN EXPERT"
+        }
+    },
+    "Common": {
+        "attendance": "Attendance",
+        "grades": "Grades",
+        "student_registration": "Student Registration"
+    }
+}

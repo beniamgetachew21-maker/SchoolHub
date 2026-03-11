@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium Emerald & Deep Sea Palette */
+    --background: 210 40% 98%; /* slate-50 */
+    --foreground: 222 47% 11%; /* slate-900 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 160 84% 33%;
+    /* Emerald */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 199 89% 48%;
+    /* Azure Blue */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 160 84% 33%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar Variables - Dark Blue/Teal Refresh */
+    --sidebar-background: 217 33% 12%; /* Deep Navy */
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 160 84% 33%; /* Emerald Active */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 84% 33%; /* Emerald Active Accents */
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 160 84% 33%;
+
+    /* Header Banner Variable */
+    --header-banner: 109 48% 13%; /* Dark Green #172D13 */
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 160 84% 43%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 199 89% 58%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 160 84% 43%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Ethiopic Font Support */
+  [lang="am"],
+  [lang="om"] {
+    font-family: var(--font-ethiopic), ui-sans-serif, system-ui;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 dark:bg-black/70 dark:border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-white/50 backdrop-blur-lg border border-white/30 shadow-xl dark:bg-black/40 dark:border-white/10;
+  }
+
+  .emerald-gradient {
+    @apply bg-gradient-to-br from-emerald-600 to-teal-700;
+  }
+}

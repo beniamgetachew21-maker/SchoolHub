@@ -1,0 +1,30 @@
+{
+    "student1": {
+        "url": "https://picsum.photos/seed/1/400/400",
+        "hint": "female student"
+    },
+    "student2": {
+        "url": "https://picsum.photos/seed/2/400/400",
+        "hint": "male student"
+    },
+    "student3": {
+        "url": "https://picsum.photos/seed/3/400/400",
+        "hint": "male student"
+    },
+    "student4": {
+        "url": "https://picsum.photos/seed/4/400/400",
+        "hint": "female student"
+    },
+    "student5": {
+        "url": "https://picsum.photos/seed/5/400/400",
+        "hint": "male student"
+    },
+    "student6": {
+        "url": "https://picsum.photos/seed/6/400/400",
+        "hint": "female student"
+    },
+    "defaultUser": {
+        "url": "https://picsum.photos/seed/user/400/400",
+        "hint": "person avatar"
+    }
+}

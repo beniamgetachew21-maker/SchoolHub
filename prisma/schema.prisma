@@ -1,0 +1,1976 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── NEW SYSTEM DOMAINS ──────────────────────────────────────────────────
+
+model User {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  roleId       String
+  entityId     String? // studentId or employeeId
+  entityType   String? // "Student", "Employee", "Parent"
+  language     String   @default("en") // en, am, om
+  role         Role     @relation(fields: [roleId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  notifications Notification[]
+  auditLogs     AuditLog[]
+}
+
+model Role {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  permissions Permission[]
+  users       User[]
+
+  @@unique([name, tenantId])
+}
+
+model Permission {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id     String @id @default(uuid())
+  name   String
+  module String
+  roles  Role[]
+
+  @@unique([name, tenantId])
+}
+
+model AcademicYear {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String         @id @default(uuid())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  status    String         @default("Upcoming")
+  terms     AcademicTerm[]
+  semesters Semester[]
+}
+
+model AcademicTerm {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String       @id @default(uuid())
+  yearId    String
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  year      AcademicYear @relation(fields: [yearId], references: [id])
+
+  courseOfferings CourseOffering[]
+  exams           Exam[]
+}
+
+model ClassSection {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String    @id @default(uuid())
+  className     String
+  sectionName   String
+  capacity      Int
+  headTeacherId String?
+  students      Student[]
+  courses       Course[]
+  classPeriods  ClassPeriod[]
+  exams         Exam[]
+}
+
+model Course {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String         @id @default(uuid())
+  name        String
+  code        String         @unique
+  description String?
+  credits     Float?
+  department  String?
+  modules     LMSModule[]
+  sections    ClassSection[]
+
+  prerequisitesFor CoursePrerequisite[] @relation("CoursePrereqs")
+  prerequisites    CoursePrerequisite[] @relation("PrereqFor")
+  offerings        CourseOffering[]
+  forums           DiscussionForum[]
+  classPeriods     ClassPeriod[]
+  examSubjects     ExamSubject[]
+}
+
+model LMSModule {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String   @id @default(uuid())
+  courseId String
+  title    String
+  order    Int
+  lessons  Lesson[]
+  course   Course   @relation(fields: [courseId], references: [id])
+}
+
+model Lesson {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String       @id @default(uuid())
+  moduleId    String
+  title       String
+  content     String?
+  videoUrl    String?
+  order       Int
+  assignments Assignment[]
+  resources   Resource[]
+  module      LMSModule    @relation(fields: [moduleId], references: [id])
+
+  quizzes Quiz[]
+}
+
+model Assignment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String       @id @default(uuid())
+  lessonId    String
+  title       String
+  description String?
+  dueDate     DateTime
+  maxMarks    Float
+  submissions Submission[]
+  lesson      Lesson       @relation(fields: [lessonId], references: [id])
+}
+
+model Submission {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String     @id @default(uuid())
+  assignmentId String
+  studentId    String
+  contentUrl   String?
+  submittedAt  DateTime   @default(now())
+  status       String     @default("Pending")
+  marks        Float?
+  feedback     String?
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  student      Student    @relation(fields: [studentId], references: [studentId])
+}
+
+model Resource {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String @id @default(uuid())
+  lessonId String
+  title    String
+  type     String
+  url      String
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
+}
+
+model AdmissionInterview {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  applicationId String
+  interviewerId String
+  date          DateTime
+  status        String      @default("Scheduled")
+  score         Float?
+  comments      String?
+  application   Application @relation(fields: [applicationId], references: [id])
+}
+
+model EntranceExam {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  applicationId String
+  subject       String
+  date          DateTime
+  marksObtained Float?
+  maxMarks      Float
+  status        String      @default("Pending")
+  application   Application @relation(fields: [applicationId], references: [id])
+}
+
+// ─── UPDATED EXISTING MODELS ───────────────────────────────────────────
+
+model Application {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id                  String                @id @default(uuid())
+  name                String
+  className           String                @map("class")
+  date                String
+  status              String
+  dob                 String
+  gender              String
+  email               String
+  phone               String
+  address             String
+  parent              String
+  parentPhone         String
+  birthCertificate    String
+  birthCertificateUrl String?
+  previousMarksheet   String?
+  motherTongue        String?
+  specialNeedsType    String?
+  region              String?
+  isRefugee           Boolean               @default(false)
+  interviews          AdmissionInterview[]
+  exams               EntranceExam[]
+  documents           ApplicationDocument[]
+  decision            AdmissionDecision?
+  offer               AdmissionOffer?
+  waitlistEntry       Waitlist?
+}
+
+model Student {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  studentId         String                 @id
+  admissionNumber   String                 @unique
+  name              String
+  className         String                 @map("class")
+  parent            String
+  status            String
+  email             String
+  avatarUrl         String
+  dob               String?
+  gender            String?
+  address           String?
+  enrollmentDate    String?
+  allergies         String[]
+  conditions        String[]
+  bloodGroup        String?
+  emergencyName     String?
+  emergencyRelation String?
+  emergencyPhone    String?
+  motherTongue      String?
+  specialNeedsType  String?
+  region            String?
+  isRefugee         Boolean                @default(false)
+  sectionId         String?
+  section           ClassSection?          @relation(fields: [sectionId], references: [id])
+  submissions       Submission[]
+  enrollments       Enrollment[]
+  studentGuardians  StudentGuardian[]
+  studentContact    StudentContact?
+  documents         StudentDocument[]
+  statusHistory     StudentStatusHistory[]
+  healthRecords     StudentHealthRecord[]
+  quizAttempts      QuizAttempt[]
+  grades            Grade[]
+}
+
+model Enrollment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String    @id @default(uuid())
+  studentId    String
+  academicYear String
+  className    String
+  sectionName  String?
+  status       String    @default("Active") // "Active", "Withdrawn", "Promoted", "Repeated"
+  startDate    DateTime  @default(now())
+  endDate      DateTime?
+  student      Student   @relation(fields: [studentId], references: [studentId])
+}
+
+model Employee {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  employeeId            String   @id
+  employeeCode          String   @unique
+  name                  String
+  dob                   String
+  gender                String
+  nationality           String?
+  nationalId            String?
+  passport              String?
+  department            String
+  designation           String
+  dateOfJoining         String
+  email                 String
+  status                String
+  avatarUrl             String
+  salary                Float
+  allowances            Float?
+  deductions            Float?
+  branch                String?
+  jobType               String?
+  lineManager           String?
+  paymentMethod         String?
+  payPeriod             String?
+  bankAccount           String?
+  maritalStatus         String?
+  spouseWorking         Boolean?
+  spouseFirstName       String?
+  spouseMiddleName      String?
+  spouseLastName        String?
+  spouseBirthDate       String?
+  spouseNationality     String?
+  spouseNationalId      String?
+  spousePassport        String?
+  spouseEthnicity       String?
+  spouseReligion        String?
+  childrenCount         Int?
+  blog                  String?
+  officePhone           String?
+  mobilePhone           String?
+  housePhone            String?
+  address1              String?
+  address2              String?
+  city                  String?
+  postcode              String?
+  state                 String?
+  country               String?
+  emergencyFirstName    String?
+  emergencyMiddleName   String?
+  emergencyLastName     String?
+  emergencyRelationship String?
+  emergencyMobile       String?
+  emergencyHouse        String?
+  emergencyOffice       String?
+  height                Float?
+  weight                Float?
+  bloodType             String?
+  payrollRecords        PayrollRecord[]
+  classPeriods          ClassPeriod[]
+}
+
+model Candidate {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  candidateId String @id
+  name        String
+  position    String
+  stage       String
+  appliedDate String
+}
+
+model OnboardingTask {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  taskId     String  @id
+  employeeId String
+  taskName   String
+  status     String
+  dueDate    String?
+}
+
+model LeaveRequest {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  requestId  String @id
+  employeeId String
+  leaveType  String
+  startDate  String
+  endDate    String
+  daysCount  Int
+  reason     String
+  status     String
+}
+
+model LeavePolicy {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String @id
+  name        String
+  days        Int
+  description String
+}
+
+model PayrollRecord {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String    @id @default(uuid())
+  employeeId  String
+  month       String    // e.g. "2024-09"
+  basicSalary Float
+  allowances  Float     @default(0)
+  deductions  Float     @default(0)
+  netSalary   Float
+  status      String    @default("Pending") // "Pending", "Paid"
+  paidDate    DateTime?
+  employee    Employee  @relation(fields: [employeeId], references: [employeeId])
+
+  @@unique([employeeId, month, tenantId])
+}
+
+model StudentLeaveRequest {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  requestId String @id
+  studentId String
+  leaveType String
+  startDate String
+  endDate   String
+  daysCount Int
+  status    String
+  reason    String
+}
+
+model Book {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  bookId          Int    @id @default(autoincrement())
+  title           String
+  author          String
+  isbn            String
+  genre           String
+  totalCopies     Int
+  availableCopies Int
+}
+
+model BorrowRecord {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  recordId   Int     @id @default(autoincrement())
+  studentId  String
+  bookId     Int
+  borrowDate String
+  dueDate    String
+  returnDate String?
+}
+
+model BorrowRequest {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  requestId   String @id
+  studentId   String
+  bookId      Int
+  requestDate String
+  status      String
+}
+
+model Invoice {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  invoiceId   String  @id
+  studentId   String
+  amount      Float
+  dueDate     String
+  status      String
+  description String?
+}
+
+model Payment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  paymentId String @id
+  studentId String
+  invoiceId String
+  amount    Float
+  date      String
+  method    String
+}
+
+model Transaction {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String @id
+  date        String
+  description String
+  type        String
+  amount      Float
+  method      String
+}
+
+model FeeStructure {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  structureId String @id
+  name        String
+  baseAmount  Float?
+  currency    String? @default("ETB")
+  items       Json
+}
+
+model Vehicle {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  vehicleId     String  @id
+  vehicleNumber String
+  model         String
+  capacity      Int
+  status        String
+  driverId      String?
+}
+
+model Driver {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  driverId      String @id
+  name          String
+  licenseNumber String
+  phone         String
+  status        String
+}
+
+model Route {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  routeId   String @id
+  routeName String
+  vehicleId String
+  driverId  String
+  stops     Int
+  students  Int
+  status    String
+}
+
+model Classroom {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  roomId String  @id
+  name   String
+  isLab  Boolean
+  classPeriods ClassPeriod[]
+}
+
+model Subject {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  subjectId String @id
+  name      String
+  teacherId String
+}
+
+model Hostel {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  hostelId      String @id
+  name          String
+  hostelType    String @map("type")
+  wardenId      String
+  totalRooms    Int
+  occupiedRooms Int
+}
+
+model Room {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  roomId     String  @id
+  hostelId   String
+  roomNumber String
+  roomType   String  @map("type")
+  status     String
+  studentId  String?
+}
+
+model InventoryItem {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  itemId          String  @id
+  name            String
+  category        String
+  quantity        Int
+  status          String
+  purchasePrice   Float?
+  purchaseDate    String?
+  warrantyEndDate String?
+  imageUrl        String?
+  imageHint       String?
+  isForSale       Boolean
+}
+
+model AssetAllocation {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  allocationId String  @id
+  itemId       String
+  assigneeId   String
+  assigneeType String
+  issueDate    String
+  dueDate      String
+  returnDate   String?
+}
+
+model Vendor {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  vendorId      String @id
+  name          String
+  contactPerson String
+  email         String
+  phone         String
+}
+
+model PurchaseOrder {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  poId        String @id
+  vendorId    String
+  orderDate   String
+  items       Json
+  totalAmount Float
+  status      String
+}
+
+model Alumni {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  alumniId        String  @id
+  name            String
+  graduationYear  Int
+  major           String
+  currentCompany  String
+  currentPosition String
+  email           String
+  linkedinUrl     String?
+  avatarUrl       String
+}
+
+model Club {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  clubId           String @id
+  name             String
+  description      String
+  facultyAdvisorId String
+  memberCount      Int
+  imageUrl         String
+  imageHint        String
+}
+
+model SubscriberList {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id              String @id
+  name            String
+  subscriberCount Int
+}
+
+model Achievement {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  achievementId String @id
+  studentId     String
+  achievement   String
+  date          String
+  category      String
+}
+
+model DisciplinaryRecord {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  recordId    String @id
+  studentId   String
+  date        String
+  incident    String
+  actionTaken String
+  reportedBy  String
+  severity    String
+}
+
+model Assessment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  assessmentId String  @id
+  name         String
+  type         String
+  subject      String
+  maxMarks     Int
+  date         String
+  isCCA        Boolean @default(false)
+}
+
+model AssessmentResult {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  resultId      String  @id
+  assessmentId  String
+  studentId     String
+  marksObtained Float
+  grade         String
+  remarks       String?
+}
+
+model AttendanceSummary {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  studentId   String @id
+  totalDays   Int
+  presentDays Int
+  absentDays  Int
+  leaveDays   Int
+}
+
+model ClassPeriod {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String       @id @default(uuid())
+  sectionId     String
+  courseId      String
+  teacherId     String
+  roomId        String
+  dayOfWeek     Int          // 1 = Monday, 5 = Friday
+  startTime     String       // e.g., "08:00"
+  endTime       String       // e.g., "08:45"
+  
+  section       ClassSection @relation(fields: [sectionId], references: [id])
+  course        Course       @relation(fields: [courseId], references: [id])
+  teacher       Employee     @relation(fields: [teacherId], references: [employeeId])
+  room          Classroom    @relation(fields: [roomId], references: [roomId])
+
+  @@unique([roomId, dayOfWeek, startTime, tenantId], name: "room_time_conflict")
+  @@unique([teacherId, dayOfWeek, startTime, tenantId], name: "teacher_time_conflict")
+  @@unique([sectionId, dayOfWeek, startTime, tenantId], name: "section_time_conflict")
+}
+
+// --- 0. SAAS CORE: MULTI-TENANCY ---
+model Tenant {
+  id           String   @id @default(uuid())
+  name         String // e.g. "Addis Ababa Academy"
+  domain       String?  @unique
+  contactEmail String
+  contactPhone String?
+  address      String?
+  logoUrl      String?
+  status       String   @default("Active") // "Active", "Suspended"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  subscriptionId String?
+  subscription   TenantSubscription? @relation(fields: [subscriptionId], references: [id])
+
+  // Inverse Relations for Data Isolation
+  users                       User[]
+  roles                       Role[]
+  permissions                 Permission[]
+  academicYears               AcademicYear[]
+  academicTerms               AcademicTerm[]
+  classSections               ClassSection[]
+  courses                     Course[]
+  lMSModules                  LMSModule[]
+  lessons                     Lesson[]
+  assignments                 Assignment[]
+  submissions                 Submission[]
+  resources                   Resource[]
+  admissionInterviews         AdmissionInterview[]
+  entranceExams               EntranceExam[]
+  applications                Application[]
+  students                    Student[]
+  enrollments                 Enrollment[]
+  employees                   Employee[]
+  candidates                  Candidate[]
+  onboardingTasks             OnboardingTask[]
+  leaveRequests               LeaveRequest[]
+  leavePolicys                LeavePolicy[]
+  studentLeaveRequests        StudentLeaveRequest[]
+  books                       Book[]
+  borrowRecords               BorrowRecord[]
+  borrowRequests              BorrowRequest[]
+  invoices                    Invoice[]
+  payments                    Payment[]
+  transactions                Transaction[]
+  feeStructures               FeeStructure[]
+  vehicles                    Vehicle[]
+  drivers                     Driver[]
+  routes                      Route[]
+  classrooms                  Classroom[]
+  subjects                    Subject[]
+  hostels                     Hostel[]
+  rooms                       Room[]
+  inventoryItems              InventoryItem[]
+  assetAllocations            AssetAllocation[]
+  vendors                     Vendor[]
+  purchaseOrders              PurchaseOrder[]
+  alumnis                     Alumni[]
+  clubs                       Club[]
+  subscriberLists             SubscriberList[]
+  achievements                Achievement[]
+  disciplinaryRecords         DisciplinaryRecord[]
+  assessments                 Assessment[]
+  assessmentResults           AssessmentResult[]
+  attendanceSummarys          AttendanceSummary[]
+  payrollRecords              PayrollRecord[]
+  systemSettings              SystemSetting[]
+  notifications               Notification[]
+  announcementBoards          AnnouncementBoard[]
+  auditLogs                   AuditLog[]
+  classPeriods                ClassPeriod[]
+  attachments                 Attachment[]
+  campuss                     Campus[]
+  schools                     School[]
+  facultys                    Faculty[]
+  departments                 Department[]
+  programs                    Program[]
+  academicLevels              AcademicLevel[]
+  semesters                   Semester[]
+  guardians                   Guardian[]
+  studentGuardians            StudentGuardian[]
+  studentContacts             StudentContact[]
+  studentDocuments            StudentDocument[]
+  studentStatusHistorys       StudentStatusHistory[]
+  studentHealthRecords        StudentHealthRecord[]
+  applicationDocuments        ApplicationDocument[]
+  admissionDecisions          AdmissionDecision[]
+  admissionOffers             AdmissionOffer[]
+  waitlists                   Waitlist[]
+  courseCategorys             CourseCategory[]
+  coursePrerequisites         CoursePrerequisite[]
+  courseOfferings             CourseOffering[]
+  schedules                   Schedule[]
+  timetableSlots              TimetableSlot[]
+  timetableEntrys             TimetableEntry[]
+  teacherAssignments          TeacherAssignment[]
+  roomAssignments             RoomAssignment[]
+  examSchedules               ExamSchedule[]
+  attendanceSessions          AttendanceSession[]
+  studentAttendances          StudentAttendance[]
+  teacherAttendances          TeacherAttendance[]
+  attendanceTypes             AttendanceType[]
+  attendanceReports           AttendanceReport[]
+  examTypes                   ExamType[]
+  examSubjects                ExamSubject[]
+  grades                      Grade[]
+  gradingScales               GradingScale[]
+  transcripts                 Transcript[]
+  reportCards                 ReportCard[]
+  gPARecords                  GPARecord[]
+  quizs                       Quiz[]
+  quizQuestions               QuizQuestion[]
+  quizAnswers                 QuizAnswer[]
+  quizAttempts                QuizAttempt[]
+  discussionForums            DiscussionForum[]
+  forumPosts                  ForumPost[]
+  studentFees                 StudentFee[]
+  paymentMethods              PaymentMethod[]
+  scholarships                Scholarship[]
+  financialAids               FinancialAid[]
+  discounts                   Discount[]
+  refunds                     Refund[]
+  payrolls                    Payroll[]
+  staffProfiles               StaffProfile[]
+  staffDepartments            StaffDepartment[]
+  staffPositions              StaffPosition[]
+  contracts                   Contract[]
+  staffAttendances            StaffAttendance[]
+  leaveTypes                  LeaveType[]
+  performanceReviews          PerformanceReview[]
+  bookCategorys               BookCategory[]
+  bookAuthors                 BookAuthor[]
+  bookCopys                   BookCopy[]
+  bookLoans                   BookLoan[]
+  bookReservations            BookReservation[]
+  libraryMembers              LibraryMember[]
+  beds                        Bed[]
+  roomAssignmentLogs          RoomAssignmentLog[]
+  hostelFees                  HostelFee[]
+  hostelMaintenances          HostelMaintenance[]
+  buss                        Bus[]
+  busRouteInfos               BusRouteInfo[]
+  busStops                    BusStop[]
+  busAssignments              BusAssignment[]
+  studentTransportAssignments StudentTransportAssignment[]
+  messages                    Message[]
+  messageThreads              MessageThread[]
+  messageRecipients           MessageRecipient[]
+  emailLogs                   EmailLog[]
+  smsLogs                     SmsLog[]
+  pushNotifications           PushNotification[]
+  reports                     Report[]
+  reportTemplates             ReportTemplate[]
+  analyticsEvents             AnalyticsEvent[]
+  dashboards                  Dashboard[]
+  kpiMetrics                  KpiMetric[]
+  exams                       Exam[]
+}
+
+model TenantSubscription {
+  id          String   @id @default(uuid())
+  plan        String // "Starter", "Growth", "Enterprise"
+  status      String   @default("Active") // "Active", "Trial", "Expired"
+  startDate   DateTime
+  endDate     DateTime
+  maxStudents Int? // null = unlimited
+  tenants     Tenant[]
+}
+
+// --- 1. CORE SYSTEM ADDITIONS ---
+model SystemSetting {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+}
+
+model Notification {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model AnnouncementBoard {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  target    String // "All", "Students", "Teachers", "Parents"
+  authorId  String
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  details   Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Attachment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  entityType String
+  entityId   String
+  fileName   String
+  fileUrl    String
+  fileType   String
+  uploadedAt DateTime @default(now())
+}
+
+// --- 2. INSTITUTION STRUCTURE ---
+model Campus {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id      String   @id @default(uuid())
+  name    String
+  address String?
+  schools School[]
+}
+
+model School {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String    @id @default(uuid())
+  campusId  String
+  name      String // e.g. "Primary School", "High School"
+  campus    Campus    @relation(fields: [campusId], references: [id])
+  faculties Faculty[]
+}
+
+model Faculty {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String       @id @default(uuid())
+  schoolId    String
+  name        String
+  school      School       @relation(fields: [schoolId], references: [id])
+  departments Department[]
+}
+
+model Department {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String    @id @default(uuid())
+  facultyId String
+  name      String
+  faculty   Faculty   @relation(fields: [facultyId], references: [id])
+  programs  Program[]
+}
+
+model Program {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String     @id @default(uuid())
+  departmentId String
+  name         String
+  department   Department @relation(fields: [departmentId], references: [id])
+}
+
+model AcademicLevel {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id    String @id @default(uuid())
+  name  String // "Grade 1", "Freshman"
+  order Int
+}
+
+model Semester {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String       @id @default(uuid())
+  yearId    String
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  year      AcademicYear @relation(fields: [yearId], references: [id])
+}
+
+// --- 3. STUDENT MANAGEMENT (SIS) ADDITIONS ---
+model Guardian {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id               String            @id @default(uuid())
+  firstName        String
+  lastName         String
+  email            String?
+  phone            String
+  profession       String?
+  studentGuardians StudentGuardian[]
+}
+
+model StudentGuardian {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String   @id @default(uuid())
+  studentId    String
+  guardianId   String
+  relationship String
+  isPrimary    Boolean  @default(false)
+  student      Student  @relation(fields: [studentId], references: [studentId])
+  guardian     Guardian @relation(fields: [guardianId], references: [id])
+}
+
+model StudentContact {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String  @id @default(uuid())
+  studentId      String  @unique
+  emergencyPhone String?
+  homePhone      String?
+  addressLine1   String?
+  addressLine2   String?
+  city           String?
+  state          String?
+  zipCode        String?
+  student        Student @relation(fields: [studentId], references: [studentId])
+}
+
+model StudentDocument {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  studentId  String
+  type       String // "Birth Certificate", "Transcript"
+  url        String
+  uploadedAt DateTime @default(now())
+  student    Student  @relation(fields: [studentId], references: [studentId])
+}
+
+model StudentStatusHistory {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  studentId String
+  status    String
+  reason    String?
+  changedAt DateTime @default(now())
+  student   Student  @relation(fields: [studentId], references: [studentId])
+}
+
+model StudentHealthRecord {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  studentId  String
+  condition  String
+  notes      String?
+  recordedAt DateTime @default(now())
+  student    Student  @relation(fields: [studentId], references: [studentId])
+}
+
+// --- 4. ADMISSIONS SYSTEM ADDITIONS ---
+model ApplicationDocument {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  applicationId String
+  type          String
+  url           String
+  application   Application @relation(fields: [applicationId], references: [id])
+}
+
+model AdmissionDecision {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  applicationId String      @unique
+  decision      String // "Accepted", "Rejected", "Waitlisted"
+  reason        String?
+  date          DateTime    @default(now())
+  application   Application @relation(fields: [applicationId], references: [id])
+}
+
+model AdmissionOffer {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  applicationId String      @unique
+  offerDetails  Json?
+  expiresAt     DateTime
+  status        String // "Pending", "Accepted", "Declined"
+  application   Application @relation(fields: [applicationId], references: [id])
+}
+
+model Waitlist {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  applicationId String      @unique
+  position      Int
+  status        String // "Active", "Admitted", "Removed"
+  application   Application @relation(fields: [applicationId], references: [id])
+}
+
+// --- 5. ACADEMIC MANAGEMENT ADDITIONS ---
+model CourseCategory {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id   String @id @default(uuid())
+  name String
+}
+
+model CoursePrerequisite {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String @id @default(uuid())
+  courseId       String
+  prerequisiteId String
+  course         Course @relation("CoursePrereqs", fields: [courseId], references: [id])
+  prerequisite   Course @relation("PrereqFor", fields: [prerequisiteId], references: [id])
+}
+
+model CourseOffering {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String       @id @default(uuid())
+  courseId String
+  termId   String
+  course   Course       @relation(fields: [courseId], references: [id])
+  term     AcademicTerm @relation(fields: [termId], references: [id])
+}
+
+// --- 6. TIMETABLE & SCHEDULING ---
+model Schedule {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String  @id @default(uuid())
+  name      String
+  termId    String
+  isDefault Boolean @default(false)
+}
+
+model TimetableSlot {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String @id @default(uuid())
+  scheduleId String
+  dayOfWeek  Int
+  startTime  String
+  endTime    String
+}
+
+model TimetableEntry {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String  @id @default(uuid())
+  slotId         String
+  classSectionId String
+  subjectId      String
+  teacherId      String
+  roomId         String?
+}
+
+model TeacherAssignment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String @id @default(uuid())
+  teacherId      String
+  classSectionId String
+  subjectId      String
+  role           String // "Primary", "Assistant"
+}
+
+model RoomAssignment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String @id @default(uuid())
+  roomId         String
+  classSectionId String
+}
+
+model ExamSchedule {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  examId     String
+  roomId     String
+  startTime  DateTime
+  endTime    DateTime
+  supervisor String?
+}
+
+// --- 7. ATTENDANCE MANAGEMENT ---
+model AttendanceSession {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String   @id @default(uuid())
+  classSectionId String
+  date           DateTime
+  recordedBy     String
+}
+
+model StudentAttendance {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String  @id @default(uuid())
+  sessionId String
+  studentId String
+  status    String // "Present", "Absent", "Late", "Excused"
+  remarks   String?
+}
+
+model TeacherAttendance {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String    @id @default(uuid())
+  teacherId String
+  date      DateTime
+  status    String
+  checkIn   DateTime?
+  checkOut  DateTime?
+}
+
+model AttendanceType {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id   String @id @default(uuid())
+  name String
+  code String @unique
+}
+
+model AttendanceReport {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id      String   @id @default(uuid())
+  type    String // "Daily", "Weekly", "Monthly"
+  date    DateTime
+  summary Json
+}
+
+// --- 8. EXAMINATION SYSTEM ---
+model ExamType {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id    String @id @default(uuid())
+  name  String // "Midterm", "Final", "Quiz"
+  exams Exam[]
+}
+
+model Exam {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String       @id @default(uuid())
+  name        String
+  examTypeId  String
+  sectionId   String
+  termId      String
+  date        DateTime
+  venue       String?
+  maxMarks    Float        @default(100)
+  passMarks   Float?
+  status      String       @default("Scheduled") // "Scheduled", "Ongoing", "Completed", "Published"
+
+  examType    ExamType     @relation(fields: [examTypeId], references: [id])
+  section     ClassSection @relation(fields: [sectionId], references: [id])
+  term        AcademicTerm @relation(fields: [termId], references: [id])
+  subjects    ExamSubject[]
+  grades      Grade[]
+
+  @@index([tenantId, sectionId, examTypeId])
+}
+
+model ExamSubject {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String  @id @default(uuid())
+  examId    String
+  courseId  String
+  maxMarks  Float   @default(100)
+  passMarks Float?  @default(40)
+
+  exam      Exam    @relation(fields: [examId], references: [id])
+  course    Course  @relation(fields: [courseId], references: [id])
+  results   Grade[]
+}
+
+model Grade {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id            String      @id @default(uuid())
+  studentId     String
+  examId        String
+  examSubjectId String
+  marksObtained Float
+  gradeLetter   String?
+  gp            Float?      // Grade Points
+  status        String      @default("Draft") // "Draft", "Submitted", "Published"
+
+  student       Student     @relation(fields: [studentId], references: [studentId])
+  exam          Exam        @relation(fields: [examId], references: [id])
+  examSubject   ExamSubject @relation(fields: [examSubjectId], references: [id])
+
+  @@unique([studentId, examSubjectId, tenantId])
+}
+
+model GradingScale {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String @id @default(uuid())
+  name     String
+  minScore Float  // Percentage e.g. 90
+  maxScore Float? // Percentage e.g. 100
+  grade    String // e.g. "A+"
+  gpaValue Float  // e.g. 4.0
+}
+
+model Transcript {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  studentId   String
+  generatedAt DateTime @default(now())
+  fileUrl     String?
+}
+
+model ReportCard {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  studentId   String
+  termId      String
+  compiledAt  DateTime @default(now())
+  isPublished Boolean  @default(false)
+}
+
+model GPARecord {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String @id @default(uuid())
+  studentId    String
+  academicYear String
+  gpa          Float
+  cumulative   Float
+}
+
+// --- 9. LEARNING MANAGEMENT (LMS) ADDITIONS ---
+model Quiz {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String         @id @default(uuid())
+  lessonId  String
+  title     String
+  timeLimit Int?
+  lesson    Lesson         @relation(fields: [lessonId], references: [id])
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+}
+
+model QuizQuestion {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String       @id @default(uuid())
+  quizId   String
+  question String
+  type     String // "Multiple Choice", "True/False"
+  marks    Float
+  quiz     Quiz         @relation(fields: [quizId], references: [id])
+  answers  QuizAnswer[]
+}
+
+model QuizAnswer {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String       @id @default(uuid())
+  questionId String
+  answerText String
+  isCorrect  Boolean
+  question   QuizQuestion @relation(fields: [questionId], references: [id])
+}
+
+model QuizAttempt {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String    @id @default(uuid())
+  quizId     String
+  studentId  String
+  score      Float?
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  quiz       Quiz      @relation(fields: [quizId], references: [id])
+  student    Student   @relation(fields: [studentId], references: [studentId])
+}
+
+model DiscussionForum {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String      @id @default(uuid())
+  courseId String
+  title    String
+  course   Course      @relation(fields: [courseId], references: [id])
+  posts    ForumPost[]
+}
+
+model ForumPost {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String          @id @default(uuid())
+  forumId   String
+  authorId  String
+  content   String
+  createdAt DateTime        @default(now())
+  forum     DiscussionForum @relation(fields: [forumId], references: [id])
+}
+
+// --- 10. FINANCE & BILLING ADDITIONS ---
+model StudentFee {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  studentId String
+  feeTypeId String
+  amount    Float
+  dueDate   DateTime
+}
+
+model PaymentMethod {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String  @id @default(uuid())
+  name     String
+  isActive Boolean @default(true)
+}
+
+model Scholarship {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  amount      Float
+}
+
+model FinancialAid {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  studentId   String
+  amount      Float
+  reason      String?
+  grantedDate DateTime @default(now())
+}
+
+model Discount {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String @id @default(uuid())
+  name       String
+  percentage Float
+}
+
+model Refund {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  paymentId   String
+  amount      Float
+  reason      String
+  processedAt DateTime @default(now())
+}
+
+model Payroll {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String    @id @default(uuid())
+  employeeId  String
+  month       Int
+  year        Int
+  basicSalary Float
+  allowances  Float
+  deductions  Float
+  netPay      Float
+  status      String // "Pending", "Processed", "Paid"
+  processedAt DateTime?
+}
+
+// --- 11. HUMAN RESOURCES (HR) ADDITIONS ---
+model StaffProfile {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id             String  @id @default(uuid())
+  employeeId     String  @unique
+  qualifications String?
+  experience     String?
+  bio            String?
+}
+
+model StaffDepartment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String @id @default(uuid())
+  employeeId   String
+  departmentId String
+}
+
+model StaffPosition {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id    String @id @default(uuid())
+  title String
+  level Int
+}
+
+model Contract {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String    @id @default(uuid())
+  employeeId String
+  startDate  DateTime
+  endDate    DateTime?
+  type       String // "Full-Time", "Part-Time", "Contract"
+  salary     Float
+}
+
+model StaffAttendance {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  employeeId String
+  date       DateTime
+  status     String
+}
+
+model LeaveType {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id   String @id @default(uuid())
+  name String
+  days Int
+}
+
+model PerformanceReview {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  employeeId String
+  reviewerId String
+  score      Float
+  comments   String?
+  reviewDate DateTime @default(now())
+}
+
+// --- 12. LIBRARY SYSTEM ---
+model BookCategory {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id   String @id @default(uuid())
+  name String
+}
+
+model BookAuthor {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id   String @id @default(uuid())
+  name String
+}
+
+model BookCopy {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String @id @default(uuid())
+  bookId    Int
+  barcode   String @unique
+  condition String
+  status    String // "Available", "Borrowed", "Lost"
+}
+
+model BookLoan {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String    @id @default(uuid())
+  copyId     String
+  borrowerId String
+  loanDate   DateTime  @default(now())
+  dueDate    DateTime
+  returnDate DateTime?
+}
+
+model BookReservation {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  bookId     Int
+  borrowerId String
+  status     String // "Pending", "Fulfilled", "Cancelled"
+  createdAt  DateTime @default(now())
+}
+
+model LibraryMember {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String   @id @default(uuid())
+  userId   String   @unique
+  maxBooks Int      @default(3)
+  joinedAt DateTime @default(now())
+}
+
+// --- 13. HOSTEL / DORMITORY ADDITIONS ---
+model Bed {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id     String @id @default(uuid())
+  roomId String
+  number String
+  status String // "Occupied", "Vacant"
+}
+
+model RoomAssignmentLog {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String    @id @default(uuid())
+  studentId  String
+  bedId      String
+  assignedAt DateTime  @default(now())
+  vacatedAt  DateTime?
+}
+
+model HostelFee {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String @id @default(uuid())
+  hostelId String
+  amount   Float
+  termId   String
+}
+
+model HostelMaintenance {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String    @id @default(uuid())
+  hostelId   String
+  issue      String
+  status     String // "Reported", "In Progress", "Resolved"
+  reportedAt DateTime  @default(now())
+  resolvedAt DateTime?
+}
+
+// --- 14. TRANSPORTATION ADDITIONS ---
+model Bus {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String  @id @default(uuid())
+  plateNumber String  @unique
+  capacity    Int
+  model       String?
+}
+
+model BusRouteInfo {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+}
+
+model BusStop {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String @id @default(uuid())
+  routeId   String
+  name      String
+  time      String
+  latitude  Float?
+  longitude Float?
+}
+
+model BusAssignment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String @id @default(uuid())
+  busId    String
+  routeId  String
+  driverId String
+}
+
+model StudentTransportAssignment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String @id @default(uuid())
+  studentId String
+  stopId    String
+  termId    String
+}
+
+// --- 15. COMMUNICATION SYSTEM ---
+model Message {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String   @id @default(uuid())
+  threadId String
+  senderId String
+  content  String
+  sentAt   DateTime @default(now())
+}
+
+model MessageThread {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  subject   String
+  createdAt DateTime @default(now())
+}
+
+model MessageRecipient {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id       String  @id @default(uuid())
+  threadId String
+  userId   String
+  isRead   Boolean @default(false)
+}
+
+model EmailLog {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  recipient String
+  subject   String
+  status    String
+  sentAt    DateTime @default(now())
+}
+
+model SmsLog {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id      String   @id @default(uuid())
+  phone   String
+  message String
+  status  String
+  sentAt  DateTime @default(now())
+}
+
+model PushNotification {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id     String   @id @default(uuid())
+  userId String
+  title  String
+  body   String
+  sentAt DateTime @default(now())
+}
+
+// --- 16. ANALYTICS & REPORTING ---
+model Report {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  name        String
+  generatedBy String
+  fileUrl     String
+  createdAt   DateTime @default(now())
+}
+
+model ReportTemplate {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id     String @id @default(uuid())
+  name   String
+  config Json
+}
+
+model AnalyticsEvent {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  eventType String
+  userId    String?
+  metadata  Json?
+  timestamp DateTime @default(now())
+}
+
+model Dashboard {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id     String @id @default(uuid())
+  roleId String
+  layout Json
+}
+
+model KpiMetric {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id           String   @id @default(uuid())
+  name         String
+  value        Float
+  calculatedAt DateTime @default(now())
+}
