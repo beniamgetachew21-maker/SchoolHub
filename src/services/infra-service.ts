@@ -110,6 +110,16 @@ export class InfraService extends BaseService {
             return this.response([], error.message);
         }
     }
+
+    async getClassrooms(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const classrooms = await prisma.classroom.findMany({ where: { tenantId: tenant.id } });
+            return this.response(classrooms);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
 }
 
 export const infraService = new InfraService();

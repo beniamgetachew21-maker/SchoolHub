@@ -21,12 +21,28 @@ const prisma = new PrismaClient({ adapter })
 async function main() {
     console.log('Start seeding...')
 
-    // Clear existing data to prevent unique constraint violations
-    await prisma.application.deleteMany()
-    await prisma.student.deleteMany()
-    await prisma.employee.deleteMany()
-    await prisma.candidate.deleteMany()
-    await prisma.onboardingTask.deleteMany()
+    // Clear existing data (Ordered from children to parents to avoid FK issues)
+    const modelsToDelete = [
+        'classPeriod', 'submission', 'enrollment', 'payrollRecord', 
+        'assessmentResult', 'attendanceSummary', 'grade', 'quizAttempt',
+        'studentHealthRecord', 'studentStatusHistory', 'studentDocument', 
+        'studentContact', 'studentGuardian', 'admissionInterview', 
+        'entranceExam', 'applicationDocument', 'application', 'candidate', 
+        'onboardingTask', 'leaveRequest', 'leavePolicy', 'studentLeaveRequest', 
+        'book', 'borrowRecord', 'borrowRequest', 'invoice', 'payment', 
+        'transaction', 'feeStructure', 'vehicle', 'driver', 'route', 
+        'inventoryItem', 'vendor', 'purchaseOrder', 'subscriberList', 
+        'achievement', 'disciplinaryRecord', 'classroom', 'subject', 
+        'hostel', 'room', 'assessment', 'student', 'employee', 'user', 'role', 'permission'
+    ];
+
+    for (const model of modelsToDelete) {
+        try {
+            await (prisma as any)[model].deleteMany();
+        } catch (e) {
+            console.warn(`Could not delete from ${model}: ${e}`);
+        }
+    }
 
     console.log('Seeding SaaS Tenants...');
 
@@ -44,48 +60,8 @@ async function main() {
         }
     });
 
-    // Create a Demo Tenant (For testing demo.localhost:3000)
-    const demoTenant = await prisma.tenant.upsert({
-        where: { domain: 'demo' },
-        update: {},
-        create: {
-            name: 'Demo Academy',
-            domain: 'demo',
-            contactEmail: 'demo@academy.com',
-            contactPhone: '+254700000000',
-            address: 'Demo Road, Nairobi',
-            status: 'Active',
-        }
-    });
-
     const SYS_TENANT = defaultTenant.id;
     console.log(`Created Default Tenant: ${SYS_TENANT}`);
-    await prisma.leaveRequest.deleteMany()
-    await prisma.leavePolicy.deleteMany()
-    await prisma.studentLeaveRequest.deleteMany()
-    await prisma.book.deleteMany()
-    await prisma.borrowRecord.deleteMany()
-    await prisma.borrowRequest.deleteMany()
-    await prisma.invoice.deleteMany()
-    await prisma.payment.deleteMany()
-    await prisma.transaction.deleteMany()
-    await prisma.feeStructure.deleteMany()
-    await prisma.vehicle.deleteMany()
-    await prisma.driver.deleteMany()
-    await prisma.route.deleteMany()
-    await prisma.inventoryItem.deleteMany()
-    await prisma.vendor.deleteMany()
-    await prisma.purchaseOrder.deleteMany()
-    await prisma.subscriberList.deleteMany()
-    await prisma.achievement.deleteMany()
-    await prisma.disciplinaryRecord.deleteMany()
-    await prisma.classroom.deleteMany()
-    await prisma.subject.deleteMany()
-    await prisma.hostel.deleteMany()
-    await prisma.room.deleteMany()
-    await prisma.assessment.deleteMany()
-    await prisma.assessmentResult.deleteMany()
-    await prisma.attendanceSummary.deleteMany()
 
     for (const app of applications) {
         await prisma.application.create({
@@ -257,7 +233,7 @@ async function main() {
                 tenantId: SYS_TENANT,
                 structureId: fs.structureId,
                 name: fs.name,
-                items: fs.items as any,
+                // items: fs.items as any,
             },
         })
     }

@@ -34,7 +34,7 @@ Campus Hub unifies your entire campus into a single, seamless ecosystem. No more
 
 *   **Intelligence Built-In**: Our AI doesn't just store data; it performs tasks for you.
 *   **Premium Experience**: A high-performance interface with glassmorphism, smooth animations, and a modern aesthetic that your staff will love using.
-*   **Scale with Confidence**: Built on reliable infrastructure (Firebase) to ensure your data is always safe, accessible, and fast.
+*   **Scale with Confidence**: Built on reliable infrastructure to ensure your data is always safe, accessible, and fast.
 
 ---
 

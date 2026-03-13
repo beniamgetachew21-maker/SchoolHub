@@ -20,7 +20,10 @@ export default function ParentPortalClient({ unpaidInvoices, studentName }: Pare
 
     return (
         <>
-            <Button className="w-full mt-2" onClick={() => setIsPaymentDialogOpen(true)}>
+            <Button 
+                className="w-full mt-2 rounded-2xl emerald-gradient font-black h-14 text-[15px] shadow-lg shadow-emerald-900/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all duration-300 text-white border border-emerald-400/20" 
+                onClick={() => setIsPaymentDialogOpen(true)}
+            >
                 Pay Fees Online
             </Button>
             {isPaymentDialogOpen && (

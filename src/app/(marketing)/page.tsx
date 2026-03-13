@@ -101,7 +101,7 @@ export default function LandingPage() {
               </Button>
             </Link>
             <Link href="/plans">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg font-bold px-10 py-7 rounded-lg h-auto transition-all">
+              <Button size="lg" variant="outline" className="border-white !bg-transparent text-white hover:bg-white/10 hover:text-white text-lg font-bold px-10 py-7 rounded-lg h-auto transition-all">
                 {tHero("explore")}
               </Button>
             </Link>

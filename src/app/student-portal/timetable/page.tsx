@@ -1,9 +1,10 @@
 import * as React from "react"
 import { getTimetableBySection } from "@/lib/actions"
 
-export default async function StudentTimetablePage({ searchParams }: { searchParams: { section?: string } }) {
+export default async function StudentTimetablePage({ searchParams }: { searchParams: Promise<{ section?: string }> }) {
     // Ideally from student's session. Using default "test-section-id" or parameter
-    const sectionId = searchParams.section || "f2496a75-b6d2-4e45-86b2-cc3ff9c83693"; 
+    const resolvedParams = await searchParams;
+    const sectionId = resolvedParams.section || "f2496a75-b6d2-4e45-86b2-cc3ff9c83693"; 
     
     let schedule = [];
     try {

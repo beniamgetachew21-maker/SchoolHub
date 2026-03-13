@@ -67,7 +67,7 @@ export default function MarketingLayout({
             </Button>
           </Link>
           <Link href="/signup">
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 font-bold hidden md:inline-flex">
+            <Button variant="outline" className="border-white !bg-transparent text-white hover:bg-white/10 hover:text-white font-bold hidden md:inline-flex">
               {t("signup")}
             </Button>
           </Link>

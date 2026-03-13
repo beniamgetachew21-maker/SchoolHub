@@ -54,5 +54,27 @@
         "attendance": "Attendance",
         "grades": "Grades",
         "student_registration": "Student Registration"
+    },
+    "Admission": {
+        "Landing": {
+            "title": "Student Admission 2026 Now Open",
+            "heroTitle": "Shaping the <spanTag>Future</spanTag> of Education.",
+            "heroSubtitle": "Join our thriving community where innovation meets tradition. Start your journey with EthioEdu's state-of-the-art learning environment.",
+            "applyNow": "Apply Now",
+            "login": "Student Login"
+        },
+        "Process": {
+            "title": "Simple, Transparent Process",
+            "subtitle": "Your pathway to enrollment is clear and straightforward.",
+            "step1": "Create Account",
+            "step2": "Fill Application",
+            "step3": "Upload Docs",
+            "step4": "Admin Review",
+            "step5": "Complete"
+        },
+        "Programs": {
+            "title": "Explore Our Programs",
+            "subtitle": "From early childhood to university preparation, we offer excellence at every stage."
+        }
     }
 }

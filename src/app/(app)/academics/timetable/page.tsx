@@ -18,7 +18,7 @@ export default async function TimetablePage() {
     const rooms = roomsData.data || [];
 
     // Keep only active teachers
-    const teachers = employees.filter(e => e.department === "Academics" || e.designation.includes("Teacher"));
+    const teachers = employees.filter((e: any) => e.department === "Academics" || e.designation.includes("Teacher"));
 
     return (
         <div className="space-y-8 max-w-[1400px] mx-auto">

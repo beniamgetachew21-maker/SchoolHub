@@ -22,15 +22,26 @@ export class HrService extends BaseService {
     async getEmployeeById(employeeId: string): Promise<ServiceResponse<any>> {
         try {
             const { tenant } = await this.getContext();
-            const employee = await prisma.employee.findUnique({
-                where: { employeeId, tenantId: tenant.id },
-                include: {
-                    payrollRecords: {
-                        where: { tenantId: tenant.id },
-                        orderBy: { month: "desc" }
-                    }
-                }
+            const employee = await prisma.employee.findFirst({
+                where: { employeeId, tenantId: tenant.id }
             });
+            console.log("getEmployeeById result for", employeeId, ":", employee ? "Found" : "Not Found");
+            return this.response(employee);
+        } catch (error: any) {
+            console.error("GET_EMPLOYEE_ERROR:", error);
+            return this.response(null, error.message);
+        }
+    }
+
+    async updateEmployee(employeeId: string, data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const employee = await prisma.employee.update({
+                where: { employeeId, tenantId: tenant.id },
+                data
+            });
+            revalidatePath('/hr/directory');
+            revalidatePath(`/hr/directory/${employeeId}`);
             return this.response(employee);
         } catch (error: any) {
             return this.response(null, error.message);

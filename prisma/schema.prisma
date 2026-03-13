@@ -526,7 +526,7 @@ model FeeStructure {
   name        String
   baseAmount  Float?
   currency    String? @default("ETB")
-  items       Json
+  items       Json?
 }
 
 model Vehicle {

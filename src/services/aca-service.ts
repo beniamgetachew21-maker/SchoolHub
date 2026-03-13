@@ -234,6 +234,24 @@ export class AcaService extends BaseService {
             return this.response(null, error.message);
         }
     }
+
+    // ─── Courses & Subjects ──────────────────────────────────────────────────
+
+    async getCourses(): Promise<ServiceResponse<any[]>> {
+        try {
+            // Mock courses for the timetable as they don't explicitly exist in the schema
+            const dummyCourses = [
+                { id: "C001", name: "Mathematics", code: "MAT101", credits: 4 },
+                { id: "C002", name: "Science", code: "SCI101", credits: 4 },
+                { id: "C003", name: "English Language", code: "ENG101", credits: 3 },
+                { id: "C004", name: "History", code: "HIS101", credits: 3 },
+                { id: "C005", name: "Physical Education", code: "PE101", credits: 2 },
+            ];
+            return this.response(dummyCourses);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
 }
 
 export const acaService = new AcaService();

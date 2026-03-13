@@ -97,6 +97,16 @@
   [lang="om"] {
     font-family: var(--font-ethiopic), ui-sans-serif, system-ui;
   }
+
+  .registration-primary {
+    --primary: 221 83% 53%; /* #2563EB */
+    --ring: 221 83% 53%;
+  }
+
+  .registration-secondary {
+    --primary: 161 84% 39%; /* #10B981 */
+    --ring: 161 84% 39%;
+  }
 }
 
 @layer components {
@@ -110,5 +120,17 @@
 
   .emerald-gradient {
     @apply bg-gradient-to-br from-emerald-600 to-teal-700;
+  }
+
+  .mesh-gradient {
+    background-color: #f8fafc;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(221, 83%, 53%, 0.05) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(161, 84% , 39%, 0.05) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(221, 83%, 53%, 0.05) 0, transparent 50%);
+  }
+
+  .step-pulse {
+    @apply relative after:absolute after:inset-0 after:rounded-full after:animate-ping after:bg-primary/20 after:content-[''];
   }
 }

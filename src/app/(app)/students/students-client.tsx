@@ -70,7 +70,7 @@ export function StudentsClient({ students }: StudentsClientProps) {
 
     const handleEditStudent = async (updatedStudent: Student) => {
         try {
-            await updateStudentAction(updatedStudent);
+            await updateStudentAction(updatedStudent.studentId, updatedStudent);
             setIsEditSheetOpen(false);
             toast({ title: "Student Updated", description: `${updatedStudent.name}'s profile has been updated.` });
         } catch (e) {

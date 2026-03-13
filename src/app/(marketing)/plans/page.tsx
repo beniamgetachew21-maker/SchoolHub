@@ -165,7 +165,7 @@ export default function PlansPage() {
                         <Button size="lg" className="bg-white text-[#004c8c] hover:bg-slate-100 font-bold px-10 py-7 h-auto text-lg rounded-2xl">
                             CUSTOM QUOTE
                         </Button>
-                        <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-bold px-10 py-7 h-auto text-lg rounded-2xl">
+                        <Button size="lg" variant="outline" className="border-white !bg-transparent text-white hover:bg-white/10 hover:text-white font-bold px-10 py-7 h-auto text-lg rounded-2xl">
                             SSO INTEGRATION GUIDE
                         </Button>
                     </div>

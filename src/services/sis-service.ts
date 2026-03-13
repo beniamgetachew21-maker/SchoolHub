@@ -239,6 +239,85 @@ export class SisService extends BaseService {
             return this.response([], error.message);
         }
     }
+
+    // ─── Student Leave Management ──────────────────────────────────────────
+
+    async getStudentLeaveRequests(studentId?: string): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const where: any = { tenantId: tenant.id };
+            if (studentId) where.studentId = studentId;
+
+            const requests = await prisma.studentLeaveRequest.findMany({
+                where,
+                orderBy: { startDate: "desc" },
+            });
+            return this.response(requests);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async addStudentLeaveRequest(data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const request = await prisma.studentLeaveRequest.create({
+                data: {
+                    ...data,
+                    tenantId: tenant.id,
+                },
+            });
+            return this.response(request);
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
+    async updateStudentLeaveRequestStatus(requestId: string, status: string): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const request = await prisma.studentLeaveRequest.update({
+                where: { requestId, tenantId: tenant.id },
+                data: { status },
+            });
+            return this.response(request);
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
+    // ─── Student Disciplinary Management ──────────────────────────────────
+
+    async getDisciplinaryRecords(studentId?: string): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const where: any = { tenantId: tenant.id };
+            if (studentId) where.studentId = studentId;
+
+            const records = await prisma.disciplinaryRecord.findMany({
+                where,
+                orderBy: { date: "desc" },
+            });
+            return this.response(records);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async addDisciplinaryRecord(data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const record = await prisma.disciplinaryRecord.create({
+                data: {
+                    ...data,
+                    tenantId: tenant.id,
+                },
+            });
+            return this.response(record);
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
 }
 
 export const sisService = new SisService();

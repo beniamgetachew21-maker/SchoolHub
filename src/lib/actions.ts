@@ -52,11 +52,31 @@ export async function getAchievements(studentId: string) {
 }
 
 export async function getDisciplinaryRecords(studentId: string) {
-    return [];
+    const { data } = await sisService.getDisciplinaryRecords(studentId);
+    return data || [];
+}
+
+export async function addDisciplinaryRecordAction(data: any) {
+    const result = await sisService.addDisciplinaryRecord(data);
+    revalidatePath("/students/discipline");
+    return result;
 }
 
 export async function getStudentLeaveRequests(studentId?: string) {
-    return [];
+    const { data } = await sisService.getStudentLeaveRequests(studentId);
+    return data || [];
+}
+
+export async function addStudentLeaveRequestAction(data: any) {
+    const result = await sisService.addStudentLeaveRequest(data);
+    revalidatePath("/students/leave");
+    return result;
+}
+
+export async function updateStudentLeaveRequestStatusAction(requestId: string, status: string) {
+    const result = await sisService.updateStudentLeaveRequestStatus(requestId, status);
+    revalidatePath("/students/leave");
+    return result;
 }
 
 // ── SIS: Attendance ─────────────────────────────────────────────────────────
@@ -151,6 +171,12 @@ export async function getEmployees() {
 export async function getEmployeeById(id: string) {
     const { data } = await hrService.getEmployeeById(id);
     return data;
+}
+
+export async function updateEmployeeAction(data: any) {
+    const { employeeId, ...rest } = data;
+    const result = await hrService.updateEmployee(employeeId, rest);
+    return result;
 }
 
 export async function getLeaveRequests() {

@@ -8,7 +8,7 @@ export default async function StudentPortalPage() {
   
   // For the demo, we pick a student to simulate "logged in" user 
   // or provide a selection if none is found.
-  const defaultStudent = students.find(s => s.name.includes("Tirunesh")) || students[0];
+  const defaultStudent = students.find(s => s.name.includes("Aida")) || students[0];
 
   if (!defaultStudent) {
     return (
