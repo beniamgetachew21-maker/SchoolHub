@@ -249,6 +249,8 @@ model Application {
   decision            AdmissionDecision?
   offer               AdmissionOffer?
   waitlistEntry       Waitlist?
+
+  @@index([tenantId])
 }
 
 model Student {
@@ -288,6 +290,12 @@ model Student {
   healthRecords     StudentHealthRecord[]
   quizAttempts      QuizAttempt[]
   grades            Grade[]
+  transportAssignments TransportAssignment[]
+  clubMemberships      ClubMembership[]
+  mealTokens           MealToken[]
+  healthVisitLogs      HealthVisitLog[]
+
+  @@index([tenantId])
 }
 
 model Enrollment {
@@ -366,6 +374,9 @@ model Employee {
   bloodType             String?
   payrollRecords        PayrollRecord[]
   classPeriods          ClassPeriod[]
+  clubs                 Club[]
+
+  @@index([tenantId])
 }
 
 model Candidate {
@@ -377,6 +388,8 @@ model Candidate {
   position    String
   stage       String
   appliedDate String
+
+  @@index([tenantId])
 }
 
 model OnboardingTask {
@@ -388,6 +401,8 @@ model OnboardingTask {
   taskName   String
   status     String
   dueDate    String?
+
+  @@index([tenantId])
 }
 
 model LeaveRequest {
@@ -402,6 +417,8 @@ model LeaveRequest {
   daysCount  Int
   reason     String
   status     String
+
+  @@index([tenantId])
 }
 
 model LeavePolicy {
@@ -430,6 +447,7 @@ model PayrollRecord {
   employee    Employee  @relation(fields: [employeeId], references: [employeeId])
 
   @@unique([employeeId, month, tenantId])
+  @@index([tenantId])
 }
 
 model StudentLeaveRequest {
@@ -492,6 +510,20 @@ model Invoice {
   dueDate     String
   status      String
   description String?
+  
+  items       InvoiceItem[]
+}
+
+model InvoiceItem {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String  @id @default(uuid())
+  invoiceId String
+  type      String  // e.g., "Tuition", "Transport", "Library"
+  amount    Float
+
+  invoice   Invoice @relation(fields: [invoiceId], references: [invoiceId], onDelete: Cascade)
 }
 
 model Payment {
@@ -516,6 +548,21 @@ model Transaction {
   type        String
   amount      Float
   method      String
+  
+  ledgerId    String?
+  ledger      Ledger? @relation(fields: [ledgerId], references: [id])
+  reference   String?
+}
+
+model Ledger {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  name        String   @map("account_name")
+  type        String   // "Income", "Expense", "Asset", "Liability"
+
+  transactions Transaction[]
 }
 
 model FeeStructure {
@@ -563,6 +610,9 @@ model Route {
   stops     Int
   students  Int
   status    String
+
+  assignments TransportAssignment[]
+  logs        TransportLog[]
 }
 
 model Classroom {
@@ -594,6 +644,9 @@ model Hostel {
   wardenId      String
   totalRooms    Int
   occupiedRooms Int
+
+  rooms           Room[]
+  maintenanceLogs HostelMaintenance[]
 }
 
 model Room {
@@ -602,10 +655,44 @@ model Room {
 
   roomId     String  @id
   hostelId   String
+  hostel     Hostel  @relation(fields: [hostelId], references: [hostelId])
   roomNumber String
   roomType   String  @map("type")
   status     String
   studentId  String?
+
+  beds Bed[]
+}
+
+model TransportAssignment {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  studentId   String
+  routeId     String
+  pickupPoint String?
+  status      String   @default("Active")
+  createdAt   DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [studentId])
+  route   Route   @relation(fields: [routeId], references: [routeId])
+
+  @@unique([studentId, routeId])
+}
+
+model TransportLog {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  routeId   String
+  studentId String?
+  event     String
+  location  String?
+  timestamp DateTime @default(now())
+
+  route Route @relation(fields: [routeId], references: [routeId])
 }
 
 model InventoryItem {
@@ -684,9 +771,47 @@ model Club {
   name             String
   description      String
   facultyAdvisorId String
+  advisor          Employee @relation(fields: [facultyAdvisorId], references: [employeeId])
   memberCount      Int
+  category         String?
+  color            String? @default("from-blue-500 to-indigo-600")
+  iconName         String? @default("Users")
   imageUrl         String
   imageHint        String
+
+  memberships ClubMembership[]
+  attendance  ClubAttendanceRecord[]
+}
+
+model ClubMembership {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  clubId    String
+  studentId String
+  role      String   @default("Member") // "Member", "President", "Secretary"
+  joinedAt  DateTime @default(now())
+
+  club    Club    @relation(fields: [clubId], references: [clubId])
+  student Student @relation(fields: [studentId], references: [studentId])
+
+  @@unique([clubId, studentId, tenantId])
+}
+
+model ClubAttendanceRecord {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  clubId    String
+  studentId String
+  date      DateTime
+  status    String   @default("Present") // "Present", "Absent"
+
+  club Club @relation(fields: [clubId], references: [clubId])
+
+  @@index([clubId, date, tenantId])
 }
 
 model SubscriberList {
@@ -790,6 +915,9 @@ model Tenant {
   contactPhone String?
   address      String?
   logoUrl      String?
+  institutionType String? // e.g., "Primary School", "High School", "University"
+  language        String   @default("English")
+  calendarSystem  String   @default("Gregorian") // "Gregorian", "Ethiopian"
   status       String   @default("Active") // "Active", "Suspended"
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -833,6 +961,9 @@ model Tenant {
   routes                      Route[]
   classrooms                  Classroom[]
   subjects                    Subject[]
+  supportTickets              SupportTicket[]
+  integrationConfigs          IntegrationConfig[]
+  globalAuditLogs             GlobalAuditLog[]
   hostels                     Hostel[]
   rooms                       Room[]
   inventoryItems              InventoryItem[]
@@ -841,6 +972,8 @@ model Tenant {
   purchaseOrders              PurchaseOrder[]
   alumnis                     Alumni[]
   clubs                       Club[]
+  clubMemberships             ClubMembership[]
+  clubAttendance              ClubAttendanceRecord[]
   subscriberLists             SubscriberList[]
   achievements                Achievement[]
   disciplinaryRecords         DisciplinaryRecord[]
@@ -863,6 +996,8 @@ model Tenant {
   semesters                   Semester[]
   guardians                   Guardian[]
   studentGuardians            StudentGuardian[]
+  transportAssignments        TransportAssignment[]
+  transportLogs               TransportLog[]
   studentContacts             StudentContact[]
   studentDocuments            StudentDocument[]
   studentStatusHistorys       StudentStatusHistory[]
@@ -909,6 +1044,9 @@ model Tenant {
   staffDepartments            StaffDepartment[]
   staffPositions              StaffPosition[]
   contracts                   Contract[]
+  cafeteriaItems              CafeteriaItem[]
+  mealTokens                  MealToken[]
+  healthVisitLogs             HealthVisitLog[]
   staffAttendances            StaffAttendance[]
   leaveTypes                  LeaveType[]
   performanceReviews          PerformanceReview[]
@@ -922,11 +1060,6 @@ model Tenant {
   roomAssignmentLogs          RoomAssignmentLog[]
   hostelFees                  HostelFee[]
   hostelMaintenances          HostelMaintenance[]
-  buss                        Bus[]
-  busRouteInfos               BusRouteInfo[]
-  busStops                    BusStop[]
-  busAssignments              BusAssignment[]
-  studentTransportAssignments StudentTransportAssignment[]
   messages                    Message[]
   messageThreads              MessageThread[]
   messageRecipients           MessageRecipient[]
@@ -939,6 +1072,9 @@ model Tenant {
   dashboards                  Dashboard[]
   kpiMetrics                  KpiMetric[]
   exams                       Exam[]
+  calendarEvents              CalendarEvent[]
+  invoiceItems                InvoiceItem[]
+  ledgers                     Ledger[]
 }
 
 model TenantSubscription {
@@ -1771,6 +1907,7 @@ model Bed {
 
   id     String @id @default(uuid())
   roomId String
+  room   Room   @relation(fields: [roomId], references: [roomId])
   number String
   status String // "Occupied", "Vacant"
 }
@@ -1802,6 +1939,7 @@ model HostelMaintenance {
 
   id         String    @id @default(uuid())
   hostelId   String
+  hostel     Hostel    @relation(fields: [hostelId], references: [hostelId])
   issue      String
   status     String // "Reported", "In Progress", "Resolved"
   reportedAt DateTime  @default(now())
@@ -1809,56 +1947,7 @@ model HostelMaintenance {
 }
 
 // --- 14. TRANSPORTATION ADDITIONS ---
-model Bus {
-  tenantId String?
-  tenant   Tenant? @relation(fields: [tenantId], references: [id])
 
-  id          String  @id @default(uuid())
-  plateNumber String  @unique
-  capacity    Int
-  model       String?
-}
-
-model BusRouteInfo {
-  tenantId String?
-  tenant   Tenant? @relation(fields: [tenantId], references: [id])
-
-  id          String  @id @default(uuid())
-  name        String
-  description String?
-}
-
-model BusStop {
-  tenantId String?
-  tenant   Tenant? @relation(fields: [tenantId], references: [id])
-
-  id        String @id @default(uuid())
-  routeId   String
-  name      String
-  time      String
-  latitude  Float?
-  longitude Float?
-}
-
-model BusAssignment {
-  tenantId String?
-  tenant   Tenant? @relation(fields: [tenantId], references: [id])
-
-  id       String @id @default(uuid())
-  busId    String
-  routeId  String
-  driverId String
-}
-
-model StudentTransportAssignment {
-  tenantId String?
-  tenant   Tenant? @relation(fields: [tenantId], references: [id])
-
-  id        String @id @default(uuid())
-  studentId String
-  stopId    String
-  termId    String
-}
 
 // --- 15. COMMUNICATION SYSTEM ---
 model Message {
@@ -1973,4 +2062,137 @@ model KpiMetric {
   name         String
   value        Float
   calculatedAt DateTime @default(now())
+}
+
+model CafeteriaItem {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  name      String
+  category  String
+  price     Float
+  rating    Float    @default(5.0)
+  orders    Int      @default(0)
+  tag       String?
+  tagColor  String?
+  isVeg     Boolean  @default(false)
+  imageHint String?
+  createdAt DateTime @default(now())
+
+  tokens    MealToken[]
+}
+
+model MealToken {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id         String   @id @default(uuid())
+  studentId  String
+  itemId     String
+  status     String   @default("Valid") // "Valid", "Used", "Expired"
+  issuedAt   DateTime @default(now())
+  validUntil DateTime?
+
+  student Student       @relation(fields: [studentId], references: [studentId])
+  item    CafeteriaItem @relation(fields: [itemId], references: [id])
+
+  @@index([studentId, status, tenantId])
+}
+
+model HealthVisitLog {
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+
+  id        String   @id @default(uuid())
+  studentId String
+  date      DateTime @default(now())
+  reason    String
+  treatment String
+  notes     String?
+  status    String   @default("Completed") // "Completed", "Follow-up Required"
+
+  student Student @relation(fields: [studentId], references: [studentId])
+
+  @@index([studentId, date, tenantId])
+}
+
+model CalendarEvent {
+  tenantId    String?
+  tenant      Tenant? @relation(fields: [tenantId], references: [id])
+
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  type        String   @default("Event") // "Holiday", "Event", "Exam", "Milestone"
+}
+
+// ─── SUPER ADMIN SAAS BACKEND MODELS ─────────────────────────────────────
+
+model SupportTicket {
+  id        String   @id @default(uuid())
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
+  userId    String?  // Reference to user reporting the ticket
+  subject   String
+  body      String
+  priority  String   @default("Medium") // Low, Medium, High, Urgent
+  status    String   @default("Open") // Open, In Progress, Resolved, Closed
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FeatureFlag {
+  id          String  @id
+  name        String
+  description String?
+  status      String  @default("Alpha") // Alpha, Beta, GA
+  rollout     String  @default("0%") // percentage or specific tiers
+  active      Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model IntegrationConfig {
+  id         String   @id @default(uuid())
+  tenantId   String?  // If null, it's global Platform integration config
+  tenant     Tenant?  @relation(fields: [tenantId], references: [id])
+  provider   String   // Stripe, Twilio, SendGrid
+  apiKey     String?
+  apiSecret  String?
+  webhookUrl String?
+  status     String   @default("Disconnected")
+  env        String   @default("Test") // Test, Live
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([tenantId, provider])
+}
+
+model SubscriptionPlan {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  price       Float
+  period      String   @default("Month")
+  description String?
+  features    String[]
+  maxStudents Int?
+  badge       String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GlobalAuditLog {
+  id         String   @id @default(uuid())
+  tenantId   String?
+  tenant     Tenant?  @relation(fields: [tenantId], references: [id])
+  actorId    String?  // Who did it
+  actorIp    String?
+  action     String   // "Log In", "Export", "Delete"
+  target     String?  // What was affected
+  severity   String   @default("Info") // Info, Warning, Critical
+  createdAt  DateTime @default(now())
 }

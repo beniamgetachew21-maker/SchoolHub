@@ -61,6 +61,24 @@ export async function updateTenantStatus(tenantId: string, status: "Active" | "S
         data: { status }
     });
     revalidatePath('/saas/tenants');
+    revalidatePath(`/saas/tenants/${tenantId}`);
+}
+
+export async function getTenantDetails(tenantId: string) {
+    return prisma.tenant.findUnique({
+        where: { id: tenantId },
+        include: {
+            subscription: true,
+            _count: {
+                select: {
+                    students: true,
+                    employees: true,
+                    users: true,
+                    campuss: true,
+                }
+            }
+        }
+    });
 }
 
 /**

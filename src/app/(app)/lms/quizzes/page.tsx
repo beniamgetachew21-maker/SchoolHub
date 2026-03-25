@@ -1,105 +1,195 @@
-import { PenTool, Clock, CheckCircle2, AlertCircle, Plus, Search, Filter } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { 
+    GraduationCap, Plus, Search, Filter, 
+    ArrowRight, ChevronRight, Clock, 
+    BarChart3, Settings, PlayCircle,
+    Users, Star, CheckCircle2, Layout
+} from "lucide-react";
+import Link from "next/link";
 
-export default function LMSQuizzesPage() {
-  return (
-    <div className="flex flex-col gap-6 p-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex flex-row items-center justify-between gap-4">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold tracking-tight">Active Quizzes & Assessments</h1>
-          <p className="text-muted-foreground">Manage digital assessments, automated grading, and question banks.</p>
-        </div>
-        <Button className="rounded-full px-6 bg-emerald-600 hover:bg-emerald-700">
-          <Plus className="mr-2 h-4 w-4" /> Create Quiz
-        </Button>
-      </div>
+// Mock quiz data
+const quizzes = [
+    { 
+        id: "QZ-88", 
+        title: "Calculus II: Mid-Term Assessment", 
+        course: "MATH-201", 
+        activeStudents: 142, 
+        avgScore: "78%", 
+        timeLimit: "90 min",
+        status: "Active",
+        type: "Multiple Choice"
+    },
+    { 
+        id: "QZ-85", 
+        title: "Empire History: Fast Quiz", 
+        course: "HIST-105", 
+        activeStudents: 86, 
+        avgScore: "92%", 
+        timeLimit: "20 min",
+        status: "Completed",
+        type: "Mixed"
+    },
+    { 
+        id: "QZ-90", 
+        title: "Python Basics: Week 4 Review", 
+        course: "CS-101", 
+        activeStudents: 215, 
+        avgScore: "-", 
+        timeLimit: "45 min",
+        status: "Scheduled",
+        type: "Coding Submission"
+    },
+    { 
+        id: "QZ-72", 
+        title: "Organic Chemistry: Lab Safety", 
+        course: "CHEM-302", 
+        activeStudents: 30, 
+        avgScore: "85%", 
+        timeLimit: "30 min",
+        status: "Archive",
+        type: "True/False"
+    },
+];
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <QuizCard 
-           title="Weekly Biology Checkpoint" 
-           subject="Grade 10 Biology" 
-           questions={15} 
-           time="20m" 
-           status="Live" 
-        />
-        <QuizCard 
-           title="Calculus Quiz #2" 
-           subject="Grade 12 Math" 
-           questions={10} 
-           time="45m" 
-           status="Scheduled" 
-        />
-        <QuizCard 
-           title="History Mid-Term Pre-Quiz" 
-           subject="World History" 
-           questions={25} 
-           time="30m" 
-           status="Draft" 
-        />
-      </div>
-
-      <Card className="rounded-[32px] shadow-sm border-slate-200 overflow-hidden">
-         <CardHeader className="p-8 pb-4">
-            <CardTitle>Recent Quiz Performance</CardTitle>
-            <CardDescription>Average scores and participation rates for recent assessments.</CardDescription>
-         </CardHeader>
-         <CardContent className="p-8 pt-0">
-            <div className="grid gap-4">
-               <QuizResultRow quiz="Biology Checkpoint" average="78%" participation="98%" />
-               <QuizResultRow quiz="Chemistry Lab Quiz" average="82%" participation="95%" />
-               <QuizResultRow quiz="Math Diagnostic" average="65%" participation="100%" />
+export default function QuizzesPage() {
+    return (
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* ── Page Header ── */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <div className="flex items-center gap-3 mb-1">
+                        <Link href="/lms" className="text-muted-foreground hover:text-[#163D2D] transition-colors">
+                            <h2 className="text-sm font-bold uppercase tracking-widest italic text-slate-400">LMS</h2>
+                        </Link>
+                        <ChevronRight className="h-4 w-4 text-slate-300" />
+                        <h1 className="text-3xl font-black tracking-tighter text-slate-900 uppercase italic">Quiz Engine</h1>
+                    </div>
+                    <p className="text-sm text-muted-foreground font-medium">Automated assessments and performance analytics.</p>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Button variant="outline" className="rounded-2xl border-slate-200 font-black text-xs uppercase tracking-widest h-11 px-6 shadow-sm">
+                        <Settings className="h-4 w-4 mr-2" /> Global Config
+                    </Button>
+                    <Button className="rounded-2xl bg-[#163D2D] hover:bg-[#1e5240] text-white font-black text-xs uppercase tracking-widest h-11 px-6 shadow-sm">
+                        <Plus className="h-4 w-4 mr-2" /> Design New Quiz
+                    </Button>
+                </div>
             </div>
-         </CardContent>
-      </Card>
-    </div>
-  );
-}
 
-function QuizCard({ title, subject, questions, time, status }: { title: string, subject: string, questions: number, time: string, status: string }) {
-  return (
-    <Card className="rounded-[32px] overflow-hidden border-slate-200 group hover:shadow-lg transition-all cursor-pointer">
-       <CardHeader className="p-6">
-          <div className="flex justify-between items-start mb-4">
-             <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                <PenTool className="h-5 w-5" />
-             </div>
-             <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest ${
-                status === 'Live' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
-                status === 'Scheduled' ? 'bg-blue-50 text-blue-600 border border-blue-100' : 'bg-slate-50 text-slate-400'
-             }`}>{status}</span>
-          </div>
-          <CardTitle className="text-xl mb-1">{title}</CardTitle>
-          <p className="text-xs text-muted-foreground">{subject}</p>
-       </CardHeader>
-       <CardContent className="p-6 pt-0 flex gap-6">
-          <div className="flex items-center gap-2">
-             <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-             <span className="text-xs font-bold">{questions} Questions</span>
-          </div>
-          <div className="flex items-center gap-2">
-             <Clock className="h-4 w-4 text-emerald-600" />
-             <span className="text-xs font-bold">{time} Limit</span>
-          </div>
-       </CardContent>
-    </Card>
-  );
-}
+            {/* ── Quiz Analytics Summary ── */}
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {[
+                    { label: "Total Quizzes", count: 42, icon: Layout, color: "text-slate-900", bg: "bg-white" },
+                    { label: "Active Now", count: 3, icon: PlayCircle, color: "text-emerald-600", bg: "bg-emerald-50/50" },
+                    { label: "Avg. Campus Score", count: "82%", icon: GraduationCap, color: "text-blue-600", bg: "bg-blue-50/50" },
+                    { label: "Review Required", count: 12, icon: BarChart3, color: "text-amber-600", bg: "bg-amber-50/50" },
+                ].map((s, i) => (
+                    <Card key={i} className={`rounded-[1.75rem] border-none shadow-sm ${s.bg} p-6 flex flex-col justify-center`}>
+                        <div className="flex items-center justify-between mb-2">
+                             <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">{s.label}</p>
+                             <s.icon className={`h-4 w-4 ${s.color} opacity-40`} />
+                        </div>
+                        <p className={`text-2xl font-black ${s.color}`}>{s.count}</p>
+                    </Card>
+                ))}
+            </div>
 
-function QuizResultRow({ quiz, average, participation }: { quiz: string, average: string, participation: string }) {
-  return (
-    <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-slate-100 transition-all cursor-pointer">
-       <span className="font-bold text-sm">{quiz}</span>
-       <div className="flex gap-8">
-          <div className="text-right">
-             <p className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">Avg Score</p>
-             <p className="text-sm font-black text-emerald-600 leading-none">{average}</p>
-          </div>
-          <div className="text-right">
-             <p className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">Participation</p>
-             <p className="text-sm font-black text-blue-600 leading-none">{participation}</p>
-          </div>
-       </div>
-    </div>
-  );
+            {/* ── All Quizzes List ── */}
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                 <div className="xl:col-span-2 space-y-4">
+                      <div className="flex items-center justify-between px-2">
+                           <h3 className="font-black text-lg uppercase tracking-tight text-slate-900 italic">Assessment Registry</h3>
+                           <div className="flex items-center gap-2">
+                                <Search className="h-4 w-4 text-slate-300 mr-2" />
+                                <Button variant="ghost" size="sm" className="h-8 text-[10px] font-black uppercase tracking-widest text-[#163D2D] bg-emerald-50">All</Button>
+                                <Button variant="ghost" size="sm" className="h-8 text-[10px] font-black uppercase tracking-widest text-slate-400">Archived</Button>
+                           </div>
+                      </div>
+
+                      {quizzes.map((quiz, i) => (
+                          <Card key={i} className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-200/50 bg-white hover:shadow-2xl hover:border-emerald-100 transition-all cursor-pointer group">
+                               <div className="p-8 flex flex-col sm:flex-row sm:items-center gap-8">
+                                    <div className="h-16 w-16 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#163D2D] group-hover:text-white transition-all duration-500">
+                                         <GraduationCap className="h-8 w-8" />
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                         <div className="flex items-center gap-2 mb-2">
+                                              <Badge className={`font-black text-[9px] uppercase tracking-widest border-none ${
+                                                  quiz.status === 'Active' ? 'bg-emerald-100 text-emerald-700' :
+                                                  quiz.status === 'Scheduled' ? 'bg-blue-100 text-blue-700' :
+                                                  'bg-slate-100 text-slate-500'
+                                              }`}>
+                                                   {quiz.status}
+                                              </Badge>
+                                              <Badge variant="outline" className="font-black text-[9px] uppercase tracking-tight text-slate-300 border-slate-100 italic">{quiz.type}</Badge>
+                                         </div>
+                                         <h4 className="text-xl font-black text-slate-900 group-hover:text-[#163D2D] transition-colors leading-tight italic">{quiz.title}</h4>
+                                         <div className="flex items-center gap-6 mt-4">
+                                              <div className="flex items-center gap-2">
+                                                   <Clock className="h-3.5 w-3.5 text-slate-300" />
+                                                   <span className="text-[11px] font-black uppercase text-slate-400 tracking-widest">{quiz.timeLimit}</span>
+                                              </div>
+                                              <div className="flex items-center gap-2 border-l border-slate-100 pl-6">
+                                                   <Users className="h-3.5 w-3.5 text-slate-300" />
+                                                   <span className="text-[11px] font-black uppercase text-slate-400 tracking-widest">{quiz.activeStudents} Participated</span>
+                                              </div>
+                                         </div>
+                                    </div>
+
+                                    <div className="text-right shrink-0">
+                                         <div className="mb-2">
+                                              <p className="text-[10px] font-black uppercase text-slate-300 tracking-widest mb-1">Avg Score</p>
+                                              <p className={`text-2xl font-black italic ${quiz.avgScore === '-' ? 'text-slate-300' : 'text-slate-900 italic'}`}>{quiz.avgScore}</p>
+                                         </div>
+                                         <Button variant="ghost" size="icon" className="h-10 w-10 bg-slate-50 text-slate-400 rounded-xl group-hover:bg-[#163D2D] group-hover:text-white transition-all">
+                                              <ChevronRight className="h-5 w-5" />
+                                         </Button>
+                                    </div>
+                               </div>
+                          </Card>
+                      ))}
+                 </div>
+
+                 {/* Sidebar: Performance Leaderboard & Templates */}
+                 <div className="space-y-6">
+                      <Card className="rounded-[2.5rem] bg-gradient-to-br from-indigo-900 to-slate-900 border-none p-8 text-white relative overflow-hidden shadow-2xl">
+                           <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
+                           <h3 className="text-xl font-black italic leading-tight mb-4">Quiz Intelligence</h3>
+                           <p className="text-xs text-indigo-200/70 font-medium mb-6 leading-relaxed">Design interactive, randomized assessments with institutional-level security and anti-cheat measures.</p>
+                           <Button className="w-full rounded-2xl bg-indigo-500 hover:bg-indigo-600 text-white font-black text-xs uppercase tracking-widest h-12 shadow-lg shadow-indigo-500/20">
+                                Launch Wizard <Plus className="h-4 w-4 ml-2" />
+                           </Button>
+                      </Card>
+
+                      <Card className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-200/50 bg-white p-7">
+                           <h3 className="font-black text-base uppercase tracking-tight text-slate-900 mb-6 italic">Top Performers (MTD)</h3>
+                           <div className="space-y-4">
+                                {[
+                                     { name: "Dawit Hailu", score: "98.5%", course: "CS-101" },
+                                     { name: "Aster Kassa", score: "97.2%", course: "MATH-201" },
+                                     { name: "Sara Belay", score: "95.8%", course: "HIST-105" },
+                                ].map((p, i) => (
+                                    <div key={i} className="flex items-center justify-between">
+                                         <div className="flex items-center gap-3">
+                                              <div className="h-8 w-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-[10px] font-black italic">
+                                                   #{i+1}
+                                              </div>
+                                              <div>
+                                                   <p className="font-black text-xs text-slate-900">{p.name}</p>
+                                                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{p.course}</p>
+                                              </div>
+                                         </div>
+                                         <span className="text-sm font-black text-emerald-600">{p.score}</span>
+                                    </div>
+                                ))}
+                           </div>
+                           <Button variant="ghost" className="w-full mt-6 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#163D2D]">View Standings →</Button>
+                      </Card>
+                 </div>
+            </div>
+        </div>
+    );
 }

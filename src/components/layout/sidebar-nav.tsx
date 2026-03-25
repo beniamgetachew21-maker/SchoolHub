@@ -66,7 +66,7 @@ const navSections: NavSection[] = [
         items: [
             { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
             { href: "/admin/core", label: "Core Admin", icon: ShieldCheck, basePath: "/admin/core" },
-            { href: "/hr/directory", label: "Human Resources", icon: Briefcase, basePath: "/hr" },
+            { href: "/hr", label: "Human Resources", icon: Briefcase, basePath: "/hr" },
             { href: "/admin/security", label: "Security & Access", icon: Lock, basePath: "/admin/security" },
         ]
     },
@@ -216,7 +216,7 @@ const inventorySubmenu = [
 ];
 
 
-export function SidebarNavComponent() {
+export function SidebarNavComponent({ tenantName = "EthioEdu", logoUrl }: { tenantName?: string, logoUrl?: string | null }) {
     const pathname = usePathname();
 
     const checkActive = React.useCallback((item: { href: string; basePath?: string }) => {
@@ -268,10 +268,16 @@ export function SidebarNavComponent() {
         <>
             <SidebarHeader className="border-b">
                 <div className="flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 text-primary font-bold"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                    <div className="flex flex-col">
-                        <h2 className="text-lg font-bold font-headline tracking-tight">EthioEdu</h2>
-                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Global Academy</p>
+                    <div className="h-8 w-8 min-w-[32px] bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-lg shadow-sm overflow-hidden">
+                        {logoUrl ? (
+                            <img src={logoUrl} alt={tenantName} className="h-full w-full object-cover" />
+                        ) : (
+                            tenantName.charAt(0).toUpperCase()
+                        )}
+                    </div>
+                    <div className="flex flex-col overflow-hidden">
+                        <h2 className="text-lg font-bold font-headline tracking-tight truncate">{tenantName}</h2>
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Workspace</p>
                     </div>
                 </div>
             </SidebarHeader>

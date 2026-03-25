@@ -23,6 +23,7 @@ async function main() {
 
     // Clear existing data (Ordered from children to parents to avoid FK issues)
     const modelsToDelete = [
+        'clubAttendanceRecord', 'clubMembership', 'club',
         'classPeriod', 'submission', 'enrollment', 'payrollRecord', 
         'assessmentResult', 'attendanceSummary', 'grade', 'quizAttempt',
         'studentHealthRecord', 'studentStatusHistory', 'studentDocument', 
@@ -33,7 +34,7 @@ async function main() {
         'transaction', 'feeStructure', 'vehicle', 'driver', 'route', 
         'inventoryItem', 'vendor', 'purchaseOrder', 'subscriberList', 
         'achievement', 'disciplinaryRecord', 'classroom', 'subject', 
-        'hostel', 'room', 'assessment', 'student', 'employee', 'user', 'role', 'permission'
+        'room', 'hostel', 'assessment', 'student', 'employee', 'user', 'role', 'permission'
     ];
 
     for (const model of modelsToDelete) {
@@ -326,6 +327,81 @@ async function main() {
 
     for (const as of attendanceSummaries) {
         await prisma.attendanceSummary.create({ data: { ...as, tenantId: SYS_TENANT } })
+    }
+
+    console.log('Seeding Clubs...');
+    const clubsData = [
+        {
+          clubId: 'CLB-ROBO',
+          name: 'Robotics & AI Club',
+          description: 'Exploring the future of automation and artificial intelligence through hands-on projects.',
+          facultyAdvisorId: 'E002', // Meaza Ashenafi
+          category: 'Tech',
+          color: 'from-blue-500 to-indigo-600',
+          iconName: 'Code2',
+          imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070',
+          imageHint: 'A futuristic robot arm',
+          memberCount: 0,
+        },
+        {
+          clubId: 'CLB-DEBATE',
+          name: 'Ethos Debate Society',
+          description: 'Developing critical thinking and public speaking skills through competitive debating.',
+          facultyAdvisorId: 'E003', // Kebede Alemu
+          category: 'Academic',
+          color: 'from-emerald-500 to-teal-600',
+          iconName: 'Globe',
+          imageUrl: 'https://images.unsplash.com/photo-1475721027187-4024733924f3?auto=format&fit=crop&q=80&w=2070',
+          imageHint: 'A person speaking at a podium',
+          memberCount: 0,
+        },
+        {
+          clubId: 'CLB-ART',
+          name: 'Creative Canvas',
+          description: 'A space for students to express themselves through various visual art forms.',
+          facultyAdvisorId: 'E002',
+          category: 'Arts',
+          color: 'from-purple-500 to-pink-600',
+          iconName: 'Palette',
+          imageUrl: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=2070',
+          imageHint: 'A collection of paint brushes and canvas',
+          memberCount: 0,
+        }
+    ];
+
+    for (const club of clubsData) {
+        await (prisma as any).club.upsert({
+            where: { clubId: club.clubId },
+            update: { ...club, tenantId: SYS_TENANT },
+            create: { ...club, tenantId: SYS_TENANT }
+        });
+    }
+
+    // Add some memberships
+    const studentIds = ['S001', 'S002', 'S003', 'S004'];
+    for (let i = 0; i < studentIds.length; i++) {
+        await (prisma as any).clubMembership.upsert({
+            where: {
+                clubId_studentId_tenantId: {
+                    clubId: 'CLB-ROBO',
+                    studentId: studentIds[i],
+                    tenantId: SYS_TENANT
+                }
+            },
+            update: {
+                role: i === 0 ? 'President' : 'Member'
+            },
+            create: {
+                clubId: 'CLB-ROBO',
+                studentId: studentIds[i],
+                tenantId: SYS_TENANT,
+                role: i === 0 ? 'President' : 'Member'
+            }
+        });
+        await (prisma as any).club.update({
+            where: { clubId: 'CLB-ROBO' },
+            data: { memberCount: { increment: 1 } }
+        });
     }
 
     console.log('Seeding finished.')

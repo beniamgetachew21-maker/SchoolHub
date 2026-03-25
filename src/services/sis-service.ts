@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { BaseService, ServiceResponse } from "./base-service";
+import { acaService } from "./aca-service";
+import { schedulingService } from "./scheduling-service";
+import { finService } from "./fin-service";
 
 /**
  * SisService handles all Student Information System related logic,
@@ -29,16 +32,54 @@ export class SisService extends BaseService {
 
     // ─── Student Management ──────────────────────────────────────────────────
 
-    async getStudents(): Promise<ServiceResponse<any[]>> {
+    async getStudents(params: {
+        page?: number;
+        pageSize?: number;
+        search?: string;
+        classFilter?: string;
+    } = {}): Promise<ServiceResponse<{ students: any[]; totalCount: number; totalPages: number }>> {
         try {
             const { tenant } = await this.getContext();
-            const students = await prisma.student.findMany({
-                where: { tenantId: tenant.id },
-                orderBy: { name: "asc" },
+            const { page = 1, pageSize = 20, search = "", classFilter = "" } = params;
+            
+            const skip = (page - 1) * pageSize;
+
+            const where: any = { 
+                tenantId: tenant.id,
+                AND: []
+            };
+
+            if (search) {
+                where.AND.push({
+                    OR: [
+                        { name: { contains: search, mode: 'insensitive' } },
+                        { email: { contains: search, mode: 'insensitive' } },
+                        { admissionNumber: { contains: search, mode: 'insensitive' } },
+                    ]
+                });
+            }
+
+            if (classFilter) {
+                where.AND.push({ className: classFilter });
+            }
+
+            const [students, totalCount] = await Promise.all([
+                prisma.student.findMany({
+                    where,
+                    orderBy: { name: "asc" },
+                    skip,
+                    take: pageSize,
+                }),
+                prisma.student.count({ where })
+            ]);
+
+            return this.response({
+                students,
+                totalCount,
+                totalPages: Math.ceil(totalCount / pageSize),
             });
-            return this.response(students);
         } catch (error: any) {
-            return this.response([], error.message);
+            return this.response({ students: [], totalCount: 0, totalPages: 0 }, error.message);
         }
     }
 
@@ -65,6 +106,53 @@ export class SisService extends BaseService {
                 data,
             });
             return this.response(student);
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
+    async getStudentDashboardData(studentId: string): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            
+            // 1. Fetch Student Core
+            const student = await prisma.student.findUnique({
+                where: { studentId, tenantId: tenant.id },
+            });
+
+            if (!student) return this.response(null, "Student not found");
+
+            // 2. Aggregate Data
+            const [attendance, gpaData, timetable, invoices, resultsData] = await Promise.all([
+                this.getAttendanceSummary(studentId),
+                acaService.calculateStudentGPA(studentId),
+                // Sections usually have names like 'Grade 11-A', let's find the section by name or reference
+                prisma.classSection.findFirst({
+                    where: { tenantId: tenant.id },
+                }).then(section => section ? schedulingService.getTimetableBySection(section.id) : { data: [], success: true, error: null } as ServiceResponse<any[]>),
+                finService.getInvoicesForStudent(studentId),
+                acaService.getResultsByStudent(studentId),
+            ]);
+
+            // 3. Fetch Active Assignments
+            const assignments = await prisma.assignment.findMany({
+                where: { 
+                    tenantId: tenant.id,
+                    dueDate: { gte: new Date(new Date().setHours(0,0,0,0)) }
+                },
+                orderBy: { dueDate: "asc" },
+                take: 5
+            });
+
+            return this.response({
+                student,
+                attendance: attendance.data,
+                invoices: invoices.data || [],
+                gpa: gpaData.data?.gpa || 0,
+                timetable: timetable?.data || [],
+                assignments: assignments || [],
+                results: resultsData || [],
+            });
         } catch (error: any) {
             return this.response(null, error.message);
         }

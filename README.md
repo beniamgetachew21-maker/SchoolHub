@@ -31,7 +31,7 @@ Campus Hub is a comprehensive, AI-powered institutional management platform buil
 - **Styling**: Tailwind CSS with Radix UI (Shadcn)
 - **AI Backend**: Genkit with Google Gemini
 - **Payments**: Stripe
-- **Hosting**: Firebase App Hosting
+- **Hosting**: Self-Hosted (Vercel / VPS)
 
 ---
 

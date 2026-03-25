@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { updateApplicationStatusAction } from "@/lib/actions";
+import { enrollApprovedApplicantAction } from "@/lib/flow-actions";
 import { toast } from "@/hooks/use-toast";
 
 export function ApplicationClient({ initialApplications }: { initialApplications: any[] }) {
@@ -49,18 +50,28 @@ export function ApplicationClient({ initialApplications }: { initialApplications
 
     async function handleStatusUpdate(id: string, status: string) {
         try {
-            await updateApplicationStatusAction(id, status);
+            if (status === "Approved") {
+                const res = await enrollApprovedApplicantAction(id);
+                if (!res.success) throw new Error(res.error || "Enrollment failed");
+                toast({
+                    title: "Student Enrolled",
+                    description: `Application ${id} approved. Student profile, guardian, and initial invoice generated.`,
+                });
+            } else {
+                await updateApplicationStatusAction(id, status);
+                toast({
+                    title: "Status Updated",
+                    description: `Application ${id} is now ${status}.`,
+                });
+            }
+
             setApplications(prev => prev.map(app =>
-                app.id === id ? { ...app, status } : app
+                app.id === id ? { ...app, status: status === "Approved" ? "Enrolled" : status } : app
             ));
+        } catch (error: any) {
             toast({
-                title: "Status Updated",
-                description: `Application ${id} is now ${status}.`,
-            });
-        } catch (error) {
-            toast({
-                title: "Error",
-                description: "Failed to update status.",
+                title: "Action Failed",
+                description: error.message || "Failed to update status.",
                 variant: "destructive"
             });
         }

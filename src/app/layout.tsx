@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_Ethiopic } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 const ethiopic = Noto_Sans_Ethiopic({
@@ -29,6 +30,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
         </NextIntlClientProvider>
+        <Toaster />
       </body>
     </html>
   );

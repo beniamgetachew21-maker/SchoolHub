@@ -1,0 +1,2001 @@
+student_id,route,bus_number
+ST00001,Route 1 Akaki,BUS-14
+ST00002,Route 5 Kality,BUS-4
+ST00003,Route 3 Nefas Silk,BUS-12
+ST00004,Route 1 Akaki,BUS-8
+ST00005,Route 1 Akaki,BUS-7
+ST00006,Route 4 Lebu,BUS-2
+ST00007,Route 2 Alem Bank,BUS-8
+ST00008,Route 4 Lebu,BUS-2
+ST00009,Route 5 Kality,BUS-7
+ST00010,Route 2 Alem Bank,BUS-8
+ST00011,Route 1 Akaki,BUS-6
+ST00012,Route 4 Lebu,BUS-11
+ST00013,Route 5 Kality,BUS-15
+ST00014,Route 1 Akaki,BUS-4
+ST00015,Route 1 Akaki,BUS-13
+ST00016,Route 4 Lebu,BUS-8
+ST00017,Route 2 Alem Bank,BUS-13
+ST00018,Route 1 Akaki,BUS-13
+ST00019,Route 5 Kality,BUS-1
+ST00020,Route 2 Alem Bank,BUS-1
+ST00021,Route 5 Kality,BUS-11
+ST00022,Route 1 Akaki,BUS-9
+ST00023,Route 1 Akaki,BUS-4
+ST00024,Route 1 Akaki,BUS-7
+ST00025,Route 3 Nefas Silk,BUS-8
+ST00026,Route 2 Alem Bank,BUS-7
+ST00027,Route 2 Alem Bank,BUS-2
+ST00028,Route 4 Lebu,BUS-4
+ST00029,Route 1 Akaki,BUS-1
+ST00030,Route 5 Kality,BUS-10
+ST00031,Route 1 Akaki,BUS-13
+ST00032,Route 5 Kality,BUS-10
+ST00033,Route 3 Nefas Silk,BUS-7
+ST00034,Route 1 Akaki,BUS-3
+ST00035,Route 5 Kality,BUS-10
+ST00036,Route 3 Nefas Silk,BUS-4
+ST00037,Route 3 Nefas Silk,BUS-7
+ST00038,Route 4 Lebu,BUS-12
+ST00039,Route 5 Kality,BUS-13
+ST00040,Route 4 Lebu,BUS-3
+ST00041,Route 5 Kality,BUS-12
+ST00042,Route 1 Akaki,BUS-7
+ST00043,Route 5 Kality,BUS-14
+ST00044,Route 1 Akaki,BUS-2
+ST00045,Route 1 Akaki,BUS-6
+ST00046,Route 3 Nefas Silk,BUS-4
+ST00047,Route 4 Lebu,BUS-4
+ST00048,Route 2 Alem Bank,BUS-14
+ST00049,Route 4 Lebu,BUS-8
+ST00050,Route 4 Lebu,BUS-2
+ST00051,Route 4 Lebu,BUS-5
+ST00052,Route 2 Alem Bank,BUS-3
+ST00053,Route 4 Lebu,BUS-6
+ST00054,Route 4 Lebu,BUS-11
+ST00055,Route 1 Akaki,BUS-14
+ST00056,Route 1 Akaki,BUS-13
+ST00057,Route 5 Kality,BUS-13
+ST00058,Route 1 Akaki,BUS-2
+ST00059,Route 1 Akaki,BUS-5
+ST00060,Route 4 Lebu,BUS-14
+ST00061,Route 1 Akaki,BUS-9
+ST00062,Route 2 Alem Bank,BUS-10
+ST00063,Route 1 Akaki,BUS-8
+ST00064,Route 1 Akaki,BUS-1
+ST00065,Route 5 Kality,BUS-9
+ST00066,Route 1 Akaki,BUS-8
+ST00067,Route 3 Nefas Silk,BUS-1
+ST00068,Route 3 Nefas Silk,BUS-12
+ST00069,Route 4 Lebu,BUS-14
+ST00070,Route 1 Akaki,BUS-1
+ST00071,Route 4 Lebu,BUS-7
+ST00072,Route 1 Akaki,BUS-15
+ST00073,Route 1 Akaki,BUS-2
+ST00074,Route 3 Nefas Silk,BUS-5
+ST00075,Route 2 Alem Bank,BUS-15
+ST00076,Route 4 Lebu,BUS-14
+ST00077,Route 2 Alem Bank,BUS-9
+ST00078,Route 2 Alem Bank,BUS-15
+ST00079,Route 5 Kality,BUS-15
+ST00080,Route 3 Nefas Silk,BUS-5
+ST00081,Route 5 Kality,BUS-13
+ST00082,Route 2 Alem Bank,BUS-4
+ST00083,Route 4 Lebu,BUS-14
+ST00084,Route 5 Kality,BUS-4
+ST00085,Route 2 Alem Bank,BUS-9
+ST00086,Route 1 Akaki,BUS-4
+ST00087,Route 1 Akaki,BUS-2
+ST00088,Route 5 Kality,BUS-15
+ST00089,Route 2 Alem Bank,BUS-2
+ST00090,Route 2 Alem Bank,BUS-1
+ST00091,Route 2 Alem Bank,BUS-5
+ST00092,Route 3 Nefas Silk,BUS-14
+ST00093,Route 3 Nefas Silk,BUS-1
+ST00094,Route 2 Alem Bank,BUS-8
+ST00095,Route 3 Nefas Silk,BUS-3
+ST00096,Route 2 Alem Bank,BUS-6
+ST00097,Route 4 Lebu,BUS-15
+ST00098,Route 1 Akaki,BUS-15
+ST00099,Route 2 Alem Bank,BUS-4
+ST00100,Route 3 Nefas Silk,BUS-15
+ST00101,Route 3 Nefas Silk,BUS-15
+ST00102,Route 3 Nefas Silk,BUS-10
+ST00103,Route 4 Lebu,BUS-7
+ST00104,Route 3 Nefas Silk,BUS-3
+ST00105,Route 1 Akaki,BUS-1
+ST00106,Route 4 Lebu,BUS-4
+ST00107,Route 1 Akaki,BUS-9
+ST00108,Route 2 Alem Bank,BUS-1
+ST00109,Route 1 Akaki,BUS-4
+ST00110,Route 2 Alem Bank,BUS-14
+ST00111,Route 5 Kality,BUS-15
+ST00112,Route 3 Nefas Silk,BUS-5
+ST00113,Route 4 Lebu,BUS-15
+ST00114,Route 5 Kality,BUS-8
+ST00115,Route 4 Lebu,BUS-4
+ST00116,Route 4 Lebu,BUS-12
+ST00117,Route 3 Nefas Silk,BUS-10
+ST00118,Route 1 Akaki,BUS-4
+ST00119,Route 4 Lebu,BUS-4
+ST00120,Route 4 Lebu,BUS-14
+ST00121,Route 3 Nefas Silk,BUS-6
+ST00122,Route 2 Alem Bank,BUS-12
+ST00123,Route 3 Nefas Silk,BUS-5
+ST00124,Route 2 Alem Bank,BUS-14
+ST00125,Route 4 Lebu,BUS-6
+ST00126,Route 2 Alem Bank,BUS-13
+ST00127,Route 4 Lebu,BUS-1
+ST00128,Route 1 Akaki,BUS-4
+ST00129,Route 1 Akaki,BUS-1
+ST00130,Route 2 Alem Bank,BUS-3
+ST00131,Route 4 Lebu,BUS-1
+ST00132,Route 1 Akaki,BUS-15
+ST00133,Route 4 Lebu,BUS-3
+ST00134,Route 3 Nefas Silk,BUS-14
+ST00135,Route 3 Nefas Silk,BUS-7
+ST00136,Route 2 Alem Bank,BUS-15
+ST00137,Route 2 Alem Bank,BUS-14
+ST00138,Route 1 Akaki,BUS-3
+ST00139,Route 4 Lebu,BUS-13
+ST00140,Route 3 Nefas Silk,BUS-3
+ST00141,Route 4 Lebu,BUS-7
+ST00142,Route 5 Kality,BUS-6
+ST00143,Route 1 Akaki,BUS-14
+ST00144,Route 3 Nefas Silk,BUS-3
+ST00145,Route 3 Nefas Silk,BUS-9
+ST00146,Route 5 Kality,BUS-15
+ST00147,Route 4 Lebu,BUS-13
+ST00148,Route 3 Nefas Silk,BUS-7
+ST00149,Route 3 Nefas Silk,BUS-6
+ST00150,Route 3 Nefas Silk,BUS-14
+ST00151,Route 3 Nefas Silk,BUS-2
+ST00152,Route 1 Akaki,BUS-9
+ST00153,Route 3 Nefas Silk,BUS-14
+ST00154,Route 4 Lebu,BUS-6
+ST00155,Route 3 Nefas Silk,BUS-4
+ST00156,Route 4 Lebu,BUS-15
+ST00157,Route 3 Nefas Silk,BUS-15
+ST00158,Route 5 Kality,BUS-11
+ST00159,Route 1 Akaki,BUS-1
+ST00160,Route 2 Alem Bank,BUS-12
+ST00161,Route 3 Nefas Silk,BUS-11
+ST00162,Route 4 Lebu,BUS-9
+ST00163,Route 2 Alem Bank,BUS-5
+ST00164,Route 2 Alem Bank,BUS-9
+ST00165,Route 1 Akaki,BUS-11
+ST00166,Route 2 Alem Bank,BUS-15
+ST00167,Route 5 Kality,BUS-13
+ST00168,Route 1 Akaki,BUS-3
+ST00169,Route 2 Alem Bank,BUS-9
+ST00170,Route 1 Akaki,BUS-11
+ST00171,Route 2 Alem Bank,BUS-3
+ST00172,Route 4 Lebu,BUS-1
+ST00173,Route 4 Lebu,BUS-4
+ST00174,Route 1 Akaki,BUS-12
+ST00175,Route 4 Lebu,BUS-7
+ST00176,Route 5 Kality,BUS-1
+ST00177,Route 3 Nefas Silk,BUS-3
+ST00178,Route 3 Nefas Silk,BUS-1
+ST00179,Route 4 Lebu,BUS-8
+ST00180,Route 2 Alem Bank,BUS-5
+ST00181,Route 2 Alem Bank,BUS-7
+ST00182,Route 4 Lebu,BUS-6
+ST00183,Route 4 Lebu,BUS-9
+ST00184,Route 4 Lebu,BUS-6
+ST00185,Route 1 Akaki,BUS-11
+ST00186,Route 4 Lebu,BUS-12
+ST00187,Route 5 Kality,BUS-1
+ST00188,Route 5 Kality,BUS-11
+ST00189,Route 1 Akaki,BUS-14
+ST00190,Route 3 Nefas Silk,BUS-1
+ST00191,Route 4 Lebu,BUS-1
+ST00192,Route 3 Nefas Silk,BUS-15
+ST00193,Route 4 Lebu,BUS-13
+ST00194,Route 2 Alem Bank,BUS-1
+ST00195,Route 2 Alem Bank,BUS-2
+ST00196,Route 1 Akaki,BUS-3
+ST00197,Route 1 Akaki,BUS-4
+ST00198,Route 1 Akaki,BUS-3
+ST00199,Route 3 Nefas Silk,BUS-5
+ST00200,Route 4 Lebu,BUS-13
+ST00201,Route 2 Alem Bank,BUS-9
+ST00202,Route 1 Akaki,BUS-9
+ST00203,Route 2 Alem Bank,BUS-14
+ST00204,Route 1 Akaki,BUS-6
+ST00205,Route 2 Alem Bank,BUS-15
+ST00206,Route 3 Nefas Silk,BUS-13
+ST00207,Route 5 Kality,BUS-7
+ST00208,Route 2 Alem Bank,BUS-2
+ST00209,Route 1 Akaki,BUS-8
+ST00210,Route 4 Lebu,BUS-11
+ST00211,Route 4 Lebu,BUS-9
+ST00212,Route 5 Kality,BUS-4
+ST00213,Route 2 Alem Bank,BUS-8
+ST00214,Route 3 Nefas Silk,BUS-4
+ST00215,Route 2 Alem Bank,BUS-10
+ST00216,Route 4 Lebu,BUS-15
+ST00217,Route 5 Kality,BUS-11
+ST00218,Route 4 Lebu,BUS-13
+ST00219,Route 5 Kality,BUS-5
+ST00220,Route 5 Kality,BUS-14
+ST00221,Route 4 Lebu,BUS-6
+ST00222,Route 2 Alem Bank,BUS-2
+ST00223,Route 1 Akaki,BUS-7
+ST00224,Route 4 Lebu,BUS-13
+ST00225,Route 3 Nefas Silk,BUS-10
+ST00226,Route 1 Akaki,BUS-14
+ST00227,Route 2 Alem Bank,BUS-4
+ST00228,Route 4 Lebu,BUS-10
+ST00229,Route 2 Alem Bank,BUS-1
+ST00230,Route 1 Akaki,BUS-5
+ST00231,Route 2 Alem Bank,BUS-3
+ST00232,Route 3 Nefas Silk,BUS-5
+ST00233,Route 5 Kality,BUS-14
+ST00234,Route 5 Kality,BUS-5
+ST00235,Route 3 Nefas Silk,BUS-2
+ST00236,Route 4 Lebu,BUS-12
+ST00237,Route 5 Kality,BUS-13
+ST00238,Route 2 Alem Bank,BUS-11
+ST00239,Route 2 Alem Bank,BUS-1
+ST00240,Route 4 Lebu,BUS-10
+ST00241,Route 2 Alem Bank,BUS-1
+ST00242,Route 2 Alem Bank,BUS-10
+ST00243,Route 1 Akaki,BUS-10
+ST00244,Route 3 Nefas Silk,BUS-2
+ST00245,Route 2 Alem Bank,BUS-11
+ST00246,Route 3 Nefas Silk,BUS-14
+ST00247,Route 1 Akaki,BUS-10
+ST00248,Route 5 Kality,BUS-6
+ST00249,Route 5 Kality,BUS-8
+ST00250,Route 2 Alem Bank,BUS-8
+ST00251,Route 3 Nefas Silk,BUS-14
+ST00252,Route 5 Kality,BUS-7
+ST00253,Route 3 Nefas Silk,BUS-4
+ST00254,Route 4 Lebu,BUS-8
+ST00255,Route 3 Nefas Silk,BUS-15
+ST00256,Route 4 Lebu,BUS-6
+ST00257,Route 2 Alem Bank,BUS-11
+ST00258,Route 2 Alem Bank,BUS-6
+ST00259,Route 5 Kality,BUS-14
+ST00260,Route 4 Lebu,BUS-3
+ST00261,Route 5 Kality,BUS-10
+ST00262,Route 3 Nefas Silk,BUS-1
+ST00263,Route 3 Nefas Silk,BUS-6
+ST00264,Route 5 Kality,BUS-14
+ST00265,Route 1 Akaki,BUS-9
+ST00266,Route 2 Alem Bank,BUS-4
+ST00267,Route 1 Akaki,BUS-2
+ST00268,Route 1 Akaki,BUS-6
+ST00269,Route 4 Lebu,BUS-10
+ST00270,Route 1 Akaki,BUS-12
+ST00271,Route 4 Lebu,BUS-14
+ST00272,Route 5 Kality,BUS-11
+ST00273,Route 4 Lebu,BUS-2
+ST00274,Route 2 Alem Bank,BUS-10
+ST00275,Route 2 Alem Bank,BUS-12
+ST00276,Route 4 Lebu,BUS-7
+ST00277,Route 4 Lebu,BUS-11
+ST00278,Route 3 Nefas Silk,BUS-12
+ST00279,Route 1 Akaki,BUS-13
+ST00280,Route 4 Lebu,BUS-14
+ST00281,Route 1 Akaki,BUS-13
+ST00282,Route 3 Nefas Silk,BUS-15
+ST00283,Route 4 Lebu,BUS-8
+ST00284,Route 5 Kality,BUS-12
+ST00285,Route 1 Akaki,BUS-10
+ST00286,Route 3 Nefas Silk,BUS-4
+ST00287,Route 2 Alem Bank,BUS-2
+ST00288,Route 1 Akaki,BUS-6
+ST00289,Route 5 Kality,BUS-15
+ST00290,Route 2 Alem Bank,BUS-7
+ST00291,Route 3 Nefas Silk,BUS-9
+ST00292,Route 4 Lebu,BUS-8
+ST00293,Route 3 Nefas Silk,BUS-7
+ST00294,Route 2 Alem Bank,BUS-7
+ST00295,Route 4 Lebu,BUS-4
+ST00296,Route 4 Lebu,BUS-3
+ST00297,Route 5 Kality,BUS-8
+ST00298,Route 4 Lebu,BUS-4
+ST00299,Route 4 Lebu,BUS-6
+ST00300,Route 4 Lebu,BUS-2
+ST00301,Route 4 Lebu,BUS-9
+ST00302,Route 1 Akaki,BUS-12
+ST00303,Route 3 Nefas Silk,BUS-13
+ST00304,Route 4 Lebu,BUS-13
+ST00305,Route 5 Kality,BUS-12
+ST00306,Route 3 Nefas Silk,BUS-2
+ST00307,Route 4 Lebu,BUS-3
+ST00308,Route 5 Kality,BUS-5
+ST00309,Route 3 Nefas Silk,BUS-9
+ST00310,Route 4 Lebu,BUS-7
+ST00311,Route 4 Lebu,BUS-8
+ST00312,Route 1 Akaki,BUS-11
+ST00313,Route 2 Alem Bank,BUS-12
+ST00314,Route 5 Kality,BUS-12
+ST00315,Route 3 Nefas Silk,BUS-2
+ST00316,Route 5 Kality,BUS-6
+ST00317,Route 5 Kality,BUS-9
+ST00318,Route 5 Kality,BUS-8
+ST00319,Route 4 Lebu,BUS-5
+ST00320,Route 3 Nefas Silk,BUS-4
+ST00321,Route 4 Lebu,BUS-11
+ST00322,Route 5 Kality,BUS-7
+ST00323,Route 4 Lebu,BUS-4
+ST00324,Route 1 Akaki,BUS-2
+ST00325,Route 4 Lebu,BUS-3
+ST00326,Route 3 Nefas Silk,BUS-4
+ST00327,Route 3 Nefas Silk,BUS-11
+ST00328,Route 3 Nefas Silk,BUS-2
+ST00329,Route 3 Nefas Silk,BUS-15
+ST00330,Route 3 Nefas Silk,BUS-8
+ST00331,Route 3 Nefas Silk,BUS-13
+ST00332,Route 5 Kality,BUS-11
+ST00333,Route 3 Nefas Silk,BUS-15
+ST00334,Route 1 Akaki,BUS-13
+ST00335,Route 3 Nefas Silk,BUS-5
+ST00336,Route 1 Akaki,BUS-14
+ST00337,Route 3 Nefas Silk,BUS-10
+ST00338,Route 4 Lebu,BUS-6
+ST00339,Route 3 Nefas Silk,BUS-3
+ST00340,Route 4 Lebu,BUS-5
+ST00341,Route 2 Alem Bank,BUS-15
+ST00342,Route 4 Lebu,BUS-3
+ST00343,Route 3 Nefas Silk,BUS-6
+ST00344,Route 5 Kality,BUS-7
+ST00345,Route 5 Kality,BUS-14
+ST00346,Route 1 Akaki,BUS-3
+ST00347,Route 1 Akaki,BUS-1
+ST00348,Route 2 Alem Bank,BUS-8
+ST00349,Route 5 Kality,BUS-11
+ST00350,Route 1 Akaki,BUS-4
+ST00351,Route 1 Akaki,BUS-13
+ST00352,Route 2 Alem Bank,BUS-5
+ST00353,Route 5 Kality,BUS-15
+ST00354,Route 2 Alem Bank,BUS-10
+ST00355,Route 3 Nefas Silk,BUS-9
+ST00356,Route 1 Akaki,BUS-12
+ST00357,Route 5 Kality,BUS-2
+ST00358,Route 5 Kality,BUS-6
+ST00359,Route 3 Nefas Silk,BUS-7
+ST00360,Route 3 Nefas Silk,BUS-15
+ST00361,Route 1 Akaki,BUS-13
+ST00362,Route 4 Lebu,BUS-11
+ST00363,Route 2 Alem Bank,BUS-7
+ST00364,Route 1 Akaki,BUS-12
+ST00365,Route 3 Nefas Silk,BUS-8
+ST00366,Route 1 Akaki,BUS-8
+ST00367,Route 3 Nefas Silk,BUS-4
+ST00368,Route 2 Alem Bank,BUS-1
+ST00369,Route 4 Lebu,BUS-8
+ST00370,Route 3 Nefas Silk,BUS-10
+ST00371,Route 4 Lebu,BUS-3
+ST00372,Route 2 Alem Bank,BUS-6
+ST00373,Route 4 Lebu,BUS-10
+ST00374,Route 1 Akaki,BUS-3
+ST00375,Route 2 Alem Bank,BUS-10
+ST00376,Route 3 Nefas Silk,BUS-8
+ST00377,Route 1 Akaki,BUS-15
+ST00378,Route 2 Alem Bank,BUS-5
+ST00379,Route 5 Kality,BUS-4
+ST00380,Route 1 Akaki,BUS-10
+ST00381,Route 1 Akaki,BUS-7
+ST00382,Route 3 Nefas Silk,BUS-8
+ST00383,Route 4 Lebu,BUS-11
+ST00384,Route 5 Kality,BUS-10
+ST00385,Route 5 Kality,BUS-10
+ST00386,Route 3 Nefas Silk,BUS-3
+ST00387,Route 4 Lebu,BUS-13
+ST00388,Route 4 Lebu,BUS-15
+ST00389,Route 4 Lebu,BUS-3
+ST00390,Route 5 Kality,BUS-1
+ST00391,Route 5 Kality,BUS-15
+ST00392,Route 3 Nefas Silk,BUS-12
+ST00393,Route 4 Lebu,BUS-1
+ST00394,Route 4 Lebu,BUS-1
+ST00395,Route 5 Kality,BUS-3
+ST00396,Route 3 Nefas Silk,BUS-15
+ST00397,Route 3 Nefas Silk,BUS-7
+ST00398,Route 3 Nefas Silk,BUS-4
+ST00399,Route 2 Alem Bank,BUS-7
+ST00400,Route 2 Alem Bank,BUS-5
+ST00401,Route 5 Kality,BUS-12
+ST00402,Route 4 Lebu,BUS-7
+ST00403,Route 2 Alem Bank,BUS-15
+ST00404,Route 3 Nefas Silk,BUS-3
+ST00405,Route 3 Nefas Silk,BUS-7
+ST00406,Route 5 Kality,BUS-3
+ST00407,Route 3 Nefas Silk,BUS-2
+ST00408,Route 4 Lebu,BUS-10
+ST00409,Route 3 Nefas Silk,BUS-15
+ST00410,Route 1 Akaki,BUS-2
+ST00411,Route 4 Lebu,BUS-7
+ST00412,Route 3 Nefas Silk,BUS-15
+ST00413,Route 2 Alem Bank,BUS-10
+ST00414,Route 5 Kality,BUS-7
+ST00415,Route 5 Kality,BUS-7
+ST00416,Route 2 Alem Bank,BUS-1
+ST00417,Route 4 Lebu,BUS-14
+ST00418,Route 2 Alem Bank,BUS-8
+ST00419,Route 4 Lebu,BUS-15
+ST00420,Route 5 Kality,BUS-3
+ST00421,Route 2 Alem Bank,BUS-4
+ST00422,Route 3 Nefas Silk,BUS-7
+ST00423,Route 4 Lebu,BUS-6
+ST00424,Route 3 Nefas Silk,BUS-5
+ST00425,Route 4 Lebu,BUS-10
+ST00426,Route 2 Alem Bank,BUS-7
+ST00427,Route 5 Kality,BUS-15
+ST00428,Route 3 Nefas Silk,BUS-14
+ST00429,Route 4 Lebu,BUS-8
+ST00430,Route 3 Nefas Silk,BUS-10
+ST00431,Route 1 Akaki,BUS-3
+ST00432,Route 5 Kality,BUS-11
+ST00433,Route 4 Lebu,BUS-7
+ST00434,Route 1 Akaki,BUS-5
+ST00435,Route 5 Kality,BUS-2
+ST00436,Route 3 Nefas Silk,BUS-15
+ST00437,Route 3 Nefas Silk,BUS-3
+ST00438,Route 3 Nefas Silk,BUS-3
+ST00439,Route 3 Nefas Silk,BUS-8
+ST00440,Route 4 Lebu,BUS-7
+ST00441,Route 3 Nefas Silk,BUS-12
+ST00442,Route 2 Alem Bank,BUS-8
+ST00443,Route 5 Kality,BUS-13
+ST00444,Route 1 Akaki,BUS-10
+ST00445,Route 5 Kality,BUS-14
+ST00446,Route 5 Kality,BUS-2
+ST00447,Route 5 Kality,BUS-13
+ST00448,Route 2 Alem Bank,BUS-1
+ST00449,Route 5 Kality,BUS-14
+ST00450,Route 4 Lebu,BUS-14
+ST00451,Route 4 Lebu,BUS-10
+ST00452,Route 1 Akaki,BUS-5
+ST00453,Route 5 Kality,BUS-11
+ST00454,Route 3 Nefas Silk,BUS-10
+ST00455,Route 5 Kality,BUS-7
+ST00456,Route 5 Kality,BUS-2
+ST00457,Route 5 Kality,BUS-11
+ST00458,Route 1 Akaki,BUS-7
+ST00459,Route 4 Lebu,BUS-13
+ST00460,Route 3 Nefas Silk,BUS-7
+ST00461,Route 3 Nefas Silk,BUS-5
+ST00462,Route 4 Lebu,BUS-11
+ST00463,Route 3 Nefas Silk,BUS-5
+ST00464,Route 4 Lebu,BUS-13
+ST00465,Route 5 Kality,BUS-4
+ST00466,Route 4 Lebu,BUS-12
+ST00467,Route 4 Lebu,BUS-6
+ST00468,Route 4 Lebu,BUS-8
+ST00469,Route 5 Kality,BUS-3
+ST00470,Route 2 Alem Bank,BUS-14
+ST00471,Route 5 Kality,BUS-4
+ST00472,Route 3 Nefas Silk,BUS-3
+ST00473,Route 3 Nefas Silk,BUS-1
+ST00474,Route 4 Lebu,BUS-13
+ST00475,Route 5 Kality,BUS-11
+ST00476,Route 1 Akaki,BUS-9
+ST00477,Route 2 Alem Bank,BUS-7
+ST00478,Route 2 Alem Bank,BUS-2
+ST00479,Route 4 Lebu,BUS-6
+ST00480,Route 3 Nefas Silk,BUS-4
+ST00481,Route 5 Kality,BUS-13
+ST00482,Route 5 Kality,BUS-8
+ST00483,Route 4 Lebu,BUS-7
+ST00484,Route 1 Akaki,BUS-15
+ST00485,Route 3 Nefas Silk,BUS-5
+ST00486,Route 3 Nefas Silk,BUS-6
+ST00487,Route 1 Akaki,BUS-15
+ST00488,Route 2 Alem Bank,BUS-1
+ST00489,Route 5 Kality,BUS-6
+ST00490,Route 3 Nefas Silk,BUS-11
+ST00491,Route 3 Nefas Silk,BUS-5
+ST00492,Route 4 Lebu,BUS-3
+ST00493,Route 3 Nefas Silk,BUS-14
+ST00494,Route 5 Kality,BUS-12
+ST00495,Route 4 Lebu,BUS-1
+ST00496,Route 2 Alem Bank,BUS-1
+ST00497,Route 5 Kality,BUS-13
+ST00498,Route 1 Akaki,BUS-1
+ST00499,Route 3 Nefas Silk,BUS-10
+ST00500,Route 1 Akaki,BUS-10
+ST00501,Route 3 Nefas Silk,BUS-4
+ST00502,Route 1 Akaki,BUS-14
+ST00503,Route 4 Lebu,BUS-9
+ST00504,Route 2 Alem Bank,BUS-5
+ST00505,Route 1 Akaki,BUS-1
+ST00506,Route 5 Kality,BUS-3
+ST00507,Route 4 Lebu,BUS-14
+ST00508,Route 2 Alem Bank,BUS-5
+ST00509,Route 1 Akaki,BUS-9
+ST00510,Route 2 Alem Bank,BUS-7
+ST00511,Route 2 Alem Bank,BUS-9
+ST00512,Route 1 Akaki,BUS-4
+ST00513,Route 5 Kality,BUS-10
+ST00514,Route 3 Nefas Silk,BUS-3
+ST00515,Route 4 Lebu,BUS-14
+ST00516,Route 1 Akaki,BUS-3
+ST00517,Route 4 Lebu,BUS-10
+ST00518,Route 2 Alem Bank,BUS-3
+ST00519,Route 1 Akaki,BUS-7
+ST00520,Route 5 Kality,BUS-13
+ST00521,Route 4 Lebu,BUS-1
+ST00522,Route 2 Alem Bank,BUS-15
+ST00523,Route 4 Lebu,BUS-15
+ST00524,Route 5 Kality,BUS-7
+ST00525,Route 3 Nefas Silk,BUS-2
+ST00526,Route 5 Kality,BUS-15
+ST00527,Route 2 Alem Bank,BUS-8
+ST00528,Route 5 Kality,BUS-4
+ST00529,Route 3 Nefas Silk,BUS-8
+ST00530,Route 1 Akaki,BUS-14
+ST00531,Route 2 Alem Bank,BUS-3
+ST00532,Route 4 Lebu,BUS-3
+ST00533,Route 2 Alem Bank,BUS-7
+ST00534,Route 5 Kality,BUS-14
+ST00535,Route 4 Lebu,BUS-2
+ST00536,Route 4 Lebu,BUS-8
+ST00537,Route 2 Alem Bank,BUS-8
+ST00538,Route 1 Akaki,BUS-12
+ST00539,Route 1 Akaki,BUS-10
+ST00540,Route 3 Nefas Silk,BUS-8
+ST00541,Route 2 Alem Bank,BUS-11
+ST00542,Route 4 Lebu,BUS-14
+ST00543,Route 3 Nefas Silk,BUS-12
+ST00544,Route 2 Alem Bank,BUS-3
+ST00545,Route 5 Kality,BUS-10
+ST00546,Route 4 Lebu,BUS-1
+ST00547,Route 5 Kality,BUS-8
+ST00548,Route 2 Alem Bank,BUS-6
+ST00549,Route 2 Alem Bank,BUS-1
+ST00550,Route 3 Nefas Silk,BUS-8
+ST00551,Route 1 Akaki,BUS-3
+ST00552,Route 1 Akaki,BUS-3
+ST00553,Route 3 Nefas Silk,BUS-12
+ST00554,Route 5 Kality,BUS-8
+ST00555,Route 5 Kality,BUS-5
+ST00556,Route 2 Alem Bank,BUS-13
+ST00557,Route 2 Alem Bank,BUS-8
+ST00558,Route 3 Nefas Silk,BUS-7
+ST00559,Route 5 Kality,BUS-9
+ST00560,Route 1 Akaki,BUS-1
+ST00561,Route 4 Lebu,BUS-12
+ST00562,Route 4 Lebu,BUS-5
+ST00563,Route 1 Akaki,BUS-13
+ST00564,Route 5 Kality,BUS-11
+ST00565,Route 5 Kality,BUS-8
+ST00566,Route 2 Alem Bank,BUS-2
+ST00567,Route 4 Lebu,BUS-7
+ST00568,Route 3 Nefas Silk,BUS-7
+ST00569,Route 5 Kality,BUS-4
+ST00570,Route 2 Alem Bank,BUS-1
+ST00571,Route 1 Akaki,BUS-13
+ST00572,Route 5 Kality,BUS-10
+ST00573,Route 3 Nefas Silk,BUS-11
+ST00574,Route 4 Lebu,BUS-14
+ST00575,Route 2 Alem Bank,BUS-11
+ST00576,Route 2 Alem Bank,BUS-14
+ST00577,Route 4 Lebu,BUS-5
+ST00578,Route 2 Alem Bank,BUS-14
+ST00579,Route 4 Lebu,BUS-14
+ST00580,Route 1 Akaki,BUS-13
+ST00581,Route 3 Nefas Silk,BUS-10
+ST00582,Route 5 Kality,BUS-12
+ST00583,Route 4 Lebu,BUS-2
+ST00584,Route 2 Alem Bank,BUS-7
+ST00585,Route 5 Kality,BUS-15
+ST00586,Route 5 Kality,BUS-15
+ST00587,Route 2 Alem Bank,BUS-6
+ST00588,Route 1 Akaki,BUS-1
+ST00589,Route 1 Akaki,BUS-15
+ST00590,Route 3 Nefas Silk,BUS-6
+ST00591,Route 1 Akaki,BUS-15
+ST00592,Route 1 Akaki,BUS-12
+ST00593,Route 4 Lebu,BUS-6
+ST00594,Route 5 Kality,BUS-7
+ST00595,Route 1 Akaki,BUS-4
+ST00596,Route 5 Kality,BUS-12
+ST00597,Route 2 Alem Bank,BUS-1
+ST00598,Route 3 Nefas Silk,BUS-8
+ST00599,Route 1 Akaki,BUS-4
+ST00600,Route 1 Akaki,BUS-8
+ST00601,Route 4 Lebu,BUS-15
+ST00602,Route 4 Lebu,BUS-14
+ST00603,Route 5 Kality,BUS-13
+ST00604,Route 4 Lebu,BUS-4
+ST00605,Route 5 Kality,BUS-14
+ST00606,Route 2 Alem Bank,BUS-8
+ST00607,Route 3 Nefas Silk,BUS-2
+ST00608,Route 4 Lebu,BUS-12
+ST00609,Route 2 Alem Bank,BUS-13
+ST00610,Route 4 Lebu,BUS-1
+ST00611,Route 1 Akaki,BUS-4
+ST00612,Route 2 Alem Bank,BUS-15
+ST00613,Route 4 Lebu,BUS-11
+ST00614,Route 4 Lebu,BUS-6
+ST00615,Route 3 Nefas Silk,BUS-14
+ST00616,Route 5 Kality,BUS-2
+ST00617,Route 5 Kality,BUS-9
+ST00618,Route 2 Alem Bank,BUS-6
+ST00619,Route 4 Lebu,BUS-6
+ST00620,Route 4 Lebu,BUS-11
+ST00621,Route 3 Nefas Silk,BUS-13
+ST00622,Route 2 Alem Bank,BUS-5
+ST00623,Route 1 Akaki,BUS-1
+ST00624,Route 4 Lebu,BUS-1
+ST00625,Route 5 Kality,BUS-10
+ST00626,Route 5 Kality,BUS-10
+ST00627,Route 5 Kality,BUS-8
+ST00628,Route 3 Nefas Silk,BUS-4
+ST00629,Route 3 Nefas Silk,BUS-13
+ST00630,Route 2 Alem Bank,BUS-5
+ST00631,Route 4 Lebu,BUS-3
+ST00632,Route 3 Nefas Silk,BUS-10
+ST00633,Route 3 Nefas Silk,BUS-9
+ST00634,Route 4 Lebu,BUS-2
+ST00635,Route 3 Nefas Silk,BUS-12
+ST00636,Route 1 Akaki,BUS-6
+ST00637,Route 4 Lebu,BUS-10
+ST00638,Route 5 Kality,BUS-13
+ST00639,Route 1 Akaki,BUS-11
+ST00640,Route 5 Kality,BUS-2
+ST00641,Route 1 Akaki,BUS-3
+ST00642,Route 1 Akaki,BUS-2
+ST00643,Route 5 Kality,BUS-10
+ST00644,Route 1 Akaki,BUS-6
+ST00645,Route 2 Alem Bank,BUS-5
+ST00646,Route 2 Alem Bank,BUS-4
+ST00647,Route 3 Nefas Silk,BUS-2
+ST00648,Route 2 Alem Bank,BUS-9
+ST00649,Route 4 Lebu,BUS-10
+ST00650,Route 5 Kality,BUS-5
+ST00651,Route 2 Alem Bank,BUS-12
+ST00652,Route 4 Lebu,BUS-10
+ST00653,Route 4 Lebu,BUS-8
+ST00654,Route 3 Nefas Silk,BUS-2
+ST00655,Route 1 Akaki,BUS-8
+ST00656,Route 3 Nefas Silk,BUS-8
+ST00657,Route 2 Alem Bank,BUS-4
+ST00658,Route 5 Kality,BUS-9
+ST00659,Route 5 Kality,BUS-8
+ST00660,Route 5 Kality,BUS-9
+ST00661,Route 4 Lebu,BUS-3
+ST00662,Route 3 Nefas Silk,BUS-4
+ST00663,Route 1 Akaki,BUS-10
+ST00664,Route 5 Kality,BUS-8
+ST00665,Route 4 Lebu,BUS-5
+ST00666,Route 3 Nefas Silk,BUS-3
+ST00667,Route 4 Lebu,BUS-15
+ST00668,Route 2 Alem Bank,BUS-4
+ST00669,Route 1 Akaki,BUS-15
+ST00670,Route 5 Kality,BUS-7
+ST00671,Route 4 Lebu,BUS-9
+ST00672,Route 3 Nefas Silk,BUS-11
+ST00673,Route 3 Nefas Silk,BUS-10
+ST00674,Route 4 Lebu,BUS-7
+ST00675,Route 3 Nefas Silk,BUS-9
+ST00676,Route 1 Akaki,BUS-7
+ST00677,Route 4 Lebu,BUS-8
+ST00678,Route 5 Kality,BUS-2
+ST00679,Route 3 Nefas Silk,BUS-15
+ST00680,Route 5 Kality,BUS-4
+ST00681,Route 3 Nefas Silk,BUS-10
+ST00682,Route 5 Kality,BUS-8
+ST00683,Route 2 Alem Bank,BUS-14
+ST00684,Route 4 Lebu,BUS-14
+ST00685,Route 5 Kality,BUS-12
+ST00686,Route 5 Kality,BUS-9
+ST00687,Route 5 Kality,BUS-15
+ST00688,Route 4 Lebu,BUS-1
+ST00689,Route 5 Kality,BUS-5
+ST00690,Route 3 Nefas Silk,BUS-4
+ST00691,Route 4 Lebu,BUS-5
+ST00692,Route 1 Akaki,BUS-8
+ST00693,Route 1 Akaki,BUS-6
+ST00694,Route 4 Lebu,BUS-1
+ST00695,Route 4 Lebu,BUS-13
+ST00696,Route 1 Akaki,BUS-3
+ST00697,Route 4 Lebu,BUS-9
+ST00698,Route 3 Nefas Silk,BUS-12
+ST00699,Route 4 Lebu,BUS-12
+ST00700,Route 1 Akaki,BUS-1
+ST00701,Route 5 Kality,BUS-4
+ST00702,Route 1 Akaki,BUS-13
+ST00703,Route 4 Lebu,BUS-15
+ST00704,Route 3 Nefas Silk,BUS-12
+ST00705,Route 5 Kality,BUS-15
+ST00706,Route 5 Kality,BUS-8
+ST00707,Route 5 Kality,BUS-6
+ST00708,Route 3 Nefas Silk,BUS-9
+ST00709,Route 1 Akaki,BUS-6
+ST00710,Route 3 Nefas Silk,BUS-8
+ST00711,Route 3 Nefas Silk,BUS-8
+ST00712,Route 1 Akaki,BUS-2
+ST00713,Route 4 Lebu,BUS-6
+ST00714,Route 2 Alem Bank,BUS-5
+ST00715,Route 3 Nefas Silk,BUS-14
+ST00716,Route 1 Akaki,BUS-15
+ST00717,Route 4 Lebu,BUS-13
+ST00718,Route 3 Nefas Silk,BUS-4
+ST00719,Route 2 Alem Bank,BUS-14
+ST00720,Route 5 Kality,BUS-4
+ST00721,Route 3 Nefas Silk,BUS-2
+ST00722,Route 2 Alem Bank,BUS-5
+ST00723,Route 5 Kality,BUS-15
+ST00724,Route 3 Nefas Silk,BUS-12
+ST00725,Route 2 Alem Bank,BUS-1
+ST00726,Route 4 Lebu,BUS-5
+ST00727,Route 3 Nefas Silk,BUS-1
+ST00728,Route 5 Kality,BUS-1
+ST00729,Route 4 Lebu,BUS-3
+ST00730,Route 1 Akaki,BUS-11
+ST00731,Route 4 Lebu,BUS-9
+ST00732,Route 3 Nefas Silk,BUS-4
+ST00733,Route 2 Alem Bank,BUS-2
+ST00734,Route 4 Lebu,BUS-9
+ST00735,Route 3 Nefas Silk,BUS-7
+ST00736,Route 5 Kality,BUS-3
+ST00737,Route 3 Nefas Silk,BUS-9
+ST00738,Route 5 Kality,BUS-8
+ST00739,Route 5 Kality,BUS-15
+ST00740,Route 1 Akaki,BUS-12
+ST00741,Route 1 Akaki,BUS-12
+ST00742,Route 1 Akaki,BUS-11
+ST00743,Route 1 Akaki,BUS-12
+ST00744,Route 5 Kality,BUS-13
+ST00745,Route 3 Nefas Silk,BUS-5
+ST00746,Route 5 Kality,BUS-10
+ST00747,Route 3 Nefas Silk,BUS-5
+ST00748,Route 2 Alem Bank,BUS-6
+ST00749,Route 5 Kality,BUS-4
+ST00750,Route 3 Nefas Silk,BUS-3
+ST00751,Route 1 Akaki,BUS-11
+ST00752,Route 2 Alem Bank,BUS-11
+ST00753,Route 4 Lebu,BUS-15
+ST00754,Route 2 Alem Bank,BUS-7
+ST00755,Route 3 Nefas Silk,BUS-1
+ST00756,Route 5 Kality,BUS-8
+ST00757,Route 4 Lebu,BUS-7
+ST00758,Route 3 Nefas Silk,BUS-8
+ST00759,Route 1 Akaki,BUS-6
+ST00760,Route 1 Akaki,BUS-7
+ST00761,Route 5 Kality,BUS-2
+ST00762,Route 1 Akaki,BUS-5
+ST00763,Route 3 Nefas Silk,BUS-4
+ST00764,Route 1 Akaki,BUS-6
+ST00765,Route 5 Kality,BUS-6
+ST00766,Route 3 Nefas Silk,BUS-15
+ST00767,Route 1 Akaki,BUS-7
+ST00768,Route 2 Alem Bank,BUS-10
+ST00769,Route 4 Lebu,BUS-3
+ST00770,Route 2 Alem Bank,BUS-13
+ST00771,Route 3 Nefas Silk,BUS-15
+ST00772,Route 1 Akaki,BUS-2
+ST00773,Route 5 Kality,BUS-10
+ST00774,Route 4 Lebu,BUS-6
+ST00775,Route 4 Lebu,BUS-7
+ST00776,Route 1 Akaki,BUS-3
+ST00777,Route 4 Lebu,BUS-11
+ST00778,Route 5 Kality,BUS-10
+ST00779,Route 5 Kality,BUS-15
+ST00780,Route 1 Akaki,BUS-9
+ST00781,Route 4 Lebu,BUS-9
+ST00782,Route 1 Akaki,BUS-6
+ST00783,Route 1 Akaki,BUS-8
+ST00784,Route 5 Kality,BUS-7
+ST00785,Route 4 Lebu,BUS-1
+ST00786,Route 2 Alem Bank,BUS-5
+ST00787,Route 1 Akaki,BUS-6
+ST00788,Route 4 Lebu,BUS-10
+ST00789,Route 1 Akaki,BUS-2
+ST00790,Route 5 Kality,BUS-4
+ST00791,Route 3 Nefas Silk,BUS-8
+ST00792,Route 1 Akaki,BUS-6
+ST00793,Route 3 Nefas Silk,BUS-6
+ST00794,Route 4 Lebu,BUS-13
+ST00795,Route 3 Nefas Silk,BUS-2
+ST00796,Route 5 Kality,BUS-1
+ST00797,Route 1 Akaki,BUS-13
+ST00798,Route 3 Nefas Silk,BUS-2
+ST00799,Route 1 Akaki,BUS-15
+ST00800,Route 5 Kality,BUS-3
+ST00801,Route 2 Alem Bank,BUS-7
+ST00802,Route 4 Lebu,BUS-11
+ST00803,Route 3 Nefas Silk,BUS-8
+ST00804,Route 5 Kality,BUS-2
+ST00805,Route 5 Kality,BUS-6
+ST00806,Route 3 Nefas Silk,BUS-1
+ST00807,Route 1 Akaki,BUS-2
+ST00808,Route 2 Alem Bank,BUS-5
+ST00809,Route 2 Alem Bank,BUS-5
+ST00810,Route 1 Akaki,BUS-7
+ST00811,Route 3 Nefas Silk,BUS-4
+ST00812,Route 4 Lebu,BUS-3
+ST00813,Route 4 Lebu,BUS-12
+ST00814,Route 2 Alem Bank,BUS-7
+ST00815,Route 3 Nefas Silk,BUS-5
+ST00816,Route 3 Nefas Silk,BUS-12
+ST00817,Route 1 Akaki,BUS-14
+ST00818,Route 3 Nefas Silk,BUS-6
+ST00819,Route 4 Lebu,BUS-14
+ST00820,Route 5 Kality,BUS-5
+ST00821,Route 3 Nefas Silk,BUS-12
+ST00822,Route 3 Nefas Silk,BUS-2
+ST00823,Route 3 Nefas Silk,BUS-9
+ST00824,Route 2 Alem Bank,BUS-14
+ST00825,Route 1 Akaki,BUS-10
+ST00826,Route 2 Alem Bank,BUS-13
+ST00827,Route 4 Lebu,BUS-7
+ST00828,Route 3 Nefas Silk,BUS-10
+ST00829,Route 2 Alem Bank,BUS-11
+ST00830,Route 1 Akaki,BUS-3
+ST00831,Route 3 Nefas Silk,BUS-8
+ST00832,Route 5 Kality,BUS-8
+ST00833,Route 2 Alem Bank,BUS-14
+ST00834,Route 5 Kality,BUS-5
+ST00835,Route 3 Nefas Silk,BUS-5
+ST00836,Route 5 Kality,BUS-1
+ST00837,Route 4 Lebu,BUS-8
+ST00838,Route 1 Akaki,BUS-7
+ST00839,Route 1 Akaki,BUS-1
+ST00840,Route 2 Alem Bank,BUS-8
+ST00841,Route 5 Kality,BUS-11
+ST00842,Route 1 Akaki,BUS-10
+ST00843,Route 2 Alem Bank,BUS-10
+ST00844,Route 3 Nefas Silk,BUS-12
+ST00845,Route 2 Alem Bank,BUS-7
+ST00846,Route 3 Nefas Silk,BUS-9
+ST00847,Route 4 Lebu,BUS-15
+ST00848,Route 3 Nefas Silk,BUS-10
+ST00849,Route 4 Lebu,BUS-4
+ST00850,Route 4 Lebu,BUS-8
+ST00851,Route 2 Alem Bank,BUS-2
+ST00852,Route 3 Nefas Silk,BUS-6
+ST00853,Route 4 Lebu,BUS-10
+ST00854,Route 4 Lebu,BUS-7
+ST00855,Route 5 Kality,BUS-12
+ST00856,Route 4 Lebu,BUS-10
+ST00857,Route 5 Kality,BUS-5
+ST00858,Route 3 Nefas Silk,BUS-9
+ST00859,Route 4 Lebu,BUS-1
+ST00860,Route 2 Alem Bank,BUS-1
+ST00861,Route 5 Kality,BUS-5
+ST00862,Route 3 Nefas Silk,BUS-12
+ST00863,Route 1 Akaki,BUS-3
+ST00864,Route 1 Akaki,BUS-7
+ST00865,Route 3 Nefas Silk,BUS-2
+ST00866,Route 2 Alem Bank,BUS-7
+ST00867,Route 3 Nefas Silk,BUS-8
+ST00868,Route 1 Akaki,BUS-9
+ST00869,Route 5 Kality,BUS-1
+ST00870,Route 4 Lebu,BUS-11
+ST00871,Route 4 Lebu,BUS-15
+ST00872,Route 3 Nefas Silk,BUS-11
+ST00873,Route 3 Nefas Silk,BUS-2
+ST00874,Route 4 Lebu,BUS-10
+ST00875,Route 5 Kality,BUS-8
+ST00876,Route 2 Alem Bank,BUS-15
+ST00877,Route 3 Nefas Silk,BUS-5
+ST00878,Route 2 Alem Bank,BUS-7
+ST00879,Route 1 Akaki,BUS-1
+ST00880,Route 1 Akaki,BUS-11
+ST00881,Route 4 Lebu,BUS-2
+ST00882,Route 2 Alem Bank,BUS-7
+ST00883,Route 5 Kality,BUS-6
+ST00884,Route 3 Nefas Silk,BUS-13
+ST00885,Route 4 Lebu,BUS-5
+ST00886,Route 5 Kality,BUS-9
+ST00887,Route 1 Akaki,BUS-8
+ST00888,Route 1 Akaki,BUS-8
+ST00889,Route 4 Lebu,BUS-4
+ST00890,Route 4 Lebu,BUS-3
+ST00891,Route 4 Lebu,BUS-13
+ST00892,Route 1 Akaki,BUS-9
+ST00893,Route 1 Akaki,BUS-10
+ST00894,Route 3 Nefas Silk,BUS-5
+ST00895,Route 3 Nefas Silk,BUS-6
+ST00896,Route 2 Alem Bank,BUS-3
+ST00897,Route 4 Lebu,BUS-3
+ST00898,Route 4 Lebu,BUS-12
+ST00899,Route 3 Nefas Silk,BUS-15
+ST00900,Route 5 Kality,BUS-8
+ST00901,Route 3 Nefas Silk,BUS-2
+ST00902,Route 3 Nefas Silk,BUS-15
+ST00903,Route 1 Akaki,BUS-4
+ST00904,Route 5 Kality,BUS-10
+ST00905,Route 1 Akaki,BUS-4
+ST00906,Route 5 Kality,BUS-9
+ST00907,Route 1 Akaki,BUS-13
+ST00908,Route 2 Alem Bank,BUS-11
+ST00909,Route 2 Alem Bank,BUS-15
+ST00910,Route 3 Nefas Silk,BUS-11
+ST00911,Route 4 Lebu,BUS-11
+ST00912,Route 3 Nefas Silk,BUS-3
+ST00913,Route 3 Nefas Silk,BUS-1
+ST00914,Route 5 Kality,BUS-6
+ST00915,Route 3 Nefas Silk,BUS-9
+ST00916,Route 4 Lebu,BUS-14
+ST00917,Route 1 Akaki,BUS-15
+ST00918,Route 1 Akaki,BUS-6
+ST00919,Route 3 Nefas Silk,BUS-10
+ST00920,Route 1 Akaki,BUS-15
+ST00921,Route 5 Kality,BUS-5
+ST00922,Route 3 Nefas Silk,BUS-11
+ST00923,Route 1 Akaki,BUS-6
+ST00924,Route 4 Lebu,BUS-2
+ST00925,Route 1 Akaki,BUS-7
+ST00926,Route 1 Akaki,BUS-1
+ST00927,Route 5 Kality,BUS-1
+ST00928,Route 3 Nefas Silk,BUS-15
+ST00929,Route 2 Alem Bank,BUS-5
+ST00930,Route 3 Nefas Silk,BUS-14
+ST00931,Route 5 Kality,BUS-8
+ST00932,Route 2 Alem Bank,BUS-3
+ST00933,Route 5 Kality,BUS-8
+ST00934,Route 5 Kality,BUS-7
+ST00935,Route 3 Nefas Silk,BUS-7
+ST00936,Route 5 Kality,BUS-1
+ST00937,Route 3 Nefas Silk,BUS-4
+ST00938,Route 2 Alem Bank,BUS-3
+ST00939,Route 2 Alem Bank,BUS-15
+ST00940,Route 5 Kality,BUS-3
+ST00941,Route 4 Lebu,BUS-5
+ST00942,Route 2 Alem Bank,BUS-12
+ST00943,Route 3 Nefas Silk,BUS-5
+ST00944,Route 3 Nefas Silk,BUS-4
+ST00945,Route 1 Akaki,BUS-15
+ST00946,Route 5 Kality,BUS-15
+ST00947,Route 1 Akaki,BUS-9
+ST00948,Route 2 Alem Bank,BUS-11
+ST00949,Route 2 Alem Bank,BUS-3
+ST00950,Route 3 Nefas Silk,BUS-5
+ST00951,Route 2 Alem Bank,BUS-7
+ST00952,Route 4 Lebu,BUS-7
+ST00953,Route 3 Nefas Silk,BUS-10
+ST00954,Route 3 Nefas Silk,BUS-9
+ST00955,Route 2 Alem Bank,BUS-5
+ST00956,Route 5 Kality,BUS-10
+ST00957,Route 1 Akaki,BUS-2
+ST00958,Route 1 Akaki,BUS-15
+ST00959,Route 2 Alem Bank,BUS-13
+ST00960,Route 5 Kality,BUS-1
+ST00961,Route 1 Akaki,BUS-8
+ST00962,Route 2 Alem Bank,BUS-5
+ST00963,Route 3 Nefas Silk,BUS-14
+ST00964,Route 5 Kality,BUS-9
+ST00965,Route 3 Nefas Silk,BUS-7
+ST00966,Route 3 Nefas Silk,BUS-5
+ST00967,Route 3 Nefas Silk,BUS-15
+ST00968,Route 5 Kality,BUS-13
+ST00969,Route 4 Lebu,BUS-10
+ST00970,Route 2 Alem Bank,BUS-15
+ST00971,Route 5 Kality,BUS-12
+ST00972,Route 2 Alem Bank,BUS-13
+ST00973,Route 1 Akaki,BUS-6
+ST00974,Route 3 Nefas Silk,BUS-15
+ST00975,Route 5 Kality,BUS-8
+ST00976,Route 1 Akaki,BUS-7
+ST00977,Route 5 Kality,BUS-4
+ST00978,Route 5 Kality,BUS-7
+ST00979,Route 2 Alem Bank,BUS-5
+ST00980,Route 5 Kality,BUS-10
+ST00981,Route 2 Alem Bank,BUS-7
+ST00982,Route 4 Lebu,BUS-8
+ST00983,Route 1 Akaki,BUS-14
+ST00984,Route 4 Lebu,BUS-11
+ST00985,Route 2 Alem Bank,BUS-5
+ST00986,Route 4 Lebu,BUS-7
+ST00987,Route 1 Akaki,BUS-3
+ST00988,Route 5 Kality,BUS-14
+ST00989,Route 5 Kality,BUS-1
+ST00990,Route 2 Alem Bank,BUS-3
+ST00991,Route 4 Lebu,BUS-3
+ST00992,Route 4 Lebu,BUS-5
+ST00993,Route 1 Akaki,BUS-11
+ST00994,Route 1 Akaki,BUS-14
+ST00995,Route 1 Akaki,BUS-4
+ST00996,Route 2 Alem Bank,BUS-15
+ST00997,Route 2 Alem Bank,BUS-1
+ST00998,Route 4 Lebu,BUS-6
+ST00999,Route 3 Nefas Silk,BUS-4
+ST01000,Route 1 Akaki,BUS-15
+ST01001,Route 1 Akaki,BUS-11
+ST01002,Route 1 Akaki,BUS-4
+ST01003,Route 2 Alem Bank,BUS-9
+ST01004,Route 1 Akaki,BUS-3
+ST01005,Route 1 Akaki,BUS-7
+ST01006,Route 3 Nefas Silk,BUS-6
+ST01007,Route 5 Kality,BUS-8
+ST01008,Route 4 Lebu,BUS-4
+ST01009,Route 1 Akaki,BUS-4
+ST01010,Route 2 Alem Bank,BUS-10
+ST01011,Route 5 Kality,BUS-5
+ST01012,Route 1 Akaki,BUS-11
+ST01013,Route 4 Lebu,BUS-4
+ST01014,Route 1 Akaki,BUS-4
+ST01015,Route 4 Lebu,BUS-6
+ST01016,Route 4 Lebu,BUS-9
+ST01017,Route 2 Alem Bank,BUS-1
+ST01018,Route 5 Kality,BUS-9
+ST01019,Route 5 Kality,BUS-3
+ST01020,Route 3 Nefas Silk,BUS-11
+ST01021,Route 4 Lebu,BUS-8
+ST01022,Route 5 Kality,BUS-13
+ST01023,Route 1 Akaki,BUS-10
+ST01024,Route 5 Kality,BUS-9
+ST01025,Route 3 Nefas Silk,BUS-10
+ST01026,Route 4 Lebu,BUS-4
+ST01027,Route 3 Nefas Silk,BUS-11
+ST01028,Route 3 Nefas Silk,BUS-7
+ST01029,Route 4 Lebu,BUS-14
+ST01030,Route 2 Alem Bank,BUS-8
+ST01031,Route 5 Kality,BUS-9
+ST01032,Route 1 Akaki,BUS-2
+ST01033,Route 2 Alem Bank,BUS-2
+ST01034,Route 3 Nefas Silk,BUS-7
+ST01035,Route 1 Akaki,BUS-13
+ST01036,Route 1 Akaki,BUS-10
+ST01037,Route 4 Lebu,BUS-2
+ST01038,Route 1 Akaki,BUS-3
+ST01039,Route 4 Lebu,BUS-1
+ST01040,Route 4 Lebu,BUS-1
+ST01041,Route 5 Kality,BUS-12
+ST01042,Route 2 Alem Bank,BUS-2
+ST01043,Route 3 Nefas Silk,BUS-6
+ST01044,Route 4 Lebu,BUS-8
+ST01045,Route 5 Kality,BUS-13
+ST01046,Route 3 Nefas Silk,BUS-15
+ST01047,Route 4 Lebu,BUS-6
+ST01048,Route 3 Nefas Silk,BUS-1
+ST01049,Route 4 Lebu,BUS-6
+ST01050,Route 3 Nefas Silk,BUS-15
+ST01051,Route 2 Alem Bank,BUS-8
+ST01052,Route 4 Lebu,BUS-5
+ST01053,Route 5 Kality,BUS-3
+ST01054,Route 5 Kality,BUS-7
+ST01055,Route 3 Nefas Silk,BUS-14
+ST01056,Route 4 Lebu,BUS-6
+ST01057,Route 4 Lebu,BUS-7
+ST01058,Route 5 Kality,BUS-8
+ST01059,Route 2 Alem Bank,BUS-3
+ST01060,Route 5 Kality,BUS-4
+ST01061,Route 5 Kality,BUS-13
+ST01062,Route 5 Kality,BUS-3
+ST01063,Route 4 Lebu,BUS-9
+ST01064,Route 4 Lebu,BUS-7
+ST01065,Route 3 Nefas Silk,BUS-11
+ST01066,Route 3 Nefas Silk,BUS-10
+ST01067,Route 4 Lebu,BUS-9
+ST01068,Route 4 Lebu,BUS-6
+ST01069,Route 1 Akaki,BUS-6
+ST01070,Route 1 Akaki,BUS-3
+ST01071,Route 5 Kality,BUS-2
+ST01072,Route 2 Alem Bank,BUS-15
+ST01073,Route 1 Akaki,BUS-7
+ST01074,Route 5 Kality,BUS-8
+ST01075,Route 5 Kality,BUS-14
+ST01076,Route 2 Alem Bank,BUS-2
+ST01077,Route 4 Lebu,BUS-1
+ST01078,Route 3 Nefas Silk,BUS-14
+ST01079,Route 1 Akaki,BUS-6
+ST01080,Route 4 Lebu,BUS-7
+ST01081,Route 2 Alem Bank,BUS-5
+ST01082,Route 5 Kality,BUS-5
+ST01083,Route 4 Lebu,BUS-13
+ST01084,Route 4 Lebu,BUS-5
+ST01085,Route 4 Lebu,BUS-7
+ST01086,Route 2 Alem Bank,BUS-10
+ST01087,Route 2 Alem Bank,BUS-2
+ST01088,Route 2 Alem Bank,BUS-1
+ST01089,Route 3 Nefas Silk,BUS-6
+ST01090,Route 3 Nefas Silk,BUS-14
+ST01091,Route 5 Kality,BUS-13
+ST01092,Route 2 Alem Bank,BUS-14
+ST01093,Route 5 Kality,BUS-4
+ST01094,Route 1 Akaki,BUS-4
+ST01095,Route 4 Lebu,BUS-4
+ST01096,Route 1 Akaki,BUS-14
+ST01097,Route 3 Nefas Silk,BUS-14
+ST01098,Route 1 Akaki,BUS-1
+ST01099,Route 1 Akaki,BUS-13
+ST01100,Route 4 Lebu,BUS-10
+ST01101,Route 3 Nefas Silk,BUS-14
+ST01102,Route 3 Nefas Silk,BUS-13
+ST01103,Route 3 Nefas Silk,BUS-1
+ST01104,Route 2 Alem Bank,BUS-6
+ST01105,Route 1 Akaki,BUS-12
+ST01106,Route 3 Nefas Silk,BUS-2
+ST01107,Route 2 Alem Bank,BUS-13
+ST01108,Route 4 Lebu,BUS-15
+ST01109,Route 2 Alem Bank,BUS-9
+ST01110,Route 4 Lebu,BUS-12
+ST01111,Route 2 Alem Bank,BUS-8
+ST01112,Route 3 Nefas Silk,BUS-9
+ST01113,Route 5 Kality,BUS-11
+ST01114,Route 1 Akaki,BUS-8
+ST01115,Route 5 Kality,BUS-11
+ST01116,Route 2 Alem Bank,BUS-11
+ST01117,Route 3 Nefas Silk,BUS-14
+ST01118,Route 1 Akaki,BUS-3
+ST01119,Route 1 Akaki,BUS-7
+ST01120,Route 5 Kality,BUS-14
+ST01121,Route 2 Alem Bank,BUS-6
+ST01122,Route 2 Alem Bank,BUS-7
+ST01123,Route 4 Lebu,BUS-3
+ST01124,Route 4 Lebu,BUS-9
+ST01125,Route 2 Alem Bank,BUS-4
+ST01126,Route 3 Nefas Silk,BUS-2
+ST01127,Route 2 Alem Bank,BUS-13
+ST01128,Route 4 Lebu,BUS-4
+ST01129,Route 3 Nefas Silk,BUS-8
+ST01130,Route 2 Alem Bank,BUS-13
+ST01131,Route 2 Alem Bank,BUS-1
+ST01132,Route 2 Alem Bank,BUS-9
+ST01133,Route 1 Akaki,BUS-14
+ST01134,Route 5 Kality,BUS-14
+ST01135,Route 1 Akaki,BUS-12
+ST01136,Route 1 Akaki,BUS-8
+ST01137,Route 5 Kality,BUS-12
+ST01138,Route 2 Alem Bank,BUS-7
+ST01139,Route 1 Akaki,BUS-13
+ST01140,Route 1 Akaki,BUS-15
+ST01141,Route 4 Lebu,BUS-15
+ST01142,Route 3 Nefas Silk,BUS-9
+ST01143,Route 4 Lebu,BUS-4
+ST01144,Route 4 Lebu,BUS-1
+ST01145,Route 3 Nefas Silk,BUS-4
+ST01146,Route 3 Nefas Silk,BUS-6
+ST01147,Route 2 Alem Bank,BUS-4
+ST01148,Route 2 Alem Bank,BUS-15
+ST01149,Route 1 Akaki,BUS-2
+ST01150,Route 5 Kality,BUS-5
+ST01151,Route 3 Nefas Silk,BUS-9
+ST01152,Route 4 Lebu,BUS-8
+ST01153,Route 1 Akaki,BUS-14
+ST01154,Route 5 Kality,BUS-11
+ST01155,Route 5 Kality,BUS-2
+ST01156,Route 1 Akaki,BUS-4
+ST01157,Route 2 Alem Bank,BUS-2
+ST01158,Route 1 Akaki,BUS-5
+ST01159,Route 4 Lebu,BUS-1
+ST01160,Route 5 Kality,BUS-5
+ST01161,Route 3 Nefas Silk,BUS-11
+ST01162,Route 3 Nefas Silk,BUS-4
+ST01163,Route 2 Alem Bank,BUS-5
+ST01164,Route 3 Nefas Silk,BUS-4
+ST01165,Route 5 Kality,BUS-13
+ST01166,Route 1 Akaki,BUS-1
+ST01167,Route 3 Nefas Silk,BUS-10
+ST01168,Route 4 Lebu,BUS-1
+ST01169,Route 1 Akaki,BUS-5
+ST01170,Route 2 Alem Bank,BUS-3
+ST01171,Route 5 Kality,BUS-2
+ST01172,Route 5 Kality,BUS-13
+ST01173,Route 2 Alem Bank,BUS-15
+ST01174,Route 2 Alem Bank,BUS-10
+ST01175,Route 4 Lebu,BUS-11
+ST01176,Route 3 Nefas Silk,BUS-7
+ST01177,Route 3 Nefas Silk,BUS-1
+ST01178,Route 3 Nefas Silk,BUS-14
+ST01179,Route 1 Akaki,BUS-10
+ST01180,Route 4 Lebu,BUS-5
+ST01181,Route 2 Alem Bank,BUS-5
+ST01182,Route 2 Alem Bank,BUS-10
+ST01183,Route 5 Kality,BUS-13
+ST01184,Route 1 Akaki,BUS-14
+ST01185,Route 2 Alem Bank,BUS-2
+ST01186,Route 5 Kality,BUS-3
+ST01187,Route 4 Lebu,BUS-6
+ST01188,Route 2 Alem Bank,BUS-2
+ST01189,Route 1 Akaki,BUS-2
+ST01190,Route 3 Nefas Silk,BUS-13
+ST01191,Route 4 Lebu,BUS-2
+ST01192,Route 4 Lebu,BUS-8
+ST01193,Route 4 Lebu,BUS-8
+ST01194,Route 1 Akaki,BUS-3
+ST01195,Route 2 Alem Bank,BUS-7
+ST01196,Route 1 Akaki,BUS-3
+ST01197,Route 5 Kality,BUS-14
+ST01198,Route 5 Kality,BUS-1
+ST01199,Route 3 Nefas Silk,BUS-13
+ST01200,Route 2 Alem Bank,BUS-3
+ST01201,Route 1 Akaki,BUS-8
+ST01202,Route 3 Nefas Silk,BUS-3
+ST01203,Route 5 Kality,BUS-3
+ST01204,Route 3 Nefas Silk,BUS-1
+ST01205,Route 4 Lebu,BUS-1
+ST01206,Route 4 Lebu,BUS-10
+ST01207,Route 5 Kality,BUS-8
+ST01208,Route 1 Akaki,BUS-11
+ST01209,Route 2 Alem Bank,BUS-7
+ST01210,Route 1 Akaki,BUS-6
+ST01211,Route 5 Kality,BUS-14
+ST01212,Route 5 Kality,BUS-3
+ST01213,Route 1 Akaki,BUS-7
+ST01214,Route 1 Akaki,BUS-4
+ST01215,Route 2 Alem Bank,BUS-1
+ST01216,Route 3 Nefas Silk,BUS-1
+ST01217,Route 3 Nefas Silk,BUS-8
+ST01218,Route 4 Lebu,BUS-8
+ST01219,Route 2 Alem Bank,BUS-5
+ST01220,Route 5 Kality,BUS-9
+ST01221,Route 1 Akaki,BUS-12
+ST01222,Route 4 Lebu,BUS-15
+ST01223,Route 2 Alem Bank,BUS-12
+ST01224,Route 2 Alem Bank,BUS-3
+ST01225,Route 5 Kality,BUS-5
+ST01226,Route 5 Kality,BUS-6
+ST01227,Route 5 Kality,BUS-5
+ST01228,Route 1 Akaki,BUS-14
+ST01229,Route 1 Akaki,BUS-8
+ST01230,Route 2 Alem Bank,BUS-5
+ST01231,Route 4 Lebu,BUS-12
+ST01232,Route 1 Akaki,BUS-11
+ST01233,Route 2 Alem Bank,BUS-12
+ST01234,Route 5 Kality,BUS-13
+ST01235,Route 3 Nefas Silk,BUS-12
+ST01236,Route 5 Kality,BUS-12
+ST01237,Route 3 Nefas Silk,BUS-14
+ST01238,Route 3 Nefas Silk,BUS-10
+ST01239,Route 1 Akaki,BUS-9
+ST01240,Route 5 Kality,BUS-12
+ST01241,Route 4 Lebu,BUS-12
+ST01242,Route 5 Kality,BUS-1
+ST01243,Route 4 Lebu,BUS-9
+ST01244,Route 2 Alem Bank,BUS-5
+ST01245,Route 2 Alem Bank,BUS-2
+ST01246,Route 1 Akaki,BUS-5
+ST01247,Route 3 Nefas Silk,BUS-9
+ST01248,Route 3 Nefas Silk,BUS-7
+ST01249,Route 5 Kality,BUS-3
+ST01250,Route 1 Akaki,BUS-10
+ST01251,Route 5 Kality,BUS-11
+ST01252,Route 1 Akaki,BUS-11
+ST01253,Route 2 Alem Bank,BUS-10
+ST01254,Route 4 Lebu,BUS-6
+ST01255,Route 1 Akaki,BUS-12
+ST01256,Route 3 Nefas Silk,BUS-7
+ST01257,Route 1 Akaki,BUS-12
+ST01258,Route 5 Kality,BUS-4
+ST01259,Route 2 Alem Bank,BUS-9
+ST01260,Route 5 Kality,BUS-12
+ST01261,Route 3 Nefas Silk,BUS-9
+ST01262,Route 5 Kality,BUS-11
+ST01263,Route 5 Kality,BUS-8
+ST01264,Route 3 Nefas Silk,BUS-5
+ST01265,Route 4 Lebu,BUS-6
+ST01266,Route 3 Nefas Silk,BUS-9
+ST01267,Route 1 Akaki,BUS-6
+ST01268,Route 1 Akaki,BUS-14
+ST01269,Route 4 Lebu,BUS-5
+ST01270,Route 2 Alem Bank,BUS-10
+ST01271,Route 2 Alem Bank,BUS-2
+ST01272,Route 5 Kality,BUS-4
+ST01273,Route 2 Alem Bank,BUS-3
+ST01274,Route 3 Nefas Silk,BUS-14
+ST01275,Route 1 Akaki,BUS-11
+ST01276,Route 3 Nefas Silk,BUS-12
+ST01277,Route 2 Alem Bank,BUS-10
+ST01278,Route 1 Akaki,BUS-1
+ST01279,Route 5 Kality,BUS-10
+ST01280,Route 5 Kality,BUS-12
+ST01281,Route 1 Akaki,BUS-3
+ST01282,Route 5 Kality,BUS-4
+ST01283,Route 5 Kality,BUS-14
+ST01284,Route 1 Akaki,BUS-14
+ST01285,Route 4 Lebu,BUS-5
+ST01286,Route 3 Nefas Silk,BUS-10
+ST01287,Route 5 Kality,BUS-10
+ST01288,Route 3 Nefas Silk,BUS-1
+ST01289,Route 1 Akaki,BUS-15
+ST01290,Route 1 Akaki,BUS-3
+ST01291,Route 4 Lebu,BUS-4
+ST01292,Route 5 Kality,BUS-15
+ST01293,Route 3 Nefas Silk,BUS-15
+ST01294,Route 4 Lebu,BUS-9
+ST01295,Route 5 Kality,BUS-1
+ST01296,Route 5 Kality,BUS-8
+ST01297,Route 5 Kality,BUS-11
+ST01298,Route 5 Kality,BUS-13
+ST01299,Route 2 Alem Bank,BUS-9
+ST01300,Route 4 Lebu,BUS-2
+ST01301,Route 2 Alem Bank,BUS-3
+ST01302,Route 4 Lebu,BUS-14
+ST01303,Route 4 Lebu,BUS-7
+ST01304,Route 5 Kality,BUS-7
+ST01305,Route 5 Kality,BUS-1
+ST01306,Route 5 Kality,BUS-7
+ST01307,Route 3 Nefas Silk,BUS-7
+ST01308,Route 3 Nefas Silk,BUS-4
+ST01309,Route 1 Akaki,BUS-11
+ST01310,Route 1 Akaki,BUS-9
+ST01311,Route 2 Alem Bank,BUS-10
+ST01312,Route 4 Lebu,BUS-9
+ST01313,Route 5 Kality,BUS-2
+ST01314,Route 1 Akaki,BUS-6
+ST01315,Route 2 Alem Bank,BUS-6
+ST01316,Route 5 Kality,BUS-1
+ST01317,Route 4 Lebu,BUS-4
+ST01318,Route 5 Kality,BUS-6
+ST01319,Route 3 Nefas Silk,BUS-1
+ST01320,Route 3 Nefas Silk,BUS-6
+ST01321,Route 1 Akaki,BUS-15
+ST01322,Route 2 Alem Bank,BUS-13
+ST01323,Route 5 Kality,BUS-2
+ST01324,Route 2 Alem Bank,BUS-7
+ST01325,Route 5 Kality,BUS-10
+ST01326,Route 4 Lebu,BUS-11
+ST01327,Route 2 Alem Bank,BUS-12
+ST01328,Route 1 Akaki,BUS-8
+ST01329,Route 3 Nefas Silk,BUS-12
+ST01330,Route 5 Kality,BUS-9
+ST01331,Route 1 Akaki,BUS-7
+ST01332,Route 4 Lebu,BUS-7
+ST01333,Route 3 Nefas Silk,BUS-15
+ST01334,Route 4 Lebu,BUS-13
+ST01335,Route 5 Kality,BUS-13
+ST01336,Route 2 Alem Bank,BUS-9
+ST01337,Route 5 Kality,BUS-2
+ST01338,Route 3 Nefas Silk,BUS-3
+ST01339,Route 2 Alem Bank,BUS-6
+ST01340,Route 1 Akaki,BUS-10
+ST01341,Route 1 Akaki,BUS-14
+ST01342,Route 1 Akaki,BUS-6
+ST01343,Route 4 Lebu,BUS-6
+ST01344,Route 3 Nefas Silk,BUS-8
+ST01345,Route 5 Kality,BUS-7
+ST01346,Route 3 Nefas Silk,BUS-14
+ST01347,Route 5 Kality,BUS-14
+ST01348,Route 2 Alem Bank,BUS-8
+ST01349,Route 4 Lebu,BUS-3
+ST01350,Route 4 Lebu,BUS-14
+ST01351,Route 2 Alem Bank,BUS-10
+ST01352,Route 1 Akaki,BUS-12
+ST01353,Route 1 Akaki,BUS-12
+ST01354,Route 5 Kality,BUS-4
+ST01355,Route 5 Kality,BUS-14
+ST01356,Route 2 Alem Bank,BUS-9
+ST01357,Route 2 Alem Bank,BUS-12
+ST01358,Route 5 Kality,BUS-8
+ST01359,Route 3 Nefas Silk,BUS-15
+ST01360,Route 3 Nefas Silk,BUS-14
+ST01361,Route 4 Lebu,BUS-2
+ST01362,Route 1 Akaki,BUS-14
+ST01363,Route 1 Akaki,BUS-10
+ST01364,Route 3 Nefas Silk,BUS-15
+ST01365,Route 3 Nefas Silk,BUS-9
+ST01366,Route 5 Kality,BUS-11
+ST01367,Route 4 Lebu,BUS-15
+ST01368,Route 2 Alem Bank,BUS-5
+ST01369,Route 5 Kality,BUS-3
+ST01370,Route 1 Akaki,BUS-13
+ST01371,Route 3 Nefas Silk,BUS-4
+ST01372,Route 2 Alem Bank,BUS-6
+ST01373,Route 2 Alem Bank,BUS-10
+ST01374,Route 3 Nefas Silk,BUS-13
+ST01375,Route 5 Kality,BUS-7
+ST01376,Route 2 Alem Bank,BUS-10
+ST01377,Route 5 Kality,BUS-11
+ST01378,Route 5 Kality,BUS-5
+ST01379,Route 2 Alem Bank,BUS-7
+ST01380,Route 5 Kality,BUS-5
+ST01381,Route 4 Lebu,BUS-7
+ST01382,Route 2 Alem Bank,BUS-7
+ST01383,Route 1 Akaki,BUS-15
+ST01384,Route 4 Lebu,BUS-3
+ST01385,Route 2 Alem Bank,BUS-8
+ST01386,Route 1 Akaki,BUS-10
+ST01387,Route 4 Lebu,BUS-13
+ST01388,Route 2 Alem Bank,BUS-5
+ST01389,Route 3 Nefas Silk,BUS-15
+ST01390,Route 5 Kality,BUS-5
+ST01391,Route 4 Lebu,BUS-4
+ST01392,Route 1 Akaki,BUS-4
+ST01393,Route 5 Kality,BUS-15
+ST01394,Route 3 Nefas Silk,BUS-1
+ST01395,Route 4 Lebu,BUS-7
+ST01396,Route 4 Lebu,BUS-14
+ST01397,Route 2 Alem Bank,BUS-1
+ST01398,Route 3 Nefas Silk,BUS-7
+ST01399,Route 2 Alem Bank,BUS-8
+ST01400,Route 2 Alem Bank,BUS-6
+ST01401,Route 5 Kality,BUS-7
+ST01402,Route 3 Nefas Silk,BUS-9
+ST01403,Route 3 Nefas Silk,BUS-7
+ST01404,Route 4 Lebu,BUS-10
+ST01405,Route 3 Nefas Silk,BUS-10
+ST01406,Route 2 Alem Bank,BUS-10
+ST01407,Route 5 Kality,BUS-3
+ST01408,Route 1 Akaki,BUS-8
+ST01409,Route 3 Nefas Silk,BUS-5
+ST01410,Route 2 Alem Bank,BUS-8
+ST01411,Route 3 Nefas Silk,BUS-12
+ST01412,Route 2 Alem Bank,BUS-3
+ST01413,Route 5 Kality,BUS-8
+ST01414,Route 4 Lebu,BUS-7
+ST01415,Route 1 Akaki,BUS-3
+ST01416,Route 1 Akaki,BUS-1
+ST01417,Route 4 Lebu,BUS-7
+ST01418,Route 4 Lebu,BUS-12
+ST01419,Route 4 Lebu,BUS-15
+ST01420,Route 1 Akaki,BUS-12
+ST01421,Route 4 Lebu,BUS-6
+ST01422,Route 1 Akaki,BUS-12
+ST01423,Route 1 Akaki,BUS-4
+ST01424,Route 3 Nefas Silk,BUS-15
+ST01425,Route 1 Akaki,BUS-4
+ST01426,Route 4 Lebu,BUS-11
+ST01427,Route 2 Alem Bank,BUS-13
+ST01428,Route 1 Akaki,BUS-9
+ST01429,Route 1 Akaki,BUS-4
+ST01430,Route 4 Lebu,BUS-3
+ST01431,Route 4 Lebu,BUS-5
+ST01432,Route 4 Lebu,BUS-8
+ST01433,Route 5 Kality,BUS-8
+ST01434,Route 4 Lebu,BUS-14
+ST01435,Route 4 Lebu,BUS-5
+ST01436,Route 5 Kality,BUS-15
+ST01437,Route 4 Lebu,BUS-1
+ST01438,Route 4 Lebu,BUS-6
+ST01439,Route 4 Lebu,BUS-11
+ST01440,Route 3 Nefas Silk,BUS-8
+ST01441,Route 1 Akaki,BUS-6
+ST01442,Route 3 Nefas Silk,BUS-10
+ST01443,Route 3 Nefas Silk,BUS-14
+ST01444,Route 3 Nefas Silk,BUS-12
+ST01445,Route 1 Akaki,BUS-13
+ST01446,Route 3 Nefas Silk,BUS-10
+ST01447,Route 4 Lebu,BUS-9
+ST01448,Route 5 Kality,BUS-3
+ST01449,Route 1 Akaki,BUS-9
+ST01450,Route 4 Lebu,BUS-2
+ST01451,Route 2 Alem Bank,BUS-6
+ST01452,Route 5 Kality,BUS-13
+ST01453,Route 4 Lebu,BUS-8
+ST01454,Route 1 Akaki,BUS-8
+ST01455,Route 3 Nefas Silk,BUS-4
+ST01456,Route 5 Kality,BUS-8
+ST01457,Route 4 Lebu,BUS-6
+ST01458,Route 2 Alem Bank,BUS-1
+ST01459,Route 2 Alem Bank,BUS-15
+ST01460,Route 5 Kality,BUS-9
+ST01461,Route 3 Nefas Silk,BUS-10
+ST01462,Route 5 Kality,BUS-3
+ST01463,Route 4 Lebu,BUS-2
+ST01464,Route 5 Kality,BUS-12
+ST01465,Route 4 Lebu,BUS-15
+ST01466,Route 3 Nefas Silk,BUS-13
+ST01467,Route 1 Akaki,BUS-10
+ST01468,Route 4 Lebu,BUS-8
+ST01469,Route 2 Alem Bank,BUS-8
+ST01470,Route 2 Alem Bank,BUS-12
+ST01471,Route 5 Kality,BUS-1
+ST01472,Route 1 Akaki,BUS-4
+ST01473,Route 1 Akaki,BUS-7
+ST01474,Route 3 Nefas Silk,BUS-7
+ST01475,Route 4 Lebu,BUS-3
+ST01476,Route 5 Kality,BUS-2
+ST01477,Route 1 Akaki,BUS-5
+ST01478,Route 5 Kality,BUS-7
+ST01479,Route 4 Lebu,BUS-11
+ST01480,Route 1 Akaki,BUS-2
+ST01481,Route 5 Kality,BUS-10
+ST01482,Route 1 Akaki,BUS-15
+ST01483,Route 1 Akaki,BUS-5
+ST01484,Route 5 Kality,BUS-5
+ST01485,Route 2 Alem Bank,BUS-5
+ST01486,Route 2 Alem Bank,BUS-12
+ST01487,Route 3 Nefas Silk,BUS-6
+ST01488,Route 5 Kality,BUS-3
+ST01489,Route 3 Nefas Silk,BUS-7
+ST01490,Route 4 Lebu,BUS-4
+ST01491,Route 3 Nefas Silk,BUS-9
+ST01492,Route 3 Nefas Silk,BUS-14
+ST01493,Route 3 Nefas Silk,BUS-6
+ST01494,Route 2 Alem Bank,BUS-5
+ST01495,Route 2 Alem Bank,BUS-7
+ST01496,Route 4 Lebu,BUS-15
+ST01497,Route 4 Lebu,BUS-1
+ST01498,Route 1 Akaki,BUS-1
+ST01499,Route 4 Lebu,BUS-8
+ST01500,Route 1 Akaki,BUS-9
+ST01501,Route 1 Akaki,BUS-12
+ST01502,Route 2 Alem Bank,BUS-12
+ST01503,Route 4 Lebu,BUS-12
+ST01504,Route 5 Kality,BUS-7
+ST01505,Route 3 Nefas Silk,BUS-5
+ST01506,Route 5 Kality,BUS-12
+ST01507,Route 5 Kality,BUS-8
+ST01508,Route 2 Alem Bank,BUS-10
+ST01509,Route 5 Kality,BUS-8
+ST01510,Route 4 Lebu,BUS-11
+ST01511,Route 1 Akaki,BUS-3
+ST01512,Route 1 Akaki,BUS-13
+ST01513,Route 2 Alem Bank,BUS-8
+ST01514,Route 1 Akaki,BUS-1
+ST01515,Route 5 Kality,BUS-5
+ST01516,Route 2 Alem Bank,BUS-4
+ST01517,Route 4 Lebu,BUS-10
+ST01518,Route 3 Nefas Silk,BUS-5
+ST01519,Route 4 Lebu,BUS-3
+ST01520,Route 5 Kality,BUS-13
+ST01521,Route 1 Akaki,BUS-4
+ST01522,Route 2 Alem Bank,BUS-6
+ST01523,Route 2 Alem Bank,BUS-12
+ST01524,Route 2 Alem Bank,BUS-10
+ST01525,Route 1 Akaki,BUS-8
+ST01526,Route 3 Nefas Silk,BUS-6
+ST01527,Route 3 Nefas Silk,BUS-9
+ST01528,Route 5 Kality,BUS-9
+ST01529,Route 2 Alem Bank,BUS-12
+ST01530,Route 1 Akaki,BUS-11
+ST01531,Route 5 Kality,BUS-12
+ST01532,Route 3 Nefas Silk,BUS-9
+ST01533,Route 3 Nefas Silk,BUS-11
+ST01534,Route 1 Akaki,BUS-6
+ST01535,Route 2 Alem Bank,BUS-3
+ST01536,Route 1 Akaki,BUS-12
+ST01537,Route 1 Akaki,BUS-8
+ST01538,Route 1 Akaki,BUS-6
+ST01539,Route 2 Alem Bank,BUS-1
+ST01540,Route 1 Akaki,BUS-12
+ST01541,Route 2 Alem Bank,BUS-10
+ST01542,Route 4 Lebu,BUS-5
+ST01543,Route 5 Kality,BUS-8
+ST01544,Route 5 Kality,BUS-2
+ST01545,Route 2 Alem Bank,BUS-6
+ST01546,Route 1 Akaki,BUS-5
+ST01547,Route 5 Kality,BUS-15
+ST01548,Route 1 Akaki,BUS-1
+ST01549,Route 5 Kality,BUS-4
+ST01550,Route 5 Kality,BUS-2
+ST01551,Route 4 Lebu,BUS-14
+ST01552,Route 5 Kality,BUS-15
+ST01553,Route 2 Alem Bank,BUS-3
+ST01554,Route 3 Nefas Silk,BUS-10
+ST01555,Route 5 Kality,BUS-6
+ST01556,Route 4 Lebu,BUS-14
+ST01557,Route 3 Nefas Silk,BUS-1
+ST01558,Route 5 Kality,BUS-4
+ST01559,Route 1 Akaki,BUS-11
+ST01560,Route 3 Nefas Silk,BUS-3
+ST01561,Route 4 Lebu,BUS-13
+ST01562,Route 3 Nefas Silk,BUS-14
+ST01563,Route 1 Akaki,BUS-14
+ST01564,Route 1 Akaki,BUS-5
+ST01565,Route 3 Nefas Silk,BUS-9
+ST01566,Route 5 Kality,BUS-4
+ST01567,Route 4 Lebu,BUS-10
+ST01568,Route 4 Lebu,BUS-6
+ST01569,Route 1 Akaki,BUS-3
+ST01570,Route 1 Akaki,BUS-12
+ST01571,Route 1 Akaki,BUS-12
+ST01572,Route 2 Alem Bank,BUS-13
+ST01573,Route 5 Kality,BUS-14
+ST01574,Route 3 Nefas Silk,BUS-10
+ST01575,Route 3 Nefas Silk,BUS-11
+ST01576,Route 1 Akaki,BUS-5
+ST01577,Route 3 Nefas Silk,BUS-13
+ST01578,Route 4 Lebu,BUS-8
+ST01579,Route 3 Nefas Silk,BUS-8
+ST01580,Route 4 Lebu,BUS-3
+ST01581,Route 5 Kality,BUS-12
+ST01582,Route 3 Nefas Silk,BUS-8
+ST01583,Route 5 Kality,BUS-15
+ST01584,Route 4 Lebu,BUS-14
+ST01585,Route 3 Nefas Silk,BUS-6
+ST01586,Route 5 Kality,BUS-7
+ST01587,Route 1 Akaki,BUS-14
+ST01588,Route 5 Kality,BUS-7
+ST01589,Route 5 Kality,BUS-8
+ST01590,Route 3 Nefas Silk,BUS-8
+ST01591,Route 2 Alem Bank,BUS-7
+ST01592,Route 2 Alem Bank,BUS-9
+ST01593,Route 5 Kality,BUS-5
+ST01594,Route 3 Nefas Silk,BUS-12
+ST01595,Route 2 Alem Bank,BUS-12
+ST01596,Route 4 Lebu,BUS-3
+ST01597,Route 3 Nefas Silk,BUS-15
+ST01598,Route 2 Alem Bank,BUS-5
+ST01599,Route 4 Lebu,BUS-6
+ST01600,Route 2 Alem Bank,BUS-9
+ST01601,Route 4 Lebu,BUS-6
+ST01602,Route 3 Nefas Silk,BUS-3
+ST01603,Route 1 Akaki,BUS-14
+ST01604,Route 1 Akaki,BUS-3
+ST01605,Route 3 Nefas Silk,BUS-8
+ST01606,Route 3 Nefas Silk,BUS-5
+ST01607,Route 4 Lebu,BUS-6
+ST01608,Route 1 Akaki,BUS-13
+ST01609,Route 5 Kality,BUS-3
+ST01610,Route 3 Nefas Silk,BUS-8
+ST01611,Route 1 Akaki,BUS-2
+ST01612,Route 4 Lebu,BUS-6
+ST01613,Route 2 Alem Bank,BUS-14
+ST01614,Route 3 Nefas Silk,BUS-13
+ST01615,Route 4 Lebu,BUS-8
+ST01616,Route 4 Lebu,BUS-6
+ST01617,Route 5 Kality,BUS-1
+ST01618,Route 2 Alem Bank,BUS-4
+ST01619,Route 5 Kality,BUS-11
+ST01620,Route 1 Akaki,BUS-9
+ST01621,Route 3 Nefas Silk,BUS-5
+ST01622,Route 5 Kality,BUS-9
+ST01623,Route 5 Kality,BUS-6
+ST01624,Route 2 Alem Bank,BUS-15
+ST01625,Route 1 Akaki,BUS-7
+ST01626,Route 2 Alem Bank,BUS-1
+ST01627,Route 2 Alem Bank,BUS-9
+ST01628,Route 1 Akaki,BUS-3
+ST01629,Route 3 Nefas Silk,BUS-15
+ST01630,Route 1 Akaki,BUS-10
+ST01631,Route 4 Lebu,BUS-11
+ST01632,Route 4 Lebu,BUS-15
+ST01633,Route 2 Alem Bank,BUS-8
+ST01634,Route 1 Akaki,BUS-9
+ST01635,Route 2 Alem Bank,BUS-9
+ST01636,Route 3 Nefas Silk,BUS-7
+ST01637,Route 3 Nefas Silk,BUS-1
+ST01638,Route 2 Alem Bank,BUS-6
+ST01639,Route 2 Alem Bank,BUS-3
+ST01640,Route 4 Lebu,BUS-10
+ST01641,Route 3 Nefas Silk,BUS-8
+ST01642,Route 4 Lebu,BUS-6
+ST01643,Route 5 Kality,BUS-7
+ST01644,Route 1 Akaki,BUS-4
+ST01645,Route 3 Nefas Silk,BUS-7
+ST01646,Route 3 Nefas Silk,BUS-11
+ST01647,Route 3 Nefas Silk,BUS-8
+ST01648,Route 1 Akaki,BUS-6
+ST01649,Route 4 Lebu,BUS-5
+ST01650,Route 2 Alem Bank,BUS-14
+ST01651,Route 4 Lebu,BUS-13
+ST01652,Route 2 Alem Bank,BUS-11
+ST01653,Route 1 Akaki,BUS-10
+ST01654,Route 3 Nefas Silk,BUS-6
+ST01655,Route 5 Kality,BUS-1
+ST01656,Route 2 Alem Bank,BUS-12
+ST01657,Route 1 Akaki,BUS-15
+ST01658,Route 5 Kality,BUS-5
+ST01659,Route 2 Alem Bank,BUS-14
+ST01660,Route 1 Akaki,BUS-5
+ST01661,Route 5 Kality,BUS-5
+ST01662,Route 2 Alem Bank,BUS-1
+ST01663,Route 1 Akaki,BUS-9
+ST01664,Route 4 Lebu,BUS-8
+ST01665,Route 2 Alem Bank,BUS-14
+ST01666,Route 4 Lebu,BUS-10
+ST01667,Route 4 Lebu,BUS-14
+ST01668,Route 5 Kality,BUS-9
+ST01669,Route 2 Alem Bank,BUS-14
+ST01670,Route 1 Akaki,BUS-7
+ST01671,Route 1 Akaki,BUS-6
+ST01672,Route 4 Lebu,BUS-3
+ST01673,Route 4 Lebu,BUS-13
+ST01674,Route 1 Akaki,BUS-15
+ST01675,Route 1 Akaki,BUS-1
+ST01676,Route 5 Kality,BUS-15
+ST01677,Route 5 Kality,BUS-9
+ST01678,Route 3 Nefas Silk,BUS-1
+ST01679,Route 1 Akaki,BUS-6
+ST01680,Route 4 Lebu,BUS-7
+ST01681,Route 4 Lebu,BUS-5
+ST01682,Route 3 Nefas Silk,BUS-4
+ST01683,Route 2 Alem Bank,BUS-7
+ST01684,Route 1 Akaki,BUS-10
+ST01685,Route 3 Nefas Silk,BUS-7
+ST01686,Route 1 Akaki,BUS-2
+ST01687,Route 1 Akaki,BUS-3
+ST01688,Route 1 Akaki,BUS-13
+ST01689,Route 2 Alem Bank,BUS-13
+ST01690,Route 2 Alem Bank,BUS-8
+ST01691,Route 3 Nefas Silk,BUS-9
+ST01692,Route 5 Kality,BUS-13
+ST01693,Route 1 Akaki,BUS-7
+ST01694,Route 1 Akaki,BUS-7
+ST01695,Route 4 Lebu,BUS-15
+ST01696,Route 3 Nefas Silk,BUS-15
+ST01697,Route 3 Nefas Silk,BUS-12
+ST01698,Route 1 Akaki,BUS-14
+ST01699,Route 2 Alem Bank,BUS-4
+ST01700,Route 2 Alem Bank,BUS-7
+ST01701,Route 1 Akaki,BUS-12
+ST01702,Route 2 Alem Bank,BUS-10
+ST01703,Route 3 Nefas Silk,BUS-14
+ST01704,Route 1 Akaki,BUS-1
+ST01705,Route 3 Nefas Silk,BUS-4
+ST01706,Route 3 Nefas Silk,BUS-7
+ST01707,Route 3 Nefas Silk,BUS-15
+ST01708,Route 5 Kality,BUS-1
+ST01709,Route 5 Kality,BUS-14
+ST01710,Route 5 Kality,BUS-9
+ST01711,Route 5 Kality,BUS-13
+ST01712,Route 4 Lebu,BUS-6
+ST01713,Route 5 Kality,BUS-10
+ST01714,Route 3 Nefas Silk,BUS-14
+ST01715,Route 5 Kality,BUS-10
+ST01716,Route 5 Kality,BUS-6
+ST01717,Route 1 Akaki,BUS-1
+ST01718,Route 5 Kality,BUS-5
+ST01719,Route 3 Nefas Silk,BUS-12
+ST01720,Route 4 Lebu,BUS-13
+ST01721,Route 3 Nefas Silk,BUS-9
+ST01722,Route 1 Akaki,BUS-10
+ST01723,Route 5 Kality,BUS-13
+ST01724,Route 5 Kality,BUS-14
+ST01725,Route 1 Akaki,BUS-14
+ST01726,Route 3 Nefas Silk,BUS-1
+ST01727,Route 2 Alem Bank,BUS-5
+ST01728,Route 3 Nefas Silk,BUS-11
+ST01729,Route 1 Akaki,BUS-10
+ST01730,Route 1 Akaki,BUS-3
+ST01731,Route 3 Nefas Silk,BUS-7
+ST01732,Route 2 Alem Bank,BUS-8
+ST01733,Route 4 Lebu,BUS-14
+ST01734,Route 1 Akaki,BUS-7
+ST01735,Route 4 Lebu,BUS-8
+ST01736,Route 1 Akaki,BUS-9
+ST01737,Route 3 Nefas Silk,BUS-14
+ST01738,Route 4 Lebu,BUS-3
+ST01739,Route 4 Lebu,BUS-2
+ST01740,Route 1 Akaki,BUS-6
+ST01741,Route 3 Nefas Silk,BUS-11
+ST01742,Route 1 Akaki,BUS-5
+ST01743,Route 3 Nefas Silk,BUS-15
+ST01744,Route 4 Lebu,BUS-12
+ST01745,Route 1 Akaki,BUS-10
+ST01746,Route 2 Alem Bank,BUS-2
+ST01747,Route 4 Lebu,BUS-14
+ST01748,Route 4 Lebu,BUS-9
+ST01749,Route 5 Kality,BUS-4
+ST01750,Route 5 Kality,BUS-6
+ST01751,Route 1 Akaki,BUS-11
+ST01752,Route 3 Nefas Silk,BUS-3
+ST01753,Route 1 Akaki,BUS-14
+ST01754,Route 4 Lebu,BUS-4
+ST01755,Route 2 Alem Bank,BUS-1
+ST01756,Route 4 Lebu,BUS-14
+ST01757,Route 4 Lebu,BUS-12
+ST01758,Route 1 Akaki,BUS-15
+ST01759,Route 4 Lebu,BUS-13
+ST01760,Route 3 Nefas Silk,BUS-1
+ST01761,Route 2 Alem Bank,BUS-12
+ST01762,Route 1 Akaki,BUS-3
+ST01763,Route 1 Akaki,BUS-4
+ST01764,Route 5 Kality,BUS-4
+ST01765,Route 1 Akaki,BUS-7
+ST01766,Route 1 Akaki,BUS-1
+ST01767,Route 3 Nefas Silk,BUS-8
+ST01768,Route 5 Kality,BUS-9
+ST01769,Route 2 Alem Bank,BUS-5
+ST01770,Route 1 Akaki,BUS-2
+ST01771,Route 5 Kality,BUS-12
+ST01772,Route 1 Akaki,BUS-7
+ST01773,Route 5 Kality,BUS-4
+ST01774,Route 1 Akaki,BUS-4
+ST01775,Route 2 Alem Bank,BUS-14
+ST01776,Route 4 Lebu,BUS-5
+ST01777,Route 3 Nefas Silk,BUS-6
+ST01778,Route 2 Alem Bank,BUS-4
+ST01779,Route 3 Nefas Silk,BUS-15
+ST01780,Route 5 Kality,BUS-3
+ST01781,Route 4 Lebu,BUS-13
+ST01782,Route 5 Kality,BUS-13
+ST01783,Route 4 Lebu,BUS-5
+ST01784,Route 2 Alem Bank,BUS-11
+ST01785,Route 5 Kality,BUS-14
+ST01786,Route 1 Akaki,BUS-8
+ST01787,Route 2 Alem Bank,BUS-2
+ST01788,Route 1 Akaki,BUS-10
+ST01789,Route 3 Nefas Silk,BUS-4
+ST01790,Route 1 Akaki,BUS-4
+ST01791,Route 3 Nefas Silk,BUS-7
+ST01792,Route 2 Alem Bank,BUS-1
+ST01793,Route 4 Lebu,BUS-11
+ST01794,Route 5 Kality,BUS-15
+ST01795,Route 1 Akaki,BUS-14
+ST01796,Route 1 Akaki,BUS-1
+ST01797,Route 2 Alem Bank,BUS-8
+ST01798,Route 3 Nefas Silk,BUS-5
+ST01799,Route 1 Akaki,BUS-8
+ST01800,Route 5 Kality,BUS-11
+ST01801,Route 1 Akaki,BUS-5
+ST01802,Route 3 Nefas Silk,BUS-4
+ST01803,Route 5 Kality,BUS-3
+ST01804,Route 5 Kality,BUS-2
+ST01805,Route 4 Lebu,BUS-3
+ST01806,Route 4 Lebu,BUS-12
+ST01807,Route 4 Lebu,BUS-13
+ST01808,Route 4 Lebu,BUS-10
+ST01809,Route 2 Alem Bank,BUS-5
+ST01810,Route 3 Nefas Silk,BUS-11
+ST01811,Route 1 Akaki,BUS-3
+ST01812,Route 5 Kality,BUS-10
+ST01813,Route 5 Kality,BUS-14
+ST01814,Route 3 Nefas Silk,BUS-11
+ST01815,Route 2 Alem Bank,BUS-13
+ST01816,Route 5 Kality,BUS-10
+ST01817,Route 1 Akaki,BUS-12
+ST01818,Route 2 Alem Bank,BUS-6
+ST01819,Route 2 Alem Bank,BUS-5
+ST01820,Route 3 Nefas Silk,BUS-13
+ST01821,Route 5 Kality,BUS-15
+ST01822,Route 4 Lebu,BUS-13
+ST01823,Route 2 Alem Bank,BUS-9
+ST01824,Route 1 Akaki,BUS-10
+ST01825,Route 2 Alem Bank,BUS-14
+ST01826,Route 5 Kality,BUS-5
+ST01827,Route 2 Alem Bank,BUS-14
+ST01828,Route 5 Kality,BUS-2
+ST01829,Route 2 Alem Bank,BUS-7
+ST01830,Route 1 Akaki,BUS-14
+ST01831,Route 4 Lebu,BUS-5
+ST01832,Route 4 Lebu,BUS-7
+ST01833,Route 2 Alem Bank,BUS-1
+ST01834,Route 4 Lebu,BUS-6
+ST01835,Route 5 Kality,BUS-8
+ST01836,Route 1 Akaki,BUS-14
+ST01837,Route 2 Alem Bank,BUS-11
+ST01838,Route 3 Nefas Silk,BUS-6
+ST01839,Route 2 Alem Bank,BUS-9
+ST01840,Route 1 Akaki,BUS-3
+ST01841,Route 5 Kality,BUS-8
+ST01842,Route 2 Alem Bank,BUS-6
+ST01843,Route 5 Kality,BUS-6
+ST01844,Route 2 Alem Bank,BUS-7
+ST01845,Route 5 Kality,BUS-7
+ST01846,Route 3 Nefas Silk,BUS-14
+ST01847,Route 3 Nefas Silk,BUS-13
+ST01848,Route 5 Kality,BUS-13
+ST01849,Route 5 Kality,BUS-5
+ST01850,Route 3 Nefas Silk,BUS-8
+ST01851,Route 2 Alem Bank,BUS-4
+ST01852,Route 1 Akaki,BUS-7
+ST01853,Route 5 Kality,BUS-12
+ST01854,Route 2 Alem Bank,BUS-3
+ST01855,Route 3 Nefas Silk,BUS-10
+ST01856,Route 3 Nefas Silk,BUS-6
+ST01857,Route 4 Lebu,BUS-4
+ST01858,Route 5 Kality,BUS-7
+ST01859,Route 2 Alem Bank,BUS-2
+ST01860,Route 5 Kality,BUS-13
+ST01861,Route 1 Akaki,BUS-6
+ST01862,Route 4 Lebu,BUS-12
+ST01863,Route 3 Nefas Silk,BUS-5
+ST01864,Route 4 Lebu,BUS-8
+ST01865,Route 1 Akaki,BUS-3
+ST01866,Route 3 Nefas Silk,BUS-9
+ST01867,Route 2 Alem Bank,BUS-8
+ST01868,Route 4 Lebu,BUS-13
+ST01869,Route 4 Lebu,BUS-10
+ST01870,Route 4 Lebu,BUS-1
+ST01871,Route 5 Kality,BUS-8
+ST01872,Route 4 Lebu,BUS-14
+ST01873,Route 4 Lebu,BUS-7
+ST01874,Route 1 Akaki,BUS-2
+ST01875,Route 2 Alem Bank,BUS-12
+ST01876,Route 2 Alem Bank,BUS-6
+ST01877,Route 3 Nefas Silk,BUS-12
+ST01878,Route 3 Nefas Silk,BUS-10
+ST01879,Route 2 Alem Bank,BUS-10
+ST01880,Route 3 Nefas Silk,BUS-14
+ST01881,Route 4 Lebu,BUS-5
+ST01882,Route 1 Akaki,BUS-10
+ST01883,Route 5 Kality,BUS-13
+ST01884,Route 2 Alem Bank,BUS-15
+ST01885,Route 5 Kality,BUS-9
+ST01886,Route 2 Alem Bank,BUS-4
+ST01887,Route 3 Nefas Silk,BUS-15
+ST01888,Route 5 Kality,BUS-3
+ST01889,Route 2 Alem Bank,BUS-10
+ST01890,Route 5 Kality,BUS-8
+ST01891,Route 1 Akaki,BUS-15
+ST01892,Route 1 Akaki,BUS-6
+ST01893,Route 5 Kality,BUS-6
+ST01894,Route 5 Kality,BUS-6
+ST01895,Route 2 Alem Bank,BUS-3
+ST01896,Route 1 Akaki,BUS-1
+ST01897,Route 5 Kality,BUS-11
+ST01898,Route 3 Nefas Silk,BUS-11
+ST01899,Route 3 Nefas Silk,BUS-15
+ST01900,Route 2 Alem Bank,BUS-1
+ST01901,Route 1 Akaki,BUS-15
+ST01902,Route 3 Nefas Silk,BUS-14
+ST01903,Route 3 Nefas Silk,BUS-8
+ST01904,Route 1 Akaki,BUS-9
+ST01905,Route 2 Alem Bank,BUS-15
+ST01906,Route 4 Lebu,BUS-10
+ST01907,Route 2 Alem Bank,BUS-1
+ST01908,Route 4 Lebu,BUS-10
+ST01909,Route 2 Alem Bank,BUS-14
+ST01910,Route 4 Lebu,BUS-4
+ST01911,Route 5 Kality,BUS-11
+ST01912,Route 1 Akaki,BUS-9
+ST01913,Route 4 Lebu,BUS-11
+ST01914,Route 3 Nefas Silk,BUS-9
+ST01915,Route 4 Lebu,BUS-8
+ST01916,Route 3 Nefas Silk,BUS-4
+ST01917,Route 5 Kality,BUS-2
+ST01918,Route 4 Lebu,BUS-1
+ST01919,Route 5 Kality,BUS-9
+ST01920,Route 1 Akaki,BUS-15
+ST01921,Route 2 Alem Bank,BUS-10
+ST01922,Route 2 Alem Bank,BUS-10
+ST01923,Route 2 Alem Bank,BUS-6
+ST01924,Route 1 Akaki,BUS-10
+ST01925,Route 2 Alem Bank,BUS-12
+ST01926,Route 2 Alem Bank,BUS-11
+ST01927,Route 1 Akaki,BUS-3
+ST01928,Route 4 Lebu,BUS-12
+ST01929,Route 2 Alem Bank,BUS-11
+ST01930,Route 3 Nefas Silk,BUS-15
+ST01931,Route 4 Lebu,BUS-13
+ST01932,Route 4 Lebu,BUS-12
+ST01933,Route 5 Kality,BUS-12
+ST01934,Route 4 Lebu,BUS-7
+ST01935,Route 3 Nefas Silk,BUS-9
+ST01936,Route 1 Akaki,BUS-9
+ST01937,Route 3 Nefas Silk,BUS-3
+ST01938,Route 4 Lebu,BUS-15
+ST01939,Route 5 Kality,BUS-14
+ST01940,Route 1 Akaki,BUS-10
+ST01941,Route 1 Akaki,BUS-8
+ST01942,Route 4 Lebu,BUS-15
+ST01943,Route 1 Akaki,BUS-14
+ST01944,Route 5 Kality,BUS-4
+ST01945,Route 2 Alem Bank,BUS-9
+ST01946,Route 4 Lebu,BUS-5
+ST01947,Route 5 Kality,BUS-8
+ST01948,Route 5 Kality,BUS-3
+ST01949,Route 3 Nefas Silk,BUS-2
+ST01950,Route 2 Alem Bank,BUS-13
+ST01951,Route 2 Alem Bank,BUS-1
+ST01952,Route 5 Kality,BUS-2
+ST01953,Route 2 Alem Bank,BUS-9
+ST01954,Route 1 Akaki,BUS-5
+ST01955,Route 2 Alem Bank,BUS-3
+ST01956,Route 3 Nefas Silk,BUS-11
+ST01957,Route 2 Alem Bank,BUS-2
+ST01958,Route 2 Alem Bank,BUS-14
+ST01959,Route 4 Lebu,BUS-13
+ST01960,Route 5 Kality,BUS-13
+ST01961,Route 5 Kality,BUS-12
+ST01962,Route 4 Lebu,BUS-13
+ST01963,Route 4 Lebu,BUS-3
+ST01964,Route 5 Kality,BUS-2
+ST01965,Route 1 Akaki,BUS-3
+ST01966,Route 2 Alem Bank,BUS-13
+ST01967,Route 4 Lebu,BUS-10
+ST01968,Route 4 Lebu,BUS-1
+ST01969,Route 4 Lebu,BUS-14
+ST01970,Route 5 Kality,BUS-7
+ST01971,Route 2 Alem Bank,BUS-1
+ST01972,Route 5 Kality,BUS-13
+ST01973,Route 4 Lebu,BUS-7
+ST01974,Route 3 Nefas Silk,BUS-14
+ST01975,Route 4 Lebu,BUS-5
+ST01976,Route 5 Kality,BUS-12
+ST01977,Route 5 Kality,BUS-14
+ST01978,Route 3 Nefas Silk,BUS-13
+ST01979,Route 4 Lebu,BUS-14
+ST01980,Route 3 Nefas Silk,BUS-15
+ST01981,Route 1 Akaki,BUS-8
+ST01982,Route 1 Akaki,BUS-7
+ST01983,Route 3 Nefas Silk,BUS-15
+ST01984,Route 5 Kality,BUS-11
+ST01985,Route 4 Lebu,BUS-8
+ST01986,Route 1 Akaki,BUS-11
+ST01987,Route 4 Lebu,BUS-7
+ST01988,Route 1 Akaki,BUS-13
+ST01989,Route 3 Nefas Silk,BUS-1
+ST01990,Route 3 Nefas Silk,BUS-5
+ST01991,Route 1 Akaki,BUS-10
+ST01992,Route 5 Kality,BUS-15
+ST01993,Route 3 Nefas Silk,BUS-5
+ST01994,Route 1 Akaki,BUS-7
+ST01995,Route 3 Nefas Silk,BUS-15
+ST01996,Route 1 Akaki,BUS-4
+ST01997,Route 2 Alem Bank,BUS-2
+ST01998,Route 4 Lebu,BUS-7
+ST01999,Route 5 Kality,BUS-4
+ST02000,Route 4 Lebu,BUS-6

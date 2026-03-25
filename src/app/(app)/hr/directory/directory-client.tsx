@@ -1,19 +1,31 @@
 "use client"
-import * as React from "react"
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useCallback, useEffect, useMemo } from "react";
+import * as React from "react";
 import Link from "next/link"
 import {
     Briefcase, Building2, Calendar, Mail, Phone,
     Search, UserPlus, FileText, BadgeCheck, MoreHorizontal,
-    GraduationCap, Plus, Save, User
+    GraduationCap, Plus, Save, User, ChevronLeft, ChevronRight
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { toast } from "@/hooks/use-toast";
 
 const STATUS_COLORS: Record<string, string> = {
     Active: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
@@ -25,6 +37,9 @@ const STATUS_COLORS: Record<string, string> = {
 
 interface DirectoryClientProps {
     employees: any[];
+    totalCount: number;
+    totalPages: number;
+    currentPage: number;
     currentUser: { name: string; role: string; branch: string; };
 }
 
@@ -78,26 +93,64 @@ function PerformanceRating({ rating = 4.2 }: { rating?: number }) {
     );
 }
 
-export function DirectoryClient({ employees, currentUser }: DirectoryClientProps) {
-    const [search, setSearch] = React.useState("");
-    const [deptFilter, setDeptFilter] = React.useState("All");
-    const [categoryFilter, setCategoryFilter] = React.useState("All Categories");
-    const [statusFilter, setStatusFilter] = React.useState("Active Status");
-    const [isAddOpen, setIsAddOpen] = React.useState(false);
+export function DirectoryClient({ employees, totalCount, totalPages, currentPage, currentUser }: DirectoryClientProps) {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    
+    // Controlled search input with debounced URL update
+    const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+    const [isAddOpen, setIsAddOpen] = useState(false);
+    
+    // Fetch departments once for the filter
+    const [departments, setDepartments] = useState<string[]>(["All"]);
+    useEffect(() => {
+        // In a real app we'd fetch this from a distinct-query action
+        // For now, we'll try to get it if we haven't already.
+        import("@/lib/actions").then(m => {
+             // If there's a getDepartments action, use it. Otherwise placeholder.
+             return ["All", "Academic", "Administration", "Finance", "IT Support", "Security", "Support Staff"];
+        }).then(depts => setDepartments(depts));
+    }, []);
 
-    const departments = ["All", ...new Set(employees.map(e => e.department).filter(Boolean))] as string[];
+    const deptFilter = searchParams.get("dept") || "All";
+    const statusFilter = searchParams.get("status") || "Active Status";
 
-    const filtered = employees.filter(e => {
-        const matchesSearch = e.name.toLowerCase().includes(search.toLowerCase()) || e.employeeCode.toLowerCase().includes(search.toLowerCase());
-        const matchesDept = deptFilter === "All" || e.department === deptFilter;
-        const matchesStatus = statusFilter === "Active Status" || statusFilter === "All Statuses" || e.status === statusFilter;
-        return matchesSearch && matchesDept && matchesStatus;
-    });
+    const createQueryString = useCallback(
+        (params: Record<string, string | null>) => {
+            const newSearchParams = new URLSearchParams(searchParams.toString());
+            for (const [key, value] of Object.entries(params)) {
+                if (value === null) {
+                    newSearchParams.delete(key);
+                } else {
+                    newSearchParams.set(key, value);
+                }
+            }
+            return newSearchParams.toString();
+        },
+        [searchParams]
+    );
 
-    // Calculate Insights
-    const totalStaff = employees.length;
-    const onLeave = employees.filter(e => e.status === "OnLeave").length;
-    const activeRoles = new Set(employees.filter(e => e.status === "Active").map(e => e.designation)).size;
+    // Debounce search
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (searchQuery !== (searchParams.get("q") || "")) {
+                router.push(`?${createQueryString({ q: searchQuery || null, page: "1" })}`);
+            }
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [searchQuery, router, createQueryString, searchParams]);
+
+    const handleDeptChange = (dept: string) => {
+        router.push(`?${createQueryString({ dept: dept === "All" ? null : dept, page: "1" })}`);
+    };
+
+    const handleStatusChange = (status: string) => {
+        router.push(`?${createQueryString({ status: status === "Active Status" ? null : status, page: "1" })}`);
+    };
+
+    const handlePageChange = (page: number) => {
+        router.push(`?${createQueryString({ page: page.toString() })}`);
+    };
 
     return (
         <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
@@ -110,27 +163,14 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                         <Input
                             placeholder="Search Employees (Name, ID, Role)"
-                            value={search}
-                            onChange={e => setSearch(e.target.value)}
-                            className="pl-9 bg-slate-50/50 border-slate-200 h-11 text-sm rounded-xl"
+                            value={searchQuery}
+                            onChange={e => setSearchQuery(e.target.value)}
+                            className="pl-9 bg-slate-50/50 border-slate-200 h-11 text-sm rounded-xl pr-4"
                         />
-                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded">Cmd+K</div>
                     </div>
                     
-                    <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                        <SelectTrigger className="w-[160px] bg-slate-50/50 border-slate-200 h-11 rounded-xl font-medium text-slate-600">
-                            <SelectValue placeholder="All Categories" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="All Categories">All Categories</SelectItem>
-                            <SelectItem value="Teaching">Teaching</SelectItem>
-                            <SelectItem value="Admin">Admin</SelectItem>
-                            <SelectItem value="Support">Support</SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    <Select value={deptFilter} onValueChange={setDeptFilter}>
-                        <SelectTrigger className="w-[160px] bg-slate-50/50 border-slate-200 h-11 rounded-xl font-medium text-slate-600">
+                    <Select value={deptFilter} onValueChange={handleDeptChange}>
+                        <SelectTrigger className="w-[180px] bg-slate-50/50 border-slate-200 h-11 rounded-xl font-medium text-slate-600">
                             <SelectValue placeholder="Departments" />
                         </SelectTrigger>
                         <SelectContent>
@@ -138,8 +178,8 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                         </SelectContent>
                     </Select>
 
-                    <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="w-[160px] bg-slate-50/50 border-slate-200 h-11 rounded-xl font-medium text-slate-600">
+                    <Select value={statusFilter} onValueChange={handleStatusChange}>
+                        <SelectTrigger className="w-[180px] bg-slate-50/50 border-slate-200 h-11 rounded-xl font-medium text-slate-600">
                             <SelectValue placeholder="Active Status" />
                         </SelectTrigger>
                         <SelectContent>
@@ -147,37 +187,64 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                             <SelectItem value="Active">Active</SelectItem>
                             <SelectItem value="OnLeave">On Leave</SelectItem>
                             <SelectItem value="Probation">Probation</SelectItem>
+                            <SelectItem value="Suspended">Suspended</SelectItem>
                         </SelectContent>
                     </Select>
                     
-                    <Select defaultValue="Joined Date">
-                        <SelectTrigger className="w-[150px] bg-slate-50/50 border-slate-200 h-11 rounded-xl font-medium text-slate-600">
-                            <SelectValue placeholder="Joined Date" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="Joined Date">Joined Date</SelectItem>
-                            <SelectItem value="Newest">Newest First</SelectItem>
-                            <SelectItem value="Oldest">Oldest First</SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    <Button className="bg-[#114C35] hover:bg-[#0a2e20] text-white font-bold h-11 px-6 rounded-xl shrink-0 shadow-sm" onClick={() => setIsAddOpen(true)}>
+                    <Button 
+                        className="bg-[#114C35] hover:bg-[#0a2e20] text-white font-bold h-11 px-6 rounded-xl shrink-0 shadow-sm ml-auto" 
+                        onClick={() => setIsAddOpen(true)}
+                    >
                         <UserPlus className="mr-2 h-4 w-4" /> Add Employee
                     </Button>
                 </div>
 
                 {/* Grid View */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {filtered.map(emp => {
+                    {employees.map(emp => {
                         const isTeacher = emp.department?.toLowerCase().includes("academic");
                         const statusColor = STATUS_COLORS[emp.status] || STATUS_COLORS.Active;
                         const managerName = emp.lineManager ? currentUser.name : (emp.department === "Finance" ? "Tadesse Worku" : currentUser.name);
                         
                         return (
-                            <Card key={emp.employeeId} className="bg-white border-slate-200 rounded-3xl hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group overflow-hidden flex flex-col">
+                            <Card key={emp.employeeId} className="bg-white border-slate-200 rounded-3xl hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 transition-all group overflow-hidden flex flex-col h-full">
                                 <CardHeader className="p-6 pb-2 relative flex-grow">
-                                    <div className="absolute top-4 right-4 bg-slate-50 hover:bg-slate-100 rounded-full p-1.5 text-slate-400 hover:text-slate-700 cursor-pointer transition-colors">
-                                        <MoreHorizontal className="h-4 w-4" />
+                                    <div className="absolute top-4 right-4">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <div className="bg-slate-50 hover:bg-slate-100 rounded-full p-1.5 text-slate-400 hover:text-slate-700 cursor-pointer transition-colors">
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </div>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end" className="w-56 glass-card border-border/30 rounded-xl shadow-2xl p-2">
+                                                <DropdownMenuLabel className="font-bold uppercase tracking-widest text-[10px] text-muted-foreground px-2 py-1.5">Employee Actions</DropdownMenuLabel>
+                                                <DropdownMenuItem asChild className="cursor-pointer gap-2 rounded-lg font-medium py-3 px-3 hover:bg-emerald-500/10 hover:text-emerald-600">
+                                                    <Link href={`/hr/directory/${emp.employeeId}`}>
+                                                        <User className="h-4 w-4" /> View Full Profile
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                {isTeacher && (
+                                                    <>
+                                                        <DropdownMenuSeparator className="bg-border/10 my-1" />
+                                                        <DropdownMenuItem
+                                                            onClick={async () => {
+                                                                try {
+                                                                    const { onboardAcademicStaffAction } = await import("@/lib/flow-actions");
+                                                                    const res = await onboardAcademicStaffAction(emp.employeeId, "SEC-10A", "CS-101");
+                                                                    if (!res.success) throw new Error(res.error);
+                                                                    toast({ title: "Academic Assignment Created", description: `${emp.name} is now assigned to CS-101 for Section 10A.`});
+                                                                } catch(e: any) {
+                                                                    console.error(e);
+                                                                }
+                                                            }}
+                                                            className="cursor-pointer gap-2 rounded-lg font-medium py-3 px-3 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400"
+                                                        >
+                                                            <BadgeCheck className="h-4 w-4" /> Assign to Class (E2E)
+                                                        </DropdownMenuItem>
+                                                    </>
+                                                )}
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
                                     </div>
                                     <div className="flex flex-col items-center text-center">
                                         <div className="relative mb-4">
@@ -192,14 +259,13 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                                                     )}
                                                 </div>
                                             </div>
-                                            {/* Status Dot */}
-                                            <div className="absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500 shadow-sm" 
+                                            <div className="absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full border-2 border-white" 
                                                  style={{ backgroundColor: emp.status === "Active" ? "#10B981" : emp.status === "OnLeave" ? "#F59E0B" : emp.status === "Probation" ? "#F59E0B" : "#EF4444" }}/>
                                         </div>
                                         
                                         <CardTitle className="font-black text-lg text-slate-900">{emp.name}</CardTitle>
                                         <p className="text-xs font-medium text-slate-500 mt-0.5 mb-1.5">{emp.designation}</p>
-                                        <Badge className={cn("text-[10px] font-bold bg-slate-100 text-blue-700 border-none px-2.5 py-0.5", 
+                                        <Badge className={cn("text-[10px] font-bold bg-slate-100 px-2.5 py-0.5 border-none", 
                                             emp.department === "Finance" ? "text-amber-700 bg-amber-50" : 
                                             isTeacher ? "text-emerald-700 bg-emerald-50" : "text-blue-700 bg-blue-50"
                                         )}>
@@ -211,23 +277,22 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                                         </Badge>
                                     </div>
 
-                                    {/* Detailed Metadata Grid */}
                                     <div className="mt-5 space-y-2.5 w-full text-xs font-medium text-slate-600">
                                         <div className="flex justify-between items-center w-full">
                                             <div className="flex items-center gap-1.5 text-emerald-700">
                                                 <BadgeCheck className="h-3.5 w-3.5" />
-                                                <span className="font-bold">{emp.employeeCode}</span>
+                                                <span className="font-bold">{emp.employeeId}</span>
                                             </div>
                                             <div className="flex items-center gap-1.5" title="Department">
                                                 <Building2 className="h-3.5 w-3.5 text-slate-400" />
-                                                <span>{emp.department || "Admin"}</span>
+                                                <span className="truncate max-w-[80px]">{emp.department || "Admin"}</span>
                                             </div>
                                         </div>
                                         
                                         <div className="flex justify-between items-center w-full">
                                             <div className="flex items-center gap-1.5 text-slate-500">
                                                 <User className="h-3.5 w-3.5" />
-                                                <span className="text-[11px]">Direct Manager</span>
+                                                <span className="text-[11px]">Manager</span>
                                             </div>
                                             <div className="flex items-center gap-1.5 font-semibold text-slate-700">
                                                 <User className="h-3 w-3 text-emerald-600" />
@@ -238,17 +303,15 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                                         <div className="flex justify-between items-center w-full">
                                             <div className="flex items-center gap-1.5 text-slate-500">
                                                 <Calendar className="h-3.5 w-3.5 text-purple-600" />
-                                                <span>{new Date(emp.dateOfJoining).toLocaleDateString("en-US", { month: "numeric", day: "numeric", year: "numeric" })}</span>
+                                                <span>{emp.dateOfJoining ? new Date(emp.dateOfJoining).toLocaleDateString() : "N/A"}</span>
                                             </div>
-                                            {!isTeacher && <PerformanceRating rating={Math.random() * 1.5 + 3.5} />}
+                                            {!isTeacher && <PerformanceRating rating={(emp.name?.length % 5) * 0.3 + 3.8} />}
                                         </div>
                                         
-                                        {/* Inject Sparkline for Teachers */}
                                         {isTeacher && <TeacherSparkline />}
                                     </div>
                                 </CardHeader>
                                 
-                                {/* Bottom Action Strip */}
                                 <CardContent className="p-4 pt-4 border-t border-slate-100 bg-slate-50/50 mt-auto">
                                     <div className="flex justify-between items-center mb-3 px-1 text-slate-400">
                                         <div className="flex items-center gap-2 max-w-[75%]">
@@ -257,7 +320,6 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <Phone className="h-3.5 w-3.5 text-blue-600" />
-                                            <MoreHorizontal className="h-3 w-3 opacity-50 ml-1" />
                                         </div>
                                     </div>
                                     
@@ -272,13 +334,43 @@ export function DirectoryClient({ employees, currentUser }: DirectoryClientProps
                     })}
                 </div>
 
-                {filtered.length === 0 && (
+                {employees.length === 0 && (
                     <div className="h-64 flex flex-col items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 rounded-3xl bg-white mt-6">
                         <Search className="h-10 w-10 opacity-20 mb-3" />
                         <p className="font-bold text-slate-600">No employees match this filter.</p>
-                        <Button variant="link" onClick={() => { setSearch(""); setDeptFilter("All"); setCategoryFilter("All Categories"); setStatusFilter("Active Status"); }}>Clear Filters</Button>
+                        <Button variant="link" onClick={() => router.push(window.location.pathname)}>Clear All Filters</Button>
                     </div>
                 )}
+                
+                {/* Pagination Controls */}
+                <div className="mt-10 flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div className="text-sm text-slate-500 font-medium">
+                        Showing <span className="text-slate-900 font-bold">{employees.length}</span> of <span className="text-slate-900 font-bold">{totalCount}</span> staff
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="rounded-xl border-slate-200 font-bold text-slate-600 h-10 px-4"
+                            disabled={currentPage <= 1}
+                            onClick={() => handlePageChange(currentPage - 1)}
+                        >
+                            <ChevronLeft className="h-4 w-4 mr-1" /> Previous
+                        </Button>
+                        <div className="bg-slate-50 px-4 h-10 flex items-center justify-center rounded-xl border border-slate-100 text-sm font-black text-slate-900">
+                            Page {currentPage} of {totalPages}
+                        </div>
+                        <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="rounded-xl border-slate-200 font-bold text-slate-600 h-10 px-4"
+                            disabled={currentPage >= totalPages}
+                            onClick={() => handlePageChange(currentPage + 1)}
+                        >
+                            Next <ChevronRight className="h-4 w-4 ml-1" />
+                        </Button>
+                    </div>
+                </div>
 
                 {/* Quick Add Sheet */}
                 <Sheet open={isAddOpen} onOpenChange={setIsAddOpen}>

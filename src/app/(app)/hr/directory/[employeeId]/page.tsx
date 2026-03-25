@@ -14,12 +14,12 @@ export default async function EmployeeProfilePage({ params: paramsProp }: { para
     const [leaveRequests, leavePolicies, assetAllocations, inventoryItems, allEmployees] = await Promise.all([
         getLeaveRequests(),
         getLeavePolicies(),
-        getAssetAllocations(),
+        getAssetAllocations(employeeId),
         getInventoryItems(),
         getEmployees()
     ]);
 
-    const managers = allEmployees.map((e: Employee) => ({ employeeId: e.employeeId, name: e.name }));
+    const managers = (allEmployees.employees || []).map((e: Employee) => ({ employeeId: e.employeeId, name: e.name }));
 
     return (
         <EmployeeProfileClient

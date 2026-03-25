@@ -16,6 +16,33 @@ export class InfraService extends BaseService {
         }
     }
 
+    async addBook(data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const book = await prisma.book.create({
+                data: {
+                    ...data,
+                    tenantId: tenant.id
+                }
+            });
+            return this.response(book);
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
+    async deleteBook(bookId: number): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            await prisma.book.delete({
+                where: { bookId, tenantId: tenant.id }
+            });
+            return this.response({ success: true });
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
     async getBookById(id: string | number): Promise<ServiceResponse<any>> {
         try {
             const { tenant } = await this.getContext();
@@ -65,6 +92,44 @@ export class InfraService extends BaseService {
         }
     }
 
+    async getDrivers(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const drivers = await prisma.driver.findMany({ where: { tenantId: tenant.id } });
+            return this.response(drivers);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async getStudentsOnRoute(routeId: string): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const assignments = await (prisma as any).transportAssignment.findMany({
+                where: { routeId, tenantId: tenant.id },
+                include: { student: true }
+            });
+            return this.response(assignments.map((a: { student: any }) => a.student));
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async getTransportLogs(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const logs = await (prisma as any).transportLog.findMany({
+                where: { tenantId: tenant.id },
+                orderBy: { timestamp: 'desc' },
+                take: 50,
+                include: { route: true }
+            });
+            return this.response(logs);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
     /**
      * Hostel Management
      */
@@ -78,11 +143,47 @@ export class InfraService extends BaseService {
         }
     }
 
-    async getRooms(): Promise<ServiceResponse<any[]>> {
+    async getRooms(hostelId?: string): Promise<ServiceResponse<any[]>> {
         try {
             const { tenant } = await this.getContext();
-            const rooms = await prisma.room.findMany({ where: { tenantId: tenant.id } });
+            const rooms = await prisma.room.findMany({ 
+                where: { 
+                    tenantId: tenant.id,
+                    ...(hostelId && { hostelId })
+                },
+                include: { hostel: true } as any
+             });
             return this.response(rooms);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async getBeds(roomId?: string): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const beds = await prisma.bed.findMany({ 
+                where: { 
+                    tenantId: tenant.id,
+                    ...(roomId && { roomId })
+                },
+                include: { room: true } as any
+             });
+            return this.response(beds);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async getMaintenanceLogs(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const logs = await prisma.hostelMaintenance.findMany({ 
+                where: { tenantId: tenant.id },
+                orderBy: { reportedAt: 'desc' },
+                include: { hostel: true } as any
+             });
+            return this.response(logs);
         } catch (error: any) {
             return this.response([], error.message);
         }
@@ -106,6 +207,19 @@ export class InfraService extends BaseService {
             const { tenant } = await this.getContext();
             const allocations = await prisma.assetAllocation.findMany({ where: { tenantId: tenant.id } });
             return this.response(allocations);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async getPurchaseOrders(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const pos = await prisma.purchaseOrder.findMany({ 
+                where: { tenantId: tenant.id },
+                orderBy: { orderDate: 'desc' }
+            });
+            return this.response(pos);
         } catch (error: any) {
             return this.response([], error.message);
         }

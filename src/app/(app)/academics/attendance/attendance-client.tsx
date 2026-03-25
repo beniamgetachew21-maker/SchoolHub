@@ -14,7 +14,8 @@ import { Progress } from "@/components/ui/progress"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/hooks/use-toast"
-import { getAttendanceByClass, bulkSaveAttendanceAction } from "@/lib/actions"
+import { getAttendanceByClass } from "@/lib/actions"
+import { markAttendanceWithAlertsAction } from "@/lib/flow-actions"
 import { cn } from "@/lib/utils"
 
 type AttendanceStatus = "Present" | "Absent" | "Late" | "Leave";
@@ -61,7 +62,7 @@ export function AttendanceClient({ classes, report }: { classes: string[]; repor
         if (!selectedClass) { toast({ variant: "destructive", title: "No class selected" }); return; }
         setIsSubmitting(true);
         const records = Object.entries(attendance).map(([studentId, status]) => ({ studentId, status, date: today }));
-        const result = await bulkSaveAttendanceAction(records);
+        const result = await markAttendanceWithAlertsAction(records, selectedClass);
         setIsSubmitting(false);
         if (result.success) {
             toast({ title: "✅ Attendance Submitted", description: `${records.length} student records saved for ${selectedClass}.` });

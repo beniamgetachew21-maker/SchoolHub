@@ -1,4 +1,7 @@
 "use client"
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import * as React from "react";
 import { File, ListFilter, MoreHorizontal, PlusCircle } from "lucide-react"
 
@@ -47,16 +50,56 @@ import { addStudentAction, updateStudentAction } from "@/lib/actions";
 
 interface StudentsClientProps {
     students: Student[];
+    totalCount: number;
+    totalPages: number;
+    currentPage: number;
 }
 
-export function StudentsClient({ students }: StudentsClientProps) {
-    const [isAddSheetOpen, setIsAddSheetOpen] = React.useState(false);
-    const [isEditSheetOpen, setIsEditSheetOpen] = React.useState(false);
-    const [selectedStudent, setSelectedStudent] = React.useState<Student | null>(null);
-    const [searchQuery, setSearchQuery] = React.useState("");
-    const [classFilter, setClassFilter] = React.useState<string[]>([]);
+export function StudentsClient({ students, totalCount, totalPages, currentPage }: StudentsClientProps) {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    
+    const [isAddSheetOpen, setIsAddSheetOpen] = useState(false);
+    const [isEditSheetOpen, setIsEditSheetOpen] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+    
+    // Controlled search input with debounced URL update
+    const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+    
+    // We still need all classes for the filter dropdown. 
+    const [all_classes, setAllClasses] = useState<string[]>([]);
 
-    const all_classes = React.useMemo(() => Array.from(new Set(students.map(s => s.className))), [students]);
+    useEffect(() => {
+        // Fetch distinct classes once
+        import("@/lib/actions").then(m => m.getDistinctClasses()).then(classes => setAllClasses(classes));
+    }, []);
+
+    const classFilter = searchParams.get("class") || "";
+
+    const createQueryString = useCallback(
+        (params: Record<string, string | null>) => {
+            const newSearchParams = new URLSearchParams(searchParams.toString());
+            for (const [key, value] of Object.entries(params)) {
+                if (value === null) {
+                    newSearchParams.delete(key);
+                } else {
+                    newSearchParams.set(key, value);
+                }
+            }
+            return newSearchParams.toString();
+        },
+        [searchParams]
+    );
+
+    // Debounce search
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (searchQuery !== (searchParams.get("q") || "")) {
+                router.push(`?${createQueryString({ q: searchQuery || null, page: "1" })}`);
+            }
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [searchQuery, router, createQueryString, searchParams]);
 
     const handleAddStudent = async (newStudent: Omit<Student, 'studentId' | 'admissionNumber' | 'status' | 'avatarUrl'>) => {
         try {
@@ -90,29 +133,15 @@ export function StudentsClient({ students }: StudentsClientProps) {
         setIsEditSheetOpen(true);
     }
 
-    const handleClassFilterChange = (className: string) => {
-        setClassFilter(prev =>
-            prev.includes(className)
-                ? prev.filter(c => c !== className)
-                : [...prev, className]
-        );
-    };
+    const handleClassFilterChange = useCallback((className: string) => {
+        const currentClass = searchParams.get("class");
+        const nextClass = currentClass === className ? null : className;
+        router.push(`?${createQueryString({ class: nextClass, page: "1" })}`);
+    }, [searchParams, router, createQueryString]);
 
-    const filteredStudents = React.useMemo(() => {
-        return students.filter(student => {
-            const query = searchQuery.toLowerCase();
-            const matchesSearch =
-                student.name.toLowerCase().includes(query) ||
-                student.email.toLowerCase().includes(query) ||
-                student.admissionNumber.toLowerCase().includes(query);
-
-            const matchesFilter =
-                classFilter.length === 0 || classFilter.includes(student.className);
-
-            return matchesSearch && matchesFilter;
-        });
-    }, [students, searchQuery, classFilter]);
-
+    const handlePageChange = useCallback((page: number) => {
+        router.push(`?${createQueryString({ page: page.toString() })}`);
+    }, [router, createQueryString]);
 
     return (
         <Card>
@@ -144,7 +173,7 @@ export function StudentsClient({ students }: StudentsClientProps) {
                                 {all_classes.map(c => (
                                     <DropdownMenuCheckboxItem
                                         key={c}
-                                        checked={classFilter.includes(c)}
+                                        checked={classFilter === c}
                                         onCheckedChange={() => handleClassFilterChange(c)}
                                     >
                                         {c}
@@ -196,7 +225,7 @@ export function StudentsClient({ students }: StudentsClientProps) {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {filteredStudents.length > 0 ? filteredStudents.map((student) => (
+                        {students.length > 0 ? students.map((student) => (
                             <TableRow key={student.studentId}>
                                 <TableCell className="font-medium">{student.admissionNumber}</TableCell>
                                 <TableCell>{student.name}</TableCell>
@@ -255,9 +284,30 @@ export function StudentsClient({ students }: StudentsClientProps) {
                 </Sheet>
 
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex items-center justify-between">
                 <div className="text-xs text-muted-foreground">
-                    Showing <strong>{filteredStudents.length}</strong> of <strong>{students.length}</strong> students
+                    Showing <strong>{students.length}</strong> of <strong>{totalCount}</strong> students
+                </div>
+                <div className="flex items-center gap-2">
+                    <Button 
+                        variant="outline" 
+                        size="sm" 
+                        disabled={currentPage <= 1}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                    >
+                        Previous
+                    </Button>
+                    <div className="text-sm font-medium">
+                        Page {currentPage} of {totalPages}
+                    </div>
+                    <Button 
+                        variant="outline" 
+                        size="sm" 
+                        disabled={currentPage >= totalPages}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                    >
+                        Next
+                    </Button>
                 </div>
             </CardFooter>
         </Card>

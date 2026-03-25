@@ -36,7 +36,7 @@ export default function ParentPortalLayout({
               <nav className="hidden md:flex items-center gap-2 lg:gap-4 absolute left-1/2 -translate-x-1/2">
                   <Link href="/parent-portal" className="text-sm font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-5 py-2.5 rounded-full transition-all">Dashboard</Link>
                   <Link href="#" className="text-sm font-bold text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-800/50 px-5 py-2.5 rounded-full transition-all">Messages</Link>
-                  <Link href="#" className="text-sm font-bold text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-800/50 px-5 py-2.5 rounded-full transition-all">Fees</Link>
+                  <Link href="/parent-portal/fees" className="text-sm font-bold text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-800/50 px-5 py-2.5 rounded-full transition-all">Fees</Link>
                   <Link href="#" className="text-sm font-bold text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-800/50 px-5 py-2.5 rounded-full transition-all">Calendar</Link>
               </nav>
 
@@ -71,7 +71,7 @@ export default function ParentPortalLayout({
           </div>
         </header>
       </div>
-      <main className="container mx-auto px-4 py-10 md:px-8">
+      <main className="w-full">
         {children}
       </main>
       <footer className="py-10 border-t border-slate-100 dark:border-slate-800">

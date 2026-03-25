@@ -1,0 +1,301 @@
+staff_id,name,position,branch,phone
+T0001,Hana Tesema,Mathematics Teacher,Akaki Campus,0927858631
+T0002,Ruth Bekele,History Teacher,Akaki Campus,0942623766
+T0003,Yonatan Alemu,ICT Teacher,Alem Bank Campus,0943215286
+T0004,Bereket Getachew,Geography Teacher,Alem Bank Campus,0926015646
+T0005,Natnael Nigatu,Physics Teacher,Alem Bank Campus,0953657006
+T0006,Eden Worku,Physics Teacher,Alem Bank Campus,0967877598
+T0007,Saba Mekonnen,Geography Teacher,Akaki Campus,0939071568
+T0008,Eden Kassa,Amharic Teacher,Nefas Silk Campus,0935943562
+T0009,Filmon Kebede,ICT Teacher,Alem Bank Campus,0935802705
+T0010,Kidus Worku,Geography Teacher,Alem Bank Campus,0991409256
+T0011,Selam Tesfaye,ICT Teacher,Nefas Silk Campus,0990886017
+T0012,Daniel Fikre,Geography Teacher,Nefas Silk Campus,0976269974
+T0013,Kaleb Alemu,Biology Teacher,Alem Bank Campus,0940810434
+T0014,Elias Hailu,Biology Teacher,Akaki Campus,0995838874
+T0015,Genet Tesfaye,History Teacher,Alem Bank Campus,0972241026
+T0016,Abel Kassa,Physics Teacher,Akaki Campus,0987391961
+T0017,Genet Solomon,Amharic Teacher,Nefas Silk Campus,0962974733
+T0018,Betelhem Girma,Amharic Teacher,Alem Bank Campus,0981159479
+T0019,Almaz Mekonnen,ICT Teacher,Alem Bank Campus,0922687967
+T0020,Henok Solomon,Physics Teacher,Akaki Campus,0946067080
+T0021,Rahel Worku,Chemistry Teacher,Nefas Silk Campus,0948674242
+T0022,Dawit Getachew,Mathematics Teacher,Akaki Campus,0930695202
+T0023,Natnael Mekonnen,Geography Teacher,Nefas Silk Campus,0924567836
+T0024,Yared Fekadu,Amharic Teacher,Akaki Campus,0977228908
+T0025,Biruk Worku,Biology Teacher,Akaki Campus,0917242577
+T0026,Bereket Worku,Mathematics Teacher,Alem Bank Campus,0961978854
+T0027,Natnael Yohannes,Physics Teacher,Akaki Campus,0943653566
+T0028,Filmon Alemu,Geography Teacher,Akaki Campus,0952049720
+T0029,Liya Worku,Amharic Teacher,Akaki Campus,0924341381
+T0030,Bereket Nigatu,History Teacher,Akaki Campus,0940701463
+T0031,Robel Tesfaye,Geography Teacher,Nefas Silk Campus,0982907287
+T0032,Rediet Alemu,English Teacher,Alem Bank Campus,0936035262
+T0033,Saba Yohannes,Biology Teacher,Nefas Silk Campus,0974446303
+T0034,Genet Nigatu,ICT Teacher,Akaki Campus,0913204999
+T0035,Liya Mekonnen,Physics Teacher,Nefas Silk Campus,0929524884
+T0036,Yonatan Abebe,ICT Teacher,Nefas Silk Campus,0963456485
+T0037,Solomon Alemu,English Teacher,Nefas Silk Campus,0940887968
+T0038,Elias Yohannes,English Teacher,Akaki Campus,0988804536
+T0039,Bethlehem Yohannes,ICT Teacher,Alem Bank Campus,0947507870
+T0040,Kidus Nigatu,English Teacher,Alem Bank Campus,0959235677
+T0041,Almaz Abebe,ICT Teacher,Akaki Campus,0941870188
+T0042,Dawit Hailu,Geography Teacher,Akaki Campus,0956957374
+T0043,Bereket Desta,Physics Teacher,Alem Bank Campus,0929836928
+T0044,Bethlehem Abebe,Mathematics Teacher,Akaki Campus,0918454000
+T0045,Yonatan Solomon,Chemistry Teacher,Alem Bank Campus,0982904872
+T0046,Hana Kebede,Physics Teacher,Alem Bank Campus,0978503268
+T0047,Ruth Kebede,Physics Teacher,Akaki Campus,0958888674
+T0048,Eden Tsegaye,Amharic Teacher,Alem Bank Campus,0932318443
+T0049,Elias Desta,ICT Teacher,Akaki Campus,0934745290
+T0050,Almaz Yohannes,Mathematics Teacher,Akaki Campus,0928916013
+T0051,Natnael Abebe,History Teacher,Nefas Silk Campus,0938571905
+T0052,Daniel Girma,Geography Teacher,Akaki Campus,0936018431
+T0053,Rediet Tesema,Mathematics Teacher,Alem Bank Campus,0989571135
+T0054,Hiwot Tadesse,Mathematics Teacher,Akaki Campus,0971553018
+T0055,Tewodros Tadesse,Geography Teacher,Alem Bank Campus,0957077236
+T0056,Daniel Getachew,ICT Teacher,Akaki Campus,0939906478
+T0057,Dawit Nigatu,Physics Teacher,Nefas Silk Campus,0953457913
+T0058,Meron Fikre,Mathematics Teacher,Alem Bank Campus,0989281362
+T0059,Saba Tadesse,ICT Teacher,Nefas Silk Campus,0938666610
+T0060,Mahlet Fikre,English Teacher,Nefas Silk Campus,0982956534
+T0061,Fikirte Fikre,Amharic Teacher,Akaki Campus,0982908621
+T0062,Liya Fikre,Biology Teacher,Nefas Silk Campus,0998700250
+T0063,Abel Girma,Chemistry Teacher,Alem Bank Campus,0929927953
+T0064,Mahlet Kebede,Geography Teacher,Akaki Campus,0980133372
+T0065,Bereket Solomon,Geography Teacher,Nefas Silk Campus,0955823049
+T0066,Elias Mekonnen,Chemistry Teacher,Nefas Silk Campus,0938943692
+T0067,Ruth Kebede,Physics Teacher,Nefas Silk Campus,0965098914
+T0068,Bethlehem Desta,History Teacher,Nefas Silk Campus,0972000562
+T0069,Almaz Abebe,Geography Teacher,Alem Bank Campus,0990798010
+T0070,Fikirte Hailu,Mathematics Teacher,Akaki Campus,0915043713
+T0071,Saron Tadesse,Mathematics Teacher,Akaki Campus,0933777640
+T0072,Saba Kassa,Mathematics Teacher,Alem Bank Campus,0914645294
+T0073,Saba Hailu,History Teacher,Akaki Campus,0995606076
+T0074,Kaleb Hailu,Mathematics Teacher,Nefas Silk Campus,0972555543
+T0075,Robel Girma,Biology Teacher,Alem Bank Campus,0979661512
+T0076,Daniel Nigatu,History Teacher,Akaki Campus,0935828743
+T0077,Saba Yohannes,Biology Teacher,Alem Bank Campus,0993555543
+T0078,Kidus Tesfaye,Biology Teacher,Alem Bank Campus,0931789571
+T0079,Saba Kebede,History Teacher,Akaki Campus,0943796349
+T0080,Hiwot Getachew,English Teacher,Alem Bank Campus,0986647850
+T0081,Liya Desta,English Teacher,Akaki Campus,0985864694
+T0082,Almaz Fikre,Biology Teacher,Nefas Silk Campus,0933841325
+T0083,Biruk Yohannes,Physics Teacher,Alem Bank Campus,0998398197
+T0084,Samrawit Mekonnen,English Teacher,Akaki Campus,0931005342
+T0085,Henok Tadesse,History Teacher,Nefas Silk Campus,0922487441
+T0086,Rahel Solomon,Physics Teacher,Nefas Silk Campus,0953503425
+T0087,Biruk Solomon,English Teacher,Akaki Campus,0950092640
+T0088,Kidus Tesfaye,Chemistry Teacher,Akaki Campus,0944663294
+T0089,Kidus Kebede,English Teacher,Alem Bank Campus,0932760444
+T0090,Samuel Girma,Physics Teacher,Akaki Campus,0954616281
+T0091,Yosef Hailu,English Teacher,Akaki Campus,0951493745
+T0092,Hana Alemu,Amharic Teacher,Akaki Campus,0930987565
+T0093,Mekdes Getachew,Mathematics Teacher,Alem Bank Campus,0921524772
+T0094,Biruk Nigatu,English Teacher,Nefas Silk Campus,0968401576
+T0095,Eden Fekadu,Physics Teacher,Alem Bank Campus,0965232846
+T0096,Samrawit Hailu,Physics Teacher,Akaki Campus,0913807944
+T0097,Kaleb Getachew,English Teacher,Alem Bank Campus,0987257304
+T0098,Bethlehem Fekadu,Chemistry Teacher,Alem Bank Campus,0970325621
+T0099,Kaleb Desta,English Teacher,Akaki Campus,0957910054
+T0100,Bethlehem Girma,Amharic Teacher,Akaki Campus,0927787540
+T0101,Bethlehem Mekonnen,ICT Teacher,Nefas Silk Campus,0995568253
+T0102,Biniam Nigatu,Amharic Teacher,Akaki Campus,0973258438
+T0103,Hiwot Fikre,Geography Teacher,Akaki Campus,0923574340
+T0104,Nahom Worku,Amharic Teacher,Akaki Campus,0933268110
+T0105,Hiwot Fikre,History Teacher,Alem Bank Campus,0963569476
+T0106,Samuel Abebe,Physics Teacher,Akaki Campus,0944325002
+T0107,Mekdes Kassa,Mathematics Teacher,Akaki Campus,0935652331
+T0108,Saron Tsegaye,Physics Teacher,Nefas Silk Campus,0990661876
+T0109,Almaz Girma,Amharic Teacher,Nefas Silk Campus,0987810410
+T0110,Samuel Alemu,English Teacher,Alem Bank Campus,0961029040
+T0111,Rahel Getachew,Geography Teacher,Nefas Silk Campus,0928429120
+T0112,Rahel Mekonnen,Amharic Teacher,Nefas Silk Campus,0925207811
+T0113,Tigist Yohannes,Geography Teacher,Akaki Campus,0954489294
+T0114,Biruk Bekele,English Teacher,Nefas Silk Campus,0936955419
+T0115,Genet Nigatu,Geography Teacher,Akaki Campus,0940022207
+T0116,Yonatan Yohannes,Mathematics Teacher,Alem Bank Campus,0935808256
+T0117,Samuel Hailu,English Teacher,Alem Bank Campus,0987933265
+T0118,Abel Mekonnen,Chemistry Teacher,Alem Bank Campus,0980157982
+T0119,Kaleb Tesfaye,Physics Teacher,Alem Bank Campus,0929149586
+T0120,Daniel Nigatu,Chemistry Teacher,Nefas Silk Campus,0973451279
+T0121,Samrawit Nigatu,Chemistry Teacher,Akaki Campus,0968662721
+T0122,Almaz Tesema,Mathematics Teacher,Akaki Campus,0932057326
+T0123,Daniel Solomon,English Teacher,Akaki Campus,0974484407
+T0124,Abel Tsegaye,English Teacher,Nefas Silk Campus,0945519912
+T0125,Hana Getachew,Chemistry Teacher,Akaki Campus,0997559282
+T0126,Liya Solomon,ICT Teacher,Nefas Silk Campus,0916723267
+T0127,Genet Mekonnen,Amharic Teacher,Alem Bank Campus,0923365102
+T0128,Robel Alemu,Geography Teacher,Akaki Campus,0912230805
+T0129,Elias Hailu,ICT Teacher,Alem Bank Campus,0980832835
+T0130,Eden Solomon,Physics Teacher,Alem Bank Campus,0953963048
+T0131,Rediet Desta,ICT Teacher,Nefas Silk Campus,0978002587
+T0132,Samuel Hailu,History Teacher,Nefas Silk Campus,0973358785
+T0133,Betelhem Hailu,Chemistry Teacher,Akaki Campus,0925781462
+T0134,Genet Fekadu,Amharic Teacher,Nefas Silk Campus,0975689186
+T0135,Mekdes Tesfaye,Amharic Teacher,Alem Bank Campus,0913095901
+T0136,Biniam Nigatu,History Teacher,Akaki Campus,0926543892
+T0137,Rahel Girma,Physics Teacher,Akaki Campus,0952810139
+T0138,Samuel Worku,Biology Teacher,Alem Bank Campus,0983472016
+T0139,Betelhem Solomon,Biology Teacher,Alem Bank Campus,0975024591
+T0140,Nahom Tadesse,ICT Teacher,Akaki Campus,0965509477
+T0141,Samuel Mekonnen,Amharic Teacher,Akaki Campus,0980168627
+T0142,Yonatan Yohannes,Mathematics Teacher,Alem Bank Campus,0984870753
+T0143,Henok Mekonnen,English Teacher,Nefas Silk Campus,0968358032
+T0144,Natnael Alemu,English Teacher,Akaki Campus,0929740304
+T0145,Liya Bekele,Physics Teacher,Nefas Silk Campus,0965851216
+T0146,Ruth Nigatu,ICT Teacher,Nefas Silk Campus,0995145513
+T0147,Daniel Fekadu,Chemistry Teacher,Akaki Campus,0964133391
+T0148,Yosef Bekele,Physics Teacher,Alem Bank Campus,0997262015
+T0149,Elias Kassa,Geography Teacher,Alem Bank Campus,0991222842
+T0150,Kaleb Getachew,Geography Teacher,Akaki Campus,0960545263
+T0151,Saba Getachew,Physics Teacher,Alem Bank Campus,0957374125
+T0152,Samuel Kassa,English Teacher,Akaki Campus,0916579721
+T0153,Rediet Kebede,Biology Teacher,Nefas Silk Campus,0974705170
+T0154,Liya Alemu,History Teacher,Alem Bank Campus,0991966153
+T0155,Rahel Kebede,English Teacher,Alem Bank Campus,0990788779
+T0156,Rediet Worku,History Teacher,Akaki Campus,0912366942
+T0157,Samrawit Solomon,Biology Teacher,Akaki Campus,0976828083
+T0158,Tigist Mekonnen,History Teacher,Akaki Campus,0976123036
+T0159,Eden Tesema,Chemistry Teacher,Akaki Campus,0962156036
+T0160,Elias Kassa,Amharic Teacher,Nefas Silk Campus,0994223504
+T0161,Robel Alemu,English Teacher,Akaki Campus,0941808317
+T0162,Abel Bekele,ICT Teacher,Alem Bank Campus,0944910728
+T0163,Fikirte Girma,History Teacher,Alem Bank Campus,0927060927
+T0164,Solomon Fekadu,Amharic Teacher,Alem Bank Campus,0925974752
+T0165,Kidus Kassa,Mathematics Teacher,Nefas Silk Campus,0986744900
+T0166,Meron Tesema,English Teacher,Nefas Silk Campus,0989930084
+T0167,Filmon Girma,English Teacher,Nefas Silk Campus,0931425455
+T0168,Yosef Hailu,English Teacher,Nefas Silk Campus,0930371999
+T0169,Biruk Kebede,Physics Teacher,Akaki Campus,0987986232
+T0170,Abel Girma,Physics Teacher,Alem Bank Campus,0936050739
+T0171,Mekdes Mekonnen,ICT Teacher,Alem Bank Campus,0993996171
+T0172,Henok Abebe,ICT Teacher,Nefas Silk Campus,0928827720
+T0173,Natnael Alemu,Amharic Teacher,Alem Bank Campus,0989988400
+T0174,Biruk Tesfaye,Geography Teacher,Alem Bank Campus,0977634233
+T0175,Tewodros Getachew,ICT Teacher,Alem Bank Campus,0966803168
+T0176,Yonatan Abebe,Geography Teacher,Nefas Silk Campus,0923483253
+T0177,Hiwot Getachew,Mathematics Teacher,Akaki Campus,0960080052
+T0178,Eden Getachew,Mathematics Teacher,Akaki Campus,0986375157
+T0179,Robel Tesema,English Teacher,Akaki Campus,0932671698
+T0180,Biruk Getachew,Chemistry Teacher,Akaki Campus,0996761138
+T0181,Hana Mekonnen,Physics Teacher,Akaki Campus,0943648543
+T0182,Betelhem Mekonnen,ICT Teacher,Nefas Silk Campus,0984183007
+T0183,Samuel Solomon,Mathematics Teacher,Alem Bank Campus,0952534043
+T0184,Filmon Kebede,History Teacher,Akaki Campus,0956457305
+T0185,Rahel Worku,Biology Teacher,Akaki Campus,0957726390
+T0186,Tigist Tesema,Biology Teacher,Alem Bank Campus,0935875182
+T0187,Eden Nigatu,Geography Teacher,Alem Bank Campus,0959375732
+T0188,Filmon Girma,ICT Teacher,Nefas Silk Campus,0957763765
+T0189,Filmon Tsegaye,History Teacher,Akaki Campus,0914394980
+T0190,Bereket Getachew,English Teacher,Akaki Campus,0952514010
+T0191,Bethlehem Kebede,History Teacher,Nefas Silk Campus,0938119307
+T0192,Dawit Tadesse,Mathematics Teacher,Alem Bank Campus,0973556493
+T0193,Mekdes Tadesse,History Teacher,Akaki Campus,0941182136
+T0194,Saba Girma,History Teacher,Akaki Campus,0924761948
+T0195,Eden Yohannes,Chemistry Teacher,Akaki Campus,0949164695
+T0196,Eden Tsegaye,ICT Teacher,Nefas Silk Campus,0978216117
+T0197,Almaz Worku,English Teacher,Alem Bank Campus,0992450147
+T0198,Henok Fikre,Geography Teacher,Nefas Silk Campus,0960953314
+T0199,Saron Abebe,Biology Teacher,Nefas Silk Campus,0952579359
+T0200,Almaz Desta,Chemistry Teacher,Nefas Silk Campus,0917632309
+T0201,Bethlehem Hailu,Chemistry Teacher,Nefas Silk Campus,0970087970
+T0202,Biruk Tsegaye,History Teacher,Akaki Campus,0950100348
+T0203,Daniel Tesfaye,Geography Teacher,Alem Bank Campus,0937470535
+T0204,Daniel Nigatu,Mathematics Teacher,Alem Bank Campus,0938542635
+T0205,Daniel Worku,English Teacher,Akaki Campus,0944036199
+T0206,Natnael Kebede,Biology Teacher,Nefas Silk Campus,0982399990
+T0207,Bereket Kassa,Mathematics Teacher,Akaki Campus,0940941264
+T0208,Meron Alemu,Chemistry Teacher,Akaki Campus,0984330735
+T0209,Liya Desta,Physics Teacher,Nefas Silk Campus,0967644158
+T0210,Biruk Fikre,Chemistry Teacher,Alem Bank Campus,0930584622
+T0211,Daniel Tsegaye,Geography Teacher,Alem Bank Campus,0920403225
+T0212,Meron Tesema,Biology Teacher,Nefas Silk Campus,0981785597
+T0213,Selam Tadesse,Mathematics Teacher,Akaki Campus,0990401981
+T0214,Bethlehem Getachew,ICT Teacher,Alem Bank Campus,0978462377
+T0215,Henok Fikre,Geography Teacher,Alem Bank Campus,0988704643
+T0216,Fikirte Worku,Amharic Teacher,Akaki Campus,0962655068
+T0217,Biruk Hailu,ICT Teacher,Nefas Silk Campus,0913798784
+T0218,Saba Tsegaye,Biology Teacher,Akaki Campus,0920978298
+T0219,Nahom Bekele,ICT Teacher,Akaki Campus,0939703571
+T0220,Bereket Tesema,English Teacher,Akaki Campus,0936158262
+T0221,Biruk Getachew,Mathematics Teacher,Nefas Silk Campus,0997288628
+T0222,Biruk Kebede,Mathematics Teacher,Nefas Silk Campus,0932794060
+T0223,Yonatan Nigatu,Physics Teacher,Alem Bank Campus,0943361237
+T0224,Biruk Fekadu,History Teacher,Alem Bank Campus,0963617318
+T0225,Yared Mekonnen,English Teacher,Nefas Silk Campus,0972638695
+T0226,Daniel Fikre,Mathematics Teacher,Akaki Campus,0974452446
+T0227,Dawit Abebe,Amharic Teacher,Nefas Silk Campus,0993684285
+T0228,Saron Nigatu,History Teacher,Nefas Silk Campus,0947554361
+T0229,Solomon Fikre,Biology Teacher,Akaki Campus,0920382781
+T0230,Biruk Tesema,Biology Teacher,Akaki Campus,0915156926
+T0231,Saba Nigatu,English Teacher,Alem Bank Campus,0975671341
+T0232,Tewodros Mekonnen,Biology Teacher,Akaki Campus,0973750372
+T0233,Kaleb Mekonnen,Physics Teacher,Akaki Campus,0971961701
+T0234,Robel Getachew,Chemistry Teacher,Nefas Silk Campus,0938153179
+T0235,Kidus Tsegaye,Mathematics Teacher,Nefas Silk Campus,0952457731
+T0236,Eden Getachew,English Teacher,Alem Bank Campus,0957763345
+T0237,Selam Solomon,Biology Teacher,Akaki Campus,0977917111
+T0238,Meron Bekele,Biology Teacher,Akaki Campus,0991954959
+T0239,Abel Fikre,Biology Teacher,Akaki Campus,0969916846
+T0240,Bethlehem Alemu,Chemistry Teacher,Alem Bank Campus,0980395431
+T0241,Elias Desta,Biology Teacher,Alem Bank Campus,0931281961
+T0242,Rahel Tesfaye,Amharic Teacher,Alem Bank Campus,0990391688
+T0243,Yonatan Bekele,Physics Teacher,Alem Bank Campus,0987910705
+T0244,Tigist Hailu,ICT Teacher,Nefas Silk Campus,0962203654
+T0245,Rediet Tadesse,Amharic Teacher,Nefas Silk Campus,0996409165
+T0246,Kaleb Girma,Chemistry Teacher,Akaki Campus,0975420031
+T0247,Yared Worku,English Teacher,Nefas Silk Campus,0949452637
+T0248,Natnael Tesfaye,Amharic Teacher,Alem Bank Campus,0978436213
+T0249,Selam Desta,Chemistry Teacher,Alem Bank Campus,0963716278
+T0250,Samrawit Tadesse,Mathematics Teacher,Akaki Campus,0985822045
+T0251,Solomon Getachew,Mathematics Teacher,Alem Bank Campus,0953650132
+T0252,Robel Hailu,Chemistry Teacher,Nefas Silk Campus,0946308927
+T0253,Elias Tsegaye,Mathematics Teacher,Nefas Silk Campus,0942275420
+T0254,Tewodros Yohannes,Geography Teacher,Nefas Silk Campus,0931274247
+T0255,Betelhem Tesema,Amharic Teacher,Alem Bank Campus,0914188701
+T0256,Yared Fekadu,Biology Teacher,Alem Bank Campus,0942278265
+T0257,Daniel Fekadu,Chemistry Teacher,Nefas Silk Campus,0927740023
+T0258,Biniam Solomon,Mathematics Teacher,Akaki Campus,0981027247
+T0259,Biruk Yohannes,Amharic Teacher,Alem Bank Campus,0917577343
+T0260,Mekdes Tesema,ICT Teacher,Alem Bank Campus,0986680851
+T0261,Filmon Tesfaye,Physics Teacher,Alem Bank Campus,0979199680
+T0262,Kidus Hailu,ICT Teacher,Akaki Campus,0952819466
+T0263,Rahel Fikre,Chemistry Teacher,Akaki Campus,0968719964
+T0264,Meron Desta,Chemistry Teacher,Nefas Silk Campus,0934481494
+T0265,Betelhem Desta,Geography Teacher,Nefas Silk Campus,0930504813
+T0266,Bereket Kassa,Geography Teacher,Akaki Campus,0979767430
+T0267,Bereket Getachew,ICT Teacher,Akaki Campus,0952800973
+T0268,Fikirte Tsegaye,Chemistry Teacher,Nefas Silk Campus,0981422014
+T0269,Elias Nigatu,Amharic Teacher,Akaki Campus,0941865858
+T0270,Samrawit Kassa,Amharic Teacher,Akaki Campus,0980584850
+T0271,Selam Getachew,Geography Teacher,Nefas Silk Campus,0994556903
+T0272,Solomon Desta,Biology Teacher,Akaki Campus,0974387030
+T0273,Bethlehem Tsegaye,History Teacher,Nefas Silk Campus,0940116480
+T0274,Natnael Kebede,Mathematics Teacher,Alem Bank Campus,0962524478
+T0275,Almaz Tadesse,Biology Teacher,Nefas Silk Campus,0914415988
+T0276,Kaleb Fikre,Geography Teacher,Nefas Silk Campus,0993500899
+T0277,Tewodros Worku,Amharic Teacher,Akaki Campus,0979141872
+T0278,Biruk Kassa,Chemistry Teacher,Alem Bank Campus,0996422692
+T0279,Rahel Bekele,History Teacher,Alem Bank Campus,0934752844
+T0280,Bethlehem Desta,Mathematics Teacher,Akaki Campus,0935713594
+T0281,Saba Worku,Geography Teacher,Akaki Campus,0929709276
+T0282,Solomon Fikre,Biology Teacher,Nefas Silk Campus,0998468656
+T0283,Kaleb Alemu,English Teacher,Nefas Silk Campus,0969608513
+T0284,Rahel Tadesse,English Teacher,Alem Bank Campus,0956192905
+T0285,Biniam Desta,History Teacher,Alem Bank Campus,0970506506
+T0286,Hiwot Bekele,Chemistry Teacher,Alem Bank Campus,0972204461
+T0287,Hana Abebe,Geography Teacher,Alem Bank Campus,0985228567
+T0288,Yosef Alemu,ICT Teacher,Alem Bank Campus,0988770331
+T0289,Natnael Mekonnen,Chemistry Teacher,Alem Bank Campus,0936703186
+T0290,Liya Tsegaye,Biology Teacher,Akaki Campus,0981288565
+T0291,Genet Yohannes,History Teacher,Nefas Silk Campus,0992211619
+T0292,Genet Tesfaye,Biology Teacher,Akaki Campus,0921514717
+T0293,Samuel Nigatu,History Teacher,Alem Bank Campus,0925063615
+T0294,Tigist Getachew,Geography Teacher,Alem Bank Campus,0930726524
+T0295,Nahom Fekadu,Amharic Teacher,Akaki Campus,0997947206
+T0296,Rahel Bekele,History Teacher,Alem Bank Campus,0939918770
+T0297,Genet Fekadu,Mathematics Teacher,Nefas Silk Campus,0951025551
+T0298,Hiwot Kassa,Geography Teacher,Akaki Campus,0977772193
+T0299,Mahlet Tadesse,ICT Teacher,Nefas Silk Campus,0916031033
+T0300,Ruth Nigatu,Mathematics Teacher,Nefas Silk Campus,0945294353

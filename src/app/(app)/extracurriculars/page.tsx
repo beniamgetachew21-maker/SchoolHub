@@ -1,5 +1,2 @@
-import { ComingSoon } from "@/components/ui/coming-soon"
-        
-export default function Page() {
-    return <ComingSoon title="Extracurriculars" />;
-}
+import { redirect } from "next/navigation";
+export default function ExtracurricularsPage() { redirect("/extracurriculars/clubs"); }

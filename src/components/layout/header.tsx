@@ -14,6 +14,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { CommandPalette } from "./command-palette";
+import { stopImpersonatingAction } from "@/lib/saas/impersonate-actions";
+import { NotificationDropdown } from "./notification-dropdown";
 
 // ─── Route metadata map ─────────────────────────────────────────────────────
 // Add or extend entries here whenever a new page is added.
@@ -90,7 +93,7 @@ function isDashboard(pathname: string) {
   return pathname === "/dashboard" || pathname === "/";
 }
 
-export function Header() {
+export function Header({ tenantName = "EthioEdu", userJson = "{}", isImpersonating = false }: { tenantName?: string, userJson?: string, isImpersonating?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
   const currentDate = new Date().toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "long" });
@@ -98,6 +101,13 @@ export function Header() {
   const pageInfo = resolvePageInfo(pathname);
   const onDashboard = isDashboard(pathname);
   const onHrDirectory = pathname === "/hr/directory";
+
+  const user = JSON.parse(userJson || "{}");
+  const userName = user?.name || "School Admin";
+  let userInitials = "SA";
+  if (userName && userName !== "School Admin") {
+      userInitials = userName.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase();
+  }
 
   // Client-side fetch for HR Insight Pills
   const [hrStats, setHrStats] = useState({ total: 0, onLeave: 0, activeRoles: 0 });
@@ -128,7 +138,23 @@ export function Header() {
 
   return (
     <header className="relative z-50 bg-[#172D13] text-white p-6 shadow-2xl min-h-[180px]">
-      <div className="flex flex-col gap-6">
+      {isImpersonating && (
+        <div className="absolute top-0 left-0 right-0 bg-amber-500 text-amber-950 px-4 py-2 flex items-center justify-between text-xs font-black uppercase tracking-widest z-[60] shadow-md border-b border-amber-600">
+           <div className="flex items-center gap-2">
+             <ShieldCheck className="h-4 w-4" />
+             SUPER ADMIN MODE: Viewing {tenantName} Workspace
+           </div>
+           <Button 
+                onClick={() => stopImpersonatingAction()}
+                variant="ghost" 
+                size="sm" 
+                className="h-7 bg-amber-950 text-white hover:bg-black font-black text-[10px] px-3 rounded-full transition-all"
+            >
+                EXIT PORTAL
+           </Button>
+        </div>
+      )}
+      <div className={`flex flex-col gap-6 ${isImpersonating ? "mt-8" : ""}`}>
         {/* Top Row */}
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -144,57 +170,41 @@ export function Header() {
                 <span className="text-sm font-bold uppercase tracking-widest hidden sm:block">Back</span>
               </button>
             ) : (
-              <h1 className="text-2xl font-black font-headline tracking-tighter uppercase">
-                EMS DASHBOARD
+              <h1 className="text-2xl font-black font-headline tracking-tighter uppercase whitespace-nowrap overflow-hidden text-ellipsis max-w-sm">
+                {tenantName} DASHBOARD
               </h1>
             )}
           </div>
 
           {/* Search */}
-          <div className="hidden lg:flex flex-1 max-w-xl relative">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
-              <Search className="h-4 w-4" />
-            </div>
-            <input
-              type="text"
-              placeholder="Quick Search (Students, Staff...)"
-              className="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-10 pr-20 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-white/40"
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
-              <kbd className="bg-white/10 px-1.5 py-0.5 rounded text-[10px] uppercase font-bold text-white/50 border border-white/10">
-                Cmd + K
-              </kbd>
-            </div>
-          </div>
+          <CommandPalette />
 
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon" className="rounded-full text-white/70 hover:text-white hover:bg-white/10">
                 <Zap className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="rounded-full text-white/70 hover:text-white hover:bg-white/10 relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border-2 border-[#172D13]" />
-              </Button>
+              <NotificationDropdown />
             </div>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-3 cursor-pointer group">
                   <Avatar className="h-10 w-10 border-2 border-white/20 transition-all group-hover:border-white/40">
-                    <AvatarImage src="/avatars/tadesse.jpg" alt="@admin" className="object-cover" />
-                    <AvatarFallback className="bg-emerald-700 text-white font-bold">TW</AvatarFallback>
+                    <AvatarFallback className="bg-emerald-700 text-white font-bold">{userInitials}</AvatarFallback>
                   </Avatar>
                   <div className="hidden sm:flex flex-col text-left">
                     <span className="text-sm font-bold leading-none flex items-center gap-1">
-                      Tadesse Worku <ChevronDown className="h-3 w-3 opacity-50" />
+                      {userName} <ChevronDown className="h-3 w-3 opacity-50" />
                     </span>
-                    <span className="text-[10px] text-white/60 font-medium">Senior HR Manager</span>
+                    <span className="text-[10px] text-white/60 font-medium">
+                      {user?.role === 'ADMIN' ? 'System Administrator' : 'Staff Member'}
+                    </span>
                   </div>
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel>Tadesse Worku</DropdownMenuLabel>
+                <DropdownMenuLabel>{userName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
@@ -232,7 +242,7 @@ export function Header() {
             {(onDashboard || onHrDirectory) && (
               <div className="flex items-center gap-2 text-white/70 text-sm font-medium mb-1">
                 <span>Welcome, </span>
-                <span className="text-white font-bold">Tadesse Worku</span>
+                <span className="text-white font-bold">{userName}</span>
                 <span className="flex items-center gap-1 ml-2 text-white/50">
                   <MapPin className="h-3.5 w-3.5" />
                   Addis Ababa

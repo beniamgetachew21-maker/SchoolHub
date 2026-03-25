@@ -66,7 +66,7 @@ export default function StudentPortalLayout({
             </div>
         </div>
       </header>
-      <main className="container mx-auto px-4 py-10 md:px-8">
+      <main className="w-full">
         {children}
       </main>
       <footer className="py-10 border-t border-slate-100 dark:border-slate-800">

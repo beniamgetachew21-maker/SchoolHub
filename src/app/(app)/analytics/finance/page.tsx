@@ -1,4 +1,4 @@
-import { BarChart3, TrendingUp, Users, DollarSign, Wallet, ArrowUpRight, ArrowDownRight, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "lucide-react";
+import { BarChart3, TrendingUp, Users, DollarSign, Wallet, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 

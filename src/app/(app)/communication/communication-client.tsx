@@ -309,7 +309,7 @@ export function CommunicationClient({ announcements, teachers, students }: {
                         {[
                             { icon: Smartphone, label: "SMS Gateway",    desc: "Africa's Talking API",  status: "Active",      detail: "245 SMS sent this month" },
                             { icon: Mail,       label: "Email Service",  desc: "SendGrid Integration",  status: "Active",      detail: "1,203 emails sent this month" },
-                            { icon: Bell,       label: "Push Alerts",    desc: "Firebase FCM",          status: "Configured",  detail: "Mobile app notifications" },
+                            { icon: Bell,       label: "Push Alerts",    desc: "Cloud Push",          status: "Configured",  detail: "Mobile app notifications" },
                             { icon: MessageSquare, label: "In-App MSG", desc: "Real-time WebSocket",   status: "Active",      detail: "56 active conversations" },
                         ].map(channel => (
                             <div key={channel.label} className="flex items-center gap-4 p-5 rounded-2xl bg-muted/10 border border-border/20 hover:border-emerald-500/20 transition-all">

@@ -74,12 +74,27 @@ export class FinService extends BaseService {
         try {
             const { tenant } = await this.getContext();
             const invoiceId = "INV" + Math.floor(Math.random() * 100000).toString().padStart(6, "0");
+            
+            const totalAmount = data.items ? data.items.reduce((sum: number, item: any) => sum + item.amount, 0) : (data.amount || 0);
+            
             const invoice = await prisma.invoice.create({
                 data: {
-                    ...data,
                     invoiceId,
+                    studentId: data.studentId,
+                    amount: totalAmount,
+                    dueDate: data.dueDate,
+                    status: data.status || "Pending",
+                    description: data.description,
                     tenantId: tenant.id,
-                },
+                    items: data.items ? {
+                        create: data.items.map((item: any) => ({
+                            type: item.type,
+                            amount: item.amount,
+                            tenantId: tenant.id
+                        }))
+                    } : undefined
+                } as any,
+                include: { items: true } as any
             });
             return this.response(invoice);
         } catch (error: any) {
@@ -129,6 +144,34 @@ export class FinService extends BaseService {
                 });
             }
             return this.response(null, "External Payment Gateway error");
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+    async getLedgers(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const ledgers = await (prisma as any).ledger.findMany({
+                where: { tenantId: tenant.id },
+                include: { transactions: true }
+            });
+            return this.response(ledgers);
+        } catch (error: any) {
+            return this.response([], error.message);
+        }
+    }
+
+    async createLedger(data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const ledger = await (prisma as any).ledger.create({
+                data: {
+                    name: data.name,
+                    type: data.type,
+                    tenantId: tenant.id
+                }
+            });
+            return this.response(ledger);
         } catch (error: any) {
             return this.response(null, error.message);
         }

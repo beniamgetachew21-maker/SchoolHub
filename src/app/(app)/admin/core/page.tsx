@@ -1,6 +1,7 @@
 import { ShieldCheck, Settings, Building, Users, Lock, Database } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function AdminCorePage() {
   return (
@@ -15,16 +16,19 @@ export default function AdminCorePage() {
           title="School Profile" 
           description="Manage school name, logo, address, and contact details."
           icon={Building}
+          href="/admin/core/profile"
         />
         <AdminConfigCard 
           title="Academic Years" 
           description="Define terms, semesters, and academic sessions."
           icon={Database}
+          href="/admin/core/academic-years"
         />
         <AdminConfigCard 
           title="Global Settings" 
           description="System-wide preferences, localization, and branding."
           icon={Settings}
+          href="/admin/core/settings"
         />
       </div>
 
@@ -46,20 +50,24 @@ export default function AdminCorePage() {
   );
 }
 
-function AdminConfigCard({ title, description, icon: Icon }: { title: string, description: string, icon: any }) {
+function AdminConfigCard({ title, description, icon: Icon, href }: { title: string, description: string, icon: any, href: string }) {
   return (
-    <Card className="hover:shadow-md transition-shadow cursor-pointer group">
-      <CardHeader className="flex flex-row items-center gap-4 pb-2">
-        <div className="p-2 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-          <Icon className="h-5 w-5" />
-        </div>
-        <CardTitle className="text-lg">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground">{description}</p>
-        <Button variant="link" className="px-0 mt-4 text-primary">Configure →</Button>
-      </CardContent>
-    </Card>
+    <Link href={href}>
+      <Card className="hover:shadow-md transition-shadow cursor-pointer group h-full">
+        <CardHeader className="flex flex-row items-center gap-4 pb-2">
+          <div className="p-2 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+            <Icon className="h-5 w-5" />
+          </div>
+          <CardTitle className="text-lg">{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">{description}</p>
+          <div className="mt-4 text-sm font-medium text-primary flex items-center gap-1">
+            Configure <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 

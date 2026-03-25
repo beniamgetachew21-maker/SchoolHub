@@ -1,20 +1,21 @@
 import { headers } from 'next/headers';
-import { prisma } from './prisma'; // Adjust based on your prisma client location
+import { prisma } from './prisma';
+import { cache } from 'react';
 
 /**
  * Retrieves the current tenant's subdomain from the request headers
  * injected by the middleware.
  */
-export async function getTenantDomain(): Promise<string> {
+export const getTenantDomain = cache(async (): Promise<string> => {
     const headersList = await headers();
     const domain = headersList.get('x-tenant-domain') || 'default';
     return domain;
-}
+});
 
 /**
  * Fetches the active Tenant record from the database based on the subdomain.
  */
-export async function getCurrentTenant() {
+export const getCurrentTenant = cache(async () => {
     const domain = await getTenantDomain();
 
     // If it's the default development domain, we can either return a mock tenant
@@ -45,7 +46,7 @@ export async function getCurrentTenant() {
     }
 
     return tenant;
-}
+});
 
 /**
  * A helper function to wrap Prisma queries with the current tenantId.

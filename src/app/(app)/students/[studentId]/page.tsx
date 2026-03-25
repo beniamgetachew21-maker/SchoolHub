@@ -558,7 +558,7 @@ async function TransportTabContent({ studentId }: { studentId: string }) {
 }
 
 async function AchievementsTabContent({ studentId }: { studentId: string }) {
-    const achievements = (await getAchievements()).filter((ach: any) => ach.studentId === studentId);
+    const achievements = (await getAchievements(studentId)).filter((ach: any) => ach.studentId === studentId);
 
     return (
         <Table>

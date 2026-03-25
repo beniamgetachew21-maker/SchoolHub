@@ -222,14 +222,90 @@ export class AcaService extends BaseService {
             });
             if (!teacher) return this.response(null, "Teacher not found");
 
-            const classSections = [
-                { id: 1, teacherId: "E003", name: "Grade 10 - A", subject: "Mathematics", studentCount: 35 },
-                { id: 2, teacherId: "E003", name: "Grade 10 - B", subject: "Mathematics", studentCount: 34 },
-                { id: 3, teacherId: "E002", name: "Grade 9 - A",  subject: "Science",      studentCount: 40 },
-                { id: 4, teacherId: "E002", name: "Grade 10 - A", subject: "Science",      studentCount: 35 },
-            ];
-            const assigned = classSections.filter(c => c.teacherId === teacher.employeeId);
-            return this.response({ teacher, assigned });
+            const assigned = await prisma.classPeriod.findMany({
+                where: { tenantId: tenant.id, teacherId: teacher.employeeId },
+                include: {
+                    section: true,
+                    course: true
+                }
+            });
+
+            return this.response({ 
+                teacher, 
+                assigned: assigned.map(a => ({
+                    id: a.id,
+                    name: a.section.sectionName,
+                    subject: a.course.name,
+                    studentCount: 0 // Would need another query or field
+                }))
+            });
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
+    async getTeacherDashboardData(): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const teacherRes = await this.getTeacherContext();
+            const teacher = teacherRes.data?.teacher;
+            if (!teacher) return this.response(null, "Teacher not found");
+
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
+            const prismaDay = dayOfWeek === 0 ? 7 : dayOfWeek;
+
+            const [classPeriods, activeAssignments, recordedSessions] = await Promise.all([
+                prisma.classPeriod.findMany({
+                    where: { 
+                        tenantId: tenant.id, 
+                        teacherId: teacher.employeeId,
+                        dayOfWeek: prismaDay
+                    },
+                    include: {
+                        section: true,
+                        course: true,
+                        room: true
+                    },
+                    orderBy: { startTime: "asc" }
+                }),
+                prisma.assignment.findMany({
+                    where: { 
+                        tenantId: tenant.id,
+                        dueDate: { gte: today }
+                    },
+                    take: 5,
+                    orderBy: { dueDate: "asc" }
+                }),
+                prisma.attendanceSession.findMany({
+                    where: {
+                        tenantId: tenant.id,
+                        date: {
+                            gte: new Date(new Date().setHours(0,0,0,0)),
+                            lte: new Date(new Date().setHours(23,59,59,999))
+                        }
+                    },
+                    select: { classSectionId: true }
+                })
+            ]);
+
+            const recordedSectionIds = new Set(recordedSessions.map(s => s.classSectionId));
+            const pendingAttendance = classPeriods
+                .filter(p => !recordedSectionIds.has(p.sectionId))
+                .map(p => ({
+                    id: p.id,
+                    sectionId: p.sectionId,
+                    className: p.section.sectionName,
+                    subject: p.course.name,
+                    time: p.startTime
+                }));
+
+            return this.response({
+                teacher,
+                todaySchedule: classPeriods,
+                activeAssignments,
+                pendingAttendance
+            });
         } catch (error: any) {
             return this.response(null, error.message);
         }
@@ -239,17 +315,42 @@ export class AcaService extends BaseService {
 
     async getCourses(): Promise<ServiceResponse<any[]>> {
         try {
-            // Mock courses for the timetable as they don't explicitly exist in the schema
-            const dummyCourses = [
-                { id: "C001", name: "Mathematics", code: "MAT101", credits: 4 },
-                { id: "C002", name: "Science", code: "SCI101", credits: 4 },
-                { id: "C003", name: "English Language", code: "ENG101", credits: 3 },
-                { id: "C004", name: "History", code: "HIS101", credits: 3 },
-                { id: "C005", name: "Physical Education", code: "PE101", credits: 2 },
-            ];
-            return this.response(dummyCourses);
+            const { tenant } = await this.getContext();
+            const courses = await prisma.course.findMany({
+                where: { tenantId: tenant.id }
+            });
+            return this.response(courses);
         } catch (error: any) {
             return this.response([], error.message);
+        }
+    }
+
+    async createAssignment(data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const assignment = await prisma.assignment.create({
+                data: { ...data, tenantId: tenant.id }
+            });
+            return this.response(assignment);
+        } catch (error: any) {
+            return this.response(null, error.message);
+        }
+    }
+
+    async submitAssignment(data: { assignmentId: string; studentId: string; contentUrl?: string }): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const submission = await prisma.submission.create({
+                data: {
+                    ...data,
+                    tenantId: tenant.id,
+                    status: "Pending",
+                    submittedAt: new Date()
+                }
+            });
+            return this.response(submission);
+        } catch (error: any) {
+            return this.response(null, error.message);
         }
     }
 }

@@ -2,10 +2,26 @@ import * as React from "react"
 import { getEmployees, getTeacher } from "@/lib/actions"
 import { DirectoryClient } from "./directory-client"
 
-export default async function EmployeeDirectoryPage() {
-    // In a real app we'd get the current user, mock it out similar to the rest
-    const currentUser = { name: "Admin Alex", role: "Admin", branch: "Addis Ababa" };
-    const employees = await getEmployees();
+export default async function EmployeeDirectoryPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ page?: string; q?: string; dept?: string; size?: string }>;
+}) {
+    const params = await searchParams;
+    const page = parseInt(params.page || "1");
+    const pageSize = parseInt(params.size || "20");
+    const search = params.q || "";
+    const department = params.dept || "";
+    const status = params.status || "";
 
-    return <DirectoryClient employees={employees} currentUser={currentUser} />
+    const currentUser = { name: "Admin Alex", role: "Admin", branch: "Addis Ababa" };
+    const data = await getEmployees({ page, pageSize, search, department, status });
+
+    return <DirectoryClient 
+        employees={data.employees} 
+        totalCount={data.totalCount}
+        totalPages={data.totalPages}
+        currentPage={page}
+        currentUser={currentUser} 
+    />;
 }

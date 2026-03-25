@@ -6,16 +6,59 @@ export class HrService extends BaseService {
 
     // ─── Employee Management ──────────────────────────────────────────────────
 
-    async getEmployees(): Promise<ServiceResponse<any[]>> {
+    async getEmployees(params: {
+        page?: number;
+        pageSize?: number;
+        search?: string;
+        department?: string;
+        status?: string;
+    } = {}): Promise<ServiceResponse<{ employees: any[]; totalCount: number; totalPages: number }>> {
         try {
             const { tenant } = await this.getContext();
-            const employees = await prisma.employee.findMany({
-                where: { tenantId: tenant.id },
-                orderBy: { name: "asc" }
+            const { page = 1, pageSize = 20, search = "", department = "", status = "" } = params;
+
+            const skip = (page - 1) * pageSize;
+
+            const where: any = {
+                tenantId: tenant.id,
+                AND: []
+            };
+
+            if (search) {
+                where.AND.push({
+                    OR: [
+                        { name: { contains: search, mode: 'insensitive' } },
+                        { email: { contains: search, mode: 'insensitive' } },
+                        { employeeId: { contains: search, mode: 'insensitive' } },
+                    ]
+                });
+            }
+
+            if (department) {
+                where.AND.push({ department });
+            }
+
+            if (status && status !== "Active Status" && status !== "All Statuses") {
+                where.AND.push({ status });
+            }
+
+            const [employees, totalCount] = await Promise.all([
+                prisma.employee.findMany({
+                    where,
+                    orderBy: { name: "asc" },
+                    skip,
+                    take: pageSize,
+                }),
+                prisma.employee.count({ where })
+            ]);
+
+            return this.response({
+                employees,
+                totalCount,
+                totalPages: Math.ceil(totalCount / pageSize),
             });
-            return this.response(employees);
         } catch (error: any) {
-            return this.response([], error.message);
+            return this.response({ employees: [], totalCount: 0, totalPages: 0 }, error.message);
         }
     }
 
@@ -29,6 +72,24 @@ export class HrService extends BaseService {
             return this.response(employee);
         } catch (error: any) {
             console.error("GET_EMPLOYEE_ERROR:", error);
+            return this.response(null, error.message);
+        }
+    }
+
+    async addEmployee(data: any): Promise<ServiceResponse<any>> {
+        try {
+            const { tenant } = await this.getContext();
+            const employeeId = "EMP" + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            const employee = await prisma.employee.create({
+                data: {
+                    ...data,
+                    tenantId: tenant.id,
+                    employeeId
+                }
+            });
+            revalidatePath('/hr/directory');
+            return this.response(employee);
+        } catch (error: any) {
             return this.response(null, error.message);
         }
     }
@@ -219,15 +280,49 @@ export class HrService extends BaseService {
 
     // ─── Recruitment & Onboarding ──────────────────────────────────────────────
 
-    async getCandidates(): Promise<ServiceResponse<any[]>> {
+    async getCandidates(params: {
+        page?: number;
+        pageSize?: number;
+        search?: string;
+    } = {}): Promise<ServiceResponse<{ candidates: any[]; totalCount: number; totalPages: number }>> {
         try {
             const { tenant } = await this.getContext();
-            const candidates = await prisma.candidate.findMany({
-                where: { tenantId: tenant.id }
+            const { page = 1, pageSize = 100, search = "" } = params;
+
+            const skip = (page - 1) * pageSize;
+
+            const where: any = {
+                tenantId: tenant.id,
+                AND: []
+            };
+
+            if (search) {
+                where.AND.push({
+                    OR: [
+                        { name: { contains: search, mode: 'insensitive' } },
+                        { position: { contains: search, mode: 'insensitive' } },
+                        { candidateId: { contains: search, mode: 'insensitive' } }
+                    ]
+                });
+            }
+
+            const [candidates, totalCount] = await Promise.all([
+                prisma.candidate.findMany({
+                    where,
+                    skip,
+                    take: pageSize,
+                    orderBy: { appliedDate: 'desc' }
+                }),
+                prisma.candidate.count({ where })
+            ]);
+
+            return this.response({
+                candidates,
+                totalCount,
+                totalPages: Math.ceil(totalCount / pageSize)
             });
-            return this.response(candidates);
         } catch (error: any) {
-            return this.response([], error.message);
+            return this.response({ candidates: [], totalCount: 0, totalPages: 0 }, error.message);
         }
     }
 

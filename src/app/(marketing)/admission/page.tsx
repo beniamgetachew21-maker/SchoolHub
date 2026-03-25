@@ -2,239 +2,266 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
-    UserPlus, 
-    FileEdit, 
-    UploadCloud, 
-    ClipboardCheck, 
-    CheckCircle2, 
+    Check, 
+    ChevronRight, 
     GraduationCap, 
-    ChevronRight,
-    Search,
+    ArrowRight, 
+    FileText, 
+    Calendar, 
+    CreditCard, 
+    PhoneCall, 
     Globe,
-    Phone,
-    Mail,
-    MapPin
+    MessageSquare,
+    CheckCircle2,
+    MapPin,
+    Mail
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export default function AdmissionLandingPage() {
     return (
-        <div className="min-h-screen bg-[#F8FAFC] overflow-x-hidden">
-            {/* Custom Header for Admission Flow */}
-            <nav className="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-6 lg:px-24 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <div className="bg-blue-600 p-1.5 rounded-lg">
-                        <GraduationCap className="h-6 w-6 text-white" />
+        <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 selection:text-emerald-900 overflow-x-hidden">
+            {/* Header */}
+            <header className="border-b border-slate-100 px-6 lg:px-24 py-4 sticky top-0 bg-white/80 backdrop-blur-md z-50">
+                <div className="max-w-7xl mx-auto flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                        <div className="bg-emerald-600 p-1.5 rounded-lg shadow-sm">
+                            <GraduationCap className="h-5 w-5 text-white" />
+                        </div>
+                        <span className="text-xl font-bold text-slate-900 tracking-tight">Your School</span>
                     </div>
-                    <span className="text-xl font-bold text-[#0F172A] hidden sm:inline-block">EthioEdu Admissions</span>
-                </div>
 
-                <div className="hidden md:flex items-center gap-8">
-                    <Link href="/" className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Home</Link>
-                    <Link href="#programs" className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Programs</Link>
-                    <Link href="#process" className="text-sm font-semibold text-blue-600">Admission</Link>
-                    <Link href="#contact" className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Contact</Link>
-                </div>
+                    <nav className="hidden md:flex items-center gap-8">
+                        {['Admissions', 'Programs', 'Help', 'Contact'].map((item) => (
+                            <Link key={item} href={`#${item.toLowerCase()}`} className="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors">
+                                {item}
+                            </Link>
+                        ))}
+                    </nav>
 
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 border-r border-slate-200 pr-4 mr-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                        <Globe className="h-3 w-3" /> EN | አማ | OR
+                    <div className="flex items-center gap-6">
+                        <div className="hidden sm:flex items-center gap-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest border-r border-slate-100 pr-6">
+                            <span>EN</span> · <span>አማ</span> · <span>OR</span>
+                        </div>
+                        <Link href="/login">
+                            <Button className="bg-[#064e3b] hover:bg-[#065f46] text-white font-bold px-8 rounded-xl h-10 transition-all active:scale-95 shadow-sm">
+                                Login
+                            </Button>
+                        </Link>
                     </div>
-                    <Link href="/login">
-                        <Button variant="ghost" className="text-slate-600 font-bold hover:text-blue-600">Login</Button>
-                    </Link>
                 </div>
-            </nav>
+            </header>
 
             <main>
                 {/* Hero Section */}
-                <section className="relative pt-20 pb-24 px-6 lg:px-24 mesh-gradient">
-                    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-                        <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
-                            <Badge className="bg-blue-100 text-blue-600 border-none px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-widest animate-pulse">
-                                Admissions 2026 Now Open
-                            </Badge>
-                            <h1 className="text-5xl lg:text-7xl font-black text-[#0F172A] leading-[1.1]">
-                                Shaping the <span className="text-blue-600">Future</span> of Education.
+                <section className="relative px-6 lg:px-24 py-20 lg:py-32 bg-[#f8fafc] overflow-hidden">
+                    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+                        <div className="w-full lg:w-1/2 space-y-8 text-center lg:text-left animate-in fade-in slide-in-from-left-8 duration-700">
+                            <h1 className="text-5xl lg:text-7xl font-black text-[#0f172a] leading-[1.1] tracking-tighter">
+                                Apply for the 2026 Academic Year
                             </h1>
-                            <p className="text-lg text-slate-500 font-medium max-w-2xl leading-relaxed">
-                                Join our thriving community where innovation meets tradition. Start your journey with EthioEdu's state-of-the-art learning environment.
+                            <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                                Register your child quickly and securely.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                                <Link href="/signup">
-                                    <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-black px-10 py-7 rounded-2xl shadow-xl shadow-blue-200/50 text-lg group">
-                                        Apply Now
-                                        <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                    </Button>
-                                </Link>
-                                <Link href="/login">
-                                    <Button size="lg" variant="outline" className="border-2 border-slate-200 bg-white text-slate-700 font-black px-10 py-7 rounded-2xl hover:bg-slate-50 text-lg shadow-sm">
-                                        Student Login
-                                    </Button>
-                                </Link>
-                            </div>
+                            <Link href="/register" className="inline-block">
+                                <Button size="lg" className="bg-[#064e3b] hover:bg-[#065f46] text-white font-bold px-10 py-7 rounded-2xl shadow-xl shadow-emerald-500/10 text-lg transition-all hover:scale-105 active:scale-95">
+                                    Start New Application
+                                </Button>
+                            </Link>
                         </div>
-                        <div className="lg:w-1/2 relative">
-                            <div className="absolute -inset-4 bg-blue-100/50 rounded-[40px] blur-3xl -z-10" />
-                            <div className="bg-white p-4 rounded-[40px] shadow-2xl border border-slate-100">
-                                <img 
-                                    src="/images/admissions/hero-illustration.png" 
-                                    alt="Students Learning" 
-                                    className="rounded-[32px] w-full h-auto object-cover"
+                        
+                        <div className="w-full lg:w-1/2 relative animate-in fade-in slide-in-from-right-8 duration-1000">
+                             <div className="relative aspect-[4/3] w-full rounded-[48px] overflow-hidden border-8 border-white shadow-2xl">
+                                <Image 
+                                    src="/assets/school-hero.png" 
+                                    alt="Students at school" 
+                                    fill 
+                                    className="object-cover"
+                                    priority
                                 />
-                            </div>
-                            {/* Floating Stats */}
-                            <div className="absolute top-10 -left-10 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 animate-bounce cursor-default hidden xl:block">
-                                <p className="text-[10px] font-black text-slate-400 uppercase">Avg. Rating</p>
-                                <p className="text-xl font-black text-amber-500">4.9 ★★★★★</p>
-                            </div>
+                             </div>
+                             {/* Decorative Birds */}
+                             <div className="absolute top-10 left-0 w-12 h-12 opacity-40">
+                                <Image src="/assets/hero-bg.png" alt="" fill className="object-contain opacity-0" />
+                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Admission Process */}
-                <section id="process" className="py-24 px-6 lg:px-24 bg-white relative">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-16 space-y-4">
-                            <h2 className="text-3xl lg:text-4xl font-black text-[#0F172A]">Simple, Transparent Process</h2>
-                            <p className="text-slate-500 font-medium">Your pathway to enrollment is clear and straightforward.</p>
+                {/* Main Cards Section */}
+                <section className="px-6 lg:px-24 py-24 bg-white relative">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+                        {/* New Admissions Card */}
+                        <div className="premium-glass bg-white border border-slate-100 rounded-[48px] p-8 lg:p-14 flex flex-col items-center gap-8 shadow-2xl shadow-slate-200/50 hover:shadow-emerald-500/5 transition-all duration-700">
+                            <div className="h-20 w-20 bg-emerald-50 rounded-3xl flex items-center justify-center">
+                                <FileText className="h-10 w-10 text-emerald-600" />
+                            </div>
+                            <div className="text-center space-y-4">
+                                <h3 className="text-3xl font-black text-[#0f172a] tracking-tight">New Student Admission</h3>
+                                <p className="text-slate-400 font-bold text-[11px] uppercase tracking-widest">For students applying to the school</p>
+                                <p className="text-slate-500 font-medium">For students applying to the school for the first time.</p>
+                            </div>
+
+                            <ul className="w-full max-w-xs space-y-4">
+                                {[
+                                    "Fill application form",
+                                    "Upload required documents",
+                                    "Track admission status"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-center gap-3 text-slate-700 font-semibold group">
+                                        <div className="h-6 w-6 bg-emerald-100 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                            <Check className="h-4 w-4" />
+                                        </div>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <Link href="/register?type=new" className="w-full">
+                                <Button className="w-full h-16 rounded-2xl bg-[#064e3b] hover:bg-[#065f46] text-white font-bold text-lg shadow-xl shadow-emerald-500/20 active:scale-95 transition-all">
+                                    Start Application
+                                </Button>
+                            </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                        {/* Returning Student Card */}
+                        <div className="premium-glass bg-white border border-slate-100 rounded-[48px] p-8 lg:p-14 flex flex-col items-center gap-8 shadow-2xl shadow-slate-200/50 hover:shadow-blue-500/5 transition-all duration-700">
+                            <div className="h-20 w-20 bg-blue-50 rounded-3xl flex items-center justify-center">
+                                <CheckCircle2 className="h-10 w-10 text-blue-600" />
+                            </div>
+                            <div className="text-center space-y-4">
+                                <h3 className="text-3xl font-black text-[#0f172a] tracking-tight">Returning Student Registration</h3>
+                                <p className="text-slate-400 font-bold text-[11px] uppercase tracking-widest">For students already enrolled in the school</p>
+                                <p className="text-slate-500 font-medium">For students already enrolled</p>
+                            </div>
+
+                            <ul className="w-full max-w-xs space-y-4">
+                                {[
+                                    "Update information",
+                                    "Register for next grade",
+                                    "Pay registration fees"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-center gap-3 text-slate-700 font-semibold group">
+                                        <div className="h-6 w-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                            <Check className="h-4 w-4" />
+                                        </div>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <Link href="/register?type=returning" className="w-full">
+                                <Button className="w-full h-16 rounded-2xl bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold text-lg shadow-xl shadow-blue-500/20 active:scale-95 transition-all">
+                                    Re-Enroll Student
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Admission Process Section */}
+                <section className="px-6 lg:px-24 py-24 bg-[#f8fafc]">
+                    <div className="max-w-7xl mx-auto text-center space-y-20">
+                        <div className="space-y-4">
+                            <h2 className="text-4xl font-black text-[#0f172a] tracking-tight">Admission Process</h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative">
                             {[
-                                { step: "1", title: "Create Account", icon: UserPlus, desc: "Quick registration" },
-                                { step: "2", title: "Fill Application", icon: FileEdit, desc: "Add your details" },
-                                { step: "3", title: "Upload Docs", icon: UploadCloud, desc: "Secure vault" },
-                                { step: "4", title: "Admin Review", icon: ClipboardCheck, desc: "Verify profile" },
-                                { step: "5", title: "Complete", icon: CheckCircle2, desc: "Join EthioEdu" },
+                                { step: 1, label: "Create Account", color: "bg-emerald-500" },
+                                { step: 2, label: "Fill Application", color: "bg-emerald-600" },
+                                { step: 3, label: "Upload Documents", color: "bg-blue-500" },
+                                { step: 4, label: "Admission Review", color: "bg-blue-600" },
                             ].map((s, i) => (
-                                <div key={i} className="flex flex-col items-center text-center group">
-                                    <div className="h-16 w-16 rounded-3xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center relative mb-6 group-hover:bg-blue-600 transition-all duration-300">
-                                        <s.icon className="h-6 w-6 text-blue-600 group-hover:text-white transition-colors" />
-                                        <div className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-white shadow-md flex items-center justify-center text-xs font-black text-[#0F172A] border border-slate-50">
-                                            {s.step}
-                                        </div>
+                                <div key={i} className="flex items-center gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-500">
+                                    <div className={cn("h-12 w-12 rounded-full flex items-center justify-center text-white font-black text-xl shrink-0 shadow-lg", s.color)}>
+                                        {s.step}
                                     </div>
-                                    <h4 className="font-black text-slate-900 mb-1">{s.title}</h4>
-                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{s.desc}</p>
-                                    {i < 4 && (
-                                        <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 opacity-10">
-                                             <ChevronRight className="h-10 w-10" />
-                                        </div>
-                                    )}
+                                    <span className="text-lg font-bold text-slate-800 tracking-tight">{s.label}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </section>
 
-                {/* Programs Section */}
-                <section id="programs" className="py-24 px-6 lg:px-24 bg-[#F8FAFC]">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="flex justify-between items-end mb-16">
-                            <div className="space-y-4">
-                                <h2 className="text-3xl lg:text-4xl font-black text-[#0F172A]">Explore Our Programs</h2>
-                                <p className="text-slate-500 font-medium max-w-xl">From early childhood to university preparation, we offer excellence at every stage.</p>
-                            </div>
-                            <Button variant="ghost" className="font-bold text-blue-600 hover:bg-blue-50">View All Packages <ChevronRight className="h-4 w-4 ml-1" /></Button>
+                {/* Important Information Section */}
+                <section className="px-6 lg:px-24 py-32 bg-white">
+                    <div className="max-w-7xl mx-auto space-y-20">
+                        <div className="text-center space-y-4">
+                            <h2 className="text-4xl font-black text-[#0f172a] tracking-tight">Important Information</h2>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 bg-slate-50 p-10 rounded-[48px] border border-slate-100">
                             {[
-                                { name: "Kindergarten", code: "KG", desc: "Foundation for growth", color: "bg-rose-50 text-rose-600" },
-                                { name: "Primary School", code: "PRI", desc: "Building core skills", color: "bg-emerald-50 text-emerald-600" },
-                                { name: "Secondary", code: "SEC", desc: "Expanding horizons", color: "bg-blue-50 text-blue-600" },
-                                { name: "Preparatory", code: "PRE", desc: "College readiness", color: "bg-amber-50 text-amber-600" },
-                            ].map((p, i) => (
-                                <Card key={i} className="rounded-3xl border-none shadow-xl shadow-slate-200/50 overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
-                                    <div className={cn("h-40 flex items-center justify-center text-4xl font-black opacity-80", p.color)}>
-                                        {p.code}
+                                { title: "Admission Requirements", icon: FileText, color: "text-emerald-600", bg: "bg-emerald-50" },
+                                { title: "School Calendar", icon: Calendar, color: "text-emerald-600", bg: "bg-emerald-50" },
+                                { title: "Registration Fees", icon: CreditCard, color: "text-amber-600", bg: "bg-amber-50" },
+                                { title: "Contact Admissions", icon: PhoneCall, color: "text-blue-600", bg: "bg-blue-50" },
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-4 p-6 hover:bg-white hover:rounded-[32px] hover:shadow-2xl transition-all duration-500 cursor-pointer group">
+                                    <div className={cn("h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", item.bg)}>
+                                        <item.icon className={cn("h-7 w-7", item.color)} />
                                     </div>
-                                    <CardContent className="p-6 bg-white">
-                                        <h4 className="text-lg font-black text-[#0F172A] mb-1">{p.name}</h4>
-                                        <p className="text-sm font-medium text-slate-500 mb-6">{p.desc}</p>
-                                        <Button variant="outline" className="w-full rounded-xl border-slate-100 font-bold text-slate-500 hover:bg-slate-50">Learn More</Button>
-                                    </CardContent>
-                                </Card>
+                                    <span className="text-lg font-black text-[#0f172a] leading-tight">{item.title}</span>
+                                </div>
                             ))}
                         </div>
-                    </div>
-                </section>
 
-                {/* Contact CTA */}
-                <section id="contact" className="py-24 px-6 lg:px-24 relative overflow-hidden">
-                    <div className="max-w-7xl mx-auto bg-blue-600 rounded-[48px] p-12 lg:p-24 text-white flex flex-col lg:flex-row items-center justify-between gap-12 relative">
-                        <div className="absolute top-0 right-0 p-12 opacity-10 blur-2xl">
-                            <div className="h-64 w-64 rounded-full bg-white" />
-                        </div>
-                        <div className="space-y-6 relative z-10 lg:w-3/5">
-                            <h2 className="text-4xl lg:text-6xl font-black leading-tight">Ready to join <br/> our community?</h2>
-                            <p className="text-blue-100 text-lg font-medium opacity-80">
-                                For inquiries about the admission process, financial aid, or to book a campus tour, reach out to our team.
-                            </p>
-                        </div>
-                        <div className="lg:w-2/5 flex flex-col gap-4 relative z-10">
-                            <Button className="bg-white text-blue-600 hover:bg-blue-50 font-black py-8 rounded-2xl text-xl shadow-2xl">
-                                Contact Admissions
-                            </Button>
-                            <p className="text-[11px] font-black text-center uppercase tracking-widest text-blue-200">
-                                Respond time: &lt; 24 hours
-                            </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
+                            <div className="bg-emerald-50 border border-emerald-100 px-8 py-3 rounded-full flex items-center gap-2 group cursor-pointer hover:bg-emerald-100 transition-all">
+                                <span className="text-sm font-bold text-emerald-800">Admissions close July 30</span>
+                                <ChevronRight className="h-4 w-4 text-emerald-800 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                            <div className="flex items-center gap-2 text-slate-500 font-bold text-sm cursor-pointer hover:text-emerald-600 transition-all">
+                                <MessageSquare className="h-5 w-5" />
+                                <span>Need Help? Contact Us</span>
+                                <ChevronRight className="h-4 w-4 ml-1" />
+                            </div>
                         </div>
                     </div>
                 </section>
             </main>
 
-            {/* Premium Footer */}
-            <footer className="bg-white border-t border-slate-100 pt-24 pb-12 px-6 lg:px-24">
+            {/* Footer */}
+            <footer className="bg-[#06201a] text-white pt-24 pb-12 px-6 lg:px-24">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-                        <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-16 pb-20 border-b border-emerald-900/50">
+                        <div className="flex flex-col items-center md:items-start gap-4">
+                            <div className="flex items-center gap-2 mb-4">
+                                <MapPin className="h-5 w-5 text-emerald-400" />
+                                <span className="text-slate-300 font-semibold">123 Addis Ababa, Ethiopia</span>
+                            </div>
                             <div className="flex items-center gap-2">
-                                <GraduationCap className="h-8 w-8 text-blue-600" />
-                                <span className="text-2xl font-black text-[#0F172A]">EthioEdu</span>
+                                <PhoneCall className="h-5 w-5 text-emerald-400" />
+                                <span className="text-slate-300 font-semibold">+251 987 654 321</span>
                             </div>
-                            <p className="text-slate-400 font-medium leading-relaxed">
-                                Redefining educational administration in Ethiopia through seamless technology and human-centric design.
-                            </p>
                         </div>
-                        <div>
-                            <h4 className="font-black text-slate-900 mb-8 uppercase tracking-widest text-xs">Navigation</h4>
-                            <ul className="space-y-4 font-bold text-slate-500 text-sm">
-                                <li><Link href="/" className="hover:text-blue-600 transition-colors">Home</Link></li>
-                                <li><Link href="#programs" className="hover:text-blue-600 transition-colors">Programs</Link></li>
-                                <li><Link href="#process" className="hover:text-blue-600 transition-colors">Admission</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-black text-slate-900 mb-8 uppercase tracking-widest text-xs">Reach Us</h4>
-                            <ul className="space-y-4 font-bold text-slate-500 text-sm">
-                                <li className="flex items-center gap-3"><Mail className="h-4 w-4 text-blue-600" /> adms@ethioedu.edu</li>
-                                <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-blue-600" /> +251 11 123 4567</li>
-                                <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-blue-600" /> Bole, Addis Ababa</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-black text-slate-900 mb-8 uppercase tracking-widest text-xs">Socials</h4>
-                            <div className="flex gap-4">
-                                {[1, 2, 3, 4].map(i => (
-                                    <div key={i} className="h-10 w-10 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer">
-                                        <div className="h-4 w-4 bg-current" />
-                                    </div>
-                                ))}
+
+                        <div className="flex flex-col items-center md:items-start gap-4">
+                            <div className="flex items-center gap-2 mb-4">
+                                <Mail className="h-5 w-5 text-emerald-400" />
+                                <span className="text-slate-300 font-semibold">info@yourschool.et</span>
                             </div>
+                            <div className="flex items-center gap-2">
+                                <PhoneCall className="h-5 w-5 text-emerald-400" />
+                                <span className="text-slate-300 font-semibold">+231 997 654 321</span>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-center md:justify-end gap-6 items-center">
+                            {['twitter', 'facebook'].map((social) => (
+                                <div key={social} className="h-10 w-10 bg-emerald-900/40 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-emerald-800 cursor-pointer transition-all">
+                                    <Globe className="h-5 w-5" />
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <div className="pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p className="text-slate-400 font-bold text-xs">© 2026 EthioEdu EMS. All rights reserved.</p>
-                        <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                             <Link href="#" className="hover:text-blue-600">Privacy Policy</Link>
-                             <Link href="#" className="hover:text-blue-600">Terms of Service</Link>
-                        </div>
+
+                    <div className="pt-12 text-center text-emerald-800 text-[10px] font-bold uppercase tracking-[0.5em]">
+                        Your School Global Education Network • 2026 Edition
                     </div>
                 </div>
             </footer>

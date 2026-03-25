@@ -122,12 +122,51 @@
     @apply bg-gradient-to-br from-emerald-600 to-teal-700;
   }
 
+  .mesh-emerald {
+    background-color: #064e3b;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(161, 94%, 30%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(180, 100%, 20%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(158, 88%, 15%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(170, 95%, 25%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, hsla(160, 84%, 39%, 0.05) 0px, transparent 50%);
+  }
+
   .mesh-gradient {
     background-color: #f8fafc;
     background-image: 
-      radial-gradient(at 0% 0%, hsla(221, 83%, 53%, 0.05) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(161, 84% , 39%, 0.05) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, hsla(221, 83%, 53%, 0.05) 0, transparent 50%);
+      radial-gradient(at 0% 0%, hsla(221, 83%, 53%, 0.08) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(161, 84% , 39%, 0.08) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(221, 83%, 53%, 0.08) 0, transparent 50%),
+      radial-gradient(at 50% 50%, hsla(221, 83%, 53%, 0.02) 0, transparent 50%);
+  }
+
+  .mesh-gradient-dark {
+    background-color: #0f172a;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(221, 83%, 53%, 0.15) 0, transparent 50%), 
+      radial-gradient(at 100% 100%, hsla(161, 84% , 39%, 0.15) 0, transparent 50%);
+  }
+
+  .premium-glass {
+    @apply bg-white/10 backdrop-blur-[24px] border border-white/20;
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .premium-glass-card {
+    @apply bg-white/5 backdrop-blur-[16px] border border-white/10;
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 
   .step-pulse {

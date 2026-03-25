@@ -44,3 +44,15 @@ next-env.d.ts
 firebase-debug.log
 firestore-debug.log
 /src/generated/prisma
+
+# custom
+/tmp/
+*.txt
+*.log
+check-candidates.ts
+debug-clubs.js
+/scripts/
+prisma/seed-*.ts
+seed-soi-*.ts
+.env*
+!.env.example

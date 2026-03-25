@@ -21,20 +21,29 @@ export async function getAssignedClassesForTeacher(teacherId: string) {
     return data?.assigned || [];
 }
 
-export async function getAnnouncements() {
-    return [
-        { id: 1, title: "Annual Sports Day", date: "2024-08-15", postedBy: "Admin", content: "The annual sports day will be held on August 15th.", category: "General" },
-        { id: 2, title: "Parent-Teacher Meeting", date: "2024-08-10", postedBy: "Admin", content: "A parent-teacher meeting is scheduled for August 10th.", category: "General" },
-        { id: 3, title: "Mid-term Exams Schedule", date: "2024-09-01", postedBy: "Admin", content: "Mid-term exams will commence from September 1st.", category: "Exam" },
-        { id: 4, title: "Homework: Maths Chapter 5", date: "2024-09-05", postedBy: "Mr. Robert Brown", content: "Please complete exercises 5.1 and 5.2 from Chapter 5.", category: "Homework", dueDate: "2024-09-12" },
-    ];
+export async function getTeacherDashboardDataAction() {
+    return await acaService.getTeacherDashboardData();
 }
 
+export async function createAssignmentAction(data: any) {
+    return await acaService.createAssignment(data);
+}
+
+export async function submitAssignmentAction(data: { assignmentId: string; studentId: string; contentUrl?: string }) {
+    const result = await acaService.submitAssignment(data);
+    revalidatePath("/student-portal");
+    revalidatePath("/lms/assignments");
+    return result;
+}
 // ── Student Portal ──────────────────────────────────────────────────────────
 
 export async function getStudentById(studentId: string) {
     const { data } = await sisService.getStudentById(studentId);
     return data;
+}
+
+export async function getStudentDashboardDataAction(studentId: string) {
+    return await sisService.getStudentDashboardData(studentId);
 }
 
 export async function getAttendanceSummaryForStudent(studentId: string) {
@@ -51,7 +60,7 @@ export async function getAchievements(studentId: string) {
     return [];
 }
 
-export async function getDisciplinaryRecords(studentId: string) {
+export async function getDisciplinaryRecords(studentId?: string) {
     const { data } = await sisService.getDisciplinaryRecords(studentId);
     return data || [];
 }
@@ -81,9 +90,14 @@ export async function updateStudentLeaveRequestStatusAction(requestId: string, s
 
 // ── SIS: Attendance ─────────────────────────────────────────────────────────
 
-export async function getStudents() {
-    const { data } = await sisService.getStudents();
-    return data || [];
+export async function getStudents(params: {
+    page?: number;
+    pageSize?: number;
+    search?: string;
+    classFilter?: string;
+} = {}) {
+    const { data } = await sisService.getStudents(params);
+    return data || { students: [], totalCount: 0, totalPages: 0 };
 }
 
 export async function addStudentAction(data: any) {
@@ -163,14 +177,25 @@ export async function calculateGPA(studentId: string) {
 
 // ── HR ──────────────────────────────────────────────────────────────────────
 
-export async function getEmployees() {
-    const { data } = await hrService.getEmployees();
-    return data || [];
+export async function getEmployees(params: {
+    page?: number;
+    pageSize?: number;
+    search?: string;
+    department?: string;
+    status?: string;
+} = {}) {
+    const { data } = await hrService.getEmployees(params);
+    return data || { employees: [], totalCount: 0, totalPages: 0 };
 }
 
 export async function getEmployeeById(id: string) {
     const { data } = await hrService.getEmployeeById(id);
     return data;
+}
+
+export async function addEmployeeAction(data: any) {
+    const result = await hrService.addEmployee(data);
+    return result;
 }
 
 export async function updateEmployeeAction(data: any) {
@@ -197,9 +222,13 @@ export async function updateLeaveRequestStatusAction(requestId: string, status: 
     return await hrService.updateLeaveRequestStatus(requestId, status);
 }
 
-export async function getCandidates() {
-    const { data } = await hrService.getCandidates();
-    return data || [];
+export async function getCandidates(params: {
+    page?: number;
+    pageSize?: number;
+    search?: string;
+} = {}) {
+    const { data } = await hrService.getCandidates(params);
+    return data || { candidates: [], totalCount: 0, totalPages: 0 };
 }
 
 export async function getOnboardingTasks(employeeId?: string) {
@@ -231,23 +260,35 @@ export async function getBooks() {
     return data || [];
 }
 
-export async function getBorrowRecordsForStudent(studentId: string) {
+export async function addBookAction(data: any) {
+    const result = await infraService.addBook(data);
+    revalidatePath("/library/books");
+    return result;
+}
+
+export async function deleteBookAction(bookId: number) {
+    const result = await infraService.deleteBook(bookId);
+    revalidatePath("/library/books");
+    return result;
+}
+
+export async function getBorrowRecordsForStudent(studentId: string): Promise<any> {
     return [];
 }
 
-export async function getRoomForStudent(studentId: string) {
+export async function getRoomForStudent(studentId: string): Promise<any> {
     return null;
 }
 
-export async function getHostelById(hostelId: string) {
+export async function getHostelById(hostelId: string): Promise<any> {
     return null;
 }
 
-export async function getRouteForStudent(studentId: string) {
+export async function getRouteForStudent(studentId: string): Promise<any> {
     return null;
 }
 
-export async function getAssetAllocations(employeeId: string) {
+export async function getAssetAllocations(employeeId: string): Promise<any> {
     return [];
 }
 
@@ -261,20 +302,20 @@ export async function getVehicles() {
     return data || [];
 }
 
-export async function getVehicleById(id: string) {
+export async function getVehicleById(id: string): Promise<any> {
     return null;
 }
 
-export async function getDriverById(id: string) {
+export async function getDriverById(id: string): Promise<any> {
     return null;
 }
 
-export async function getHostels() {
-    const { data } = await infraService.getHostels();
-    return data || [];
+
+export async function getTransactions(): Promise<any> {
+    return [];
 }
 
-export async function getTransactions() {
+export async function getAnnouncements(): Promise<any> {
     return [];
 }
 
@@ -307,8 +348,14 @@ export async function removeClassPeriodAction(id: string) {
     if (error) throw new Error(error);
 }
 
-export async function getEquityData() {
-    return [];
+export async function getEquityData(): Promise<any> {
+    return {
+        totalStudents: 0,
+        genderDistribution: [],
+        regionDistribution: [],
+        specialNeedsCount: 0,
+        refugeeCount: 0
+    };
 }
 
 export async function getRoutes() {
@@ -316,8 +363,48 @@ export async function getRoutes() {
     return data || [];
 }
 
+export async function getDrivers() {
+    const { data } = await infraService.getDrivers();
+    return data || [];
+}
+
+export async function getStudentsOnRoute(routeId: string) {
+    const { data } = await infraService.getStudentsOnRoute(routeId);
+    return data || [];
+}
+
+export async function getTransportLogs() {
+    const { data } = await infraService.getTransportLogs();
+    return data || [];
+}
+
+export async function getHostels() {
+    const { data } = await infraService.getHostels();
+    return data || [];
+}
+
+export async function getRooms(hostelId?: string) {
+    const { data } = await infraService.getRooms(hostelId);
+    return data || [];
+}
+
+export async function getBeds(roomId?: string) {
+    const { data } = await infraService.getBeds(roomId);
+    return data || [];
+}
+
+export async function getMaintenanceLogs() {
+    const { data } = await infraService.getMaintenanceLogs();
+    return data || [];
+}
+
 export async function getInventoryItems() {
     const { data } = await infraService.getInventoryItems();
+    return data || [];
+}
+
+export async function getPurchaseOrders() {
+    const { data } = await infraService.getPurchaseOrders();
     return data || [];
 }
 

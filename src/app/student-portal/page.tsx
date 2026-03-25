@@ -1,13 +1,12 @@
 import * as React from "react"
-import { getStudents, getInvoicesForStudent, getAttendanceSummaryForStudent, getResultsForStudent } from "@/lib/actions"
+import { getStudents, getStudentDashboardDataAction } from "@/lib/actions"
 import { StudentPortalClient } from "./student-portal-client"
-import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 export default async function StudentPortalPage() {
   const students = await getStudents();
   
   // For the demo, we pick a student to simulate "logged in" user 
-  // or provide a selection if none is found.
   const defaultStudent = students.find(s => s.name.includes("Aida")) || students[0];
 
   if (!defaultStudent) {
@@ -19,25 +18,21 @@ export default async function StudentPortalPage() {
     );
   }
 
-  const [invoices, attendance, results] = await Promise.all([
-    getInvoicesForStudent(defaultStudent.studentId),
-    getAttendanceSummaryForStudent(defaultStudent.studentId),
-    getResultsForStudent(defaultStudent.studentId)
-  ]);
+  const { data: dashboardData } = await getStudentDashboardDataAction(defaultStudent.studentId);
+
+  if (!dashboardData) return notFound();
 
   return (
-    <div className="p-6 space-y-8 max-w-[1400px] mx-auto">
-      <div className="flex flex-col gap-2">
-         <h1 className="text-4xl font-black font-headline tracking-tighter text-emerald-900 dark:text-emerald-50">Student Portal</h1>
-         <p className="text-muted-foreground font-medium">Academic excellence and financial transparency at your fingertips.</p>
-      </div>
-
+    <div className="w-full">
       <StudentPortalClient 
-        student={defaultStudent}
-        invoices={invoices}
-        attendance={attendance}
-        results={results}
-        allStudents={students} // Allow switching for demo purposes
+        student={dashboardData.student}
+        invoices={dashboardData.invoices}
+        attendance={dashboardData.attendance}
+        results={dashboardData.results || []} 
+        gpa={dashboardData.gpa}
+        timetable={dashboardData.timetable}
+        assignments={dashboardData.assignments}
+        allStudents={students} 
       />
     </div>
   )

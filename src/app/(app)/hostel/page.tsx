@@ -1,5 +1,2 @@
-import { ComingSoon } from "@/components/ui/coming-soon"
-        
-export default function Page() {
-    return <ComingSoon title="Hostel" />;
-}
+import { redirect } from "next/navigation";
+export default function HostelPage() { redirect("/hostel/dashboard"); }
