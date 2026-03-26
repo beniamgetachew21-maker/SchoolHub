@@ -12,7 +12,16 @@ export async function middleware(request: NextRequest) {
     hostname = hostname.split(':')[0];
 
     // Define the base domain (adjust for production)
-    const baseDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
+    let baseDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'localhost';
+
+    // Auto-detect root domain on Vercel if not explicitly provided
+    // This handles the case where school-hub-s8go.vercel.app is accessed directly
+    if (baseDomain === 'localhost' && hostname.includes('vercel.app')) {
+        const parts = hostname.split('.');
+        if (parts.length === 3 && parts[1] === 'vercel' && parts[2] === 'app') {
+            baseDomain = hostname;
+        }
+    }
 
     let tenantDomain = 'default';
 
