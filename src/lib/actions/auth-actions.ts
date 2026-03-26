@@ -7,7 +7,8 @@ import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 
 export async function loginAction(tenantDomain: string, formData: any) {
-    const { email, password } = formData;
+    try {
+        const { email, password } = formData;
 
     // 1. Find the tenant
     const tenant = await prisma.tenant.findUnique({
@@ -48,7 +49,7 @@ export async function loginAction(tenantDomain: string, formData: any) {
     const session = await encrypt({ 
         userId: user.id, 
         tenantId: tenant.id, 
-        role: user.role.name,
+        role: user.role?.name || "USER",
         expires 
     });
 
@@ -62,11 +63,15 @@ export async function loginAction(tenantDomain: string, formData: any) {
     });
 
     // 6. Redirect Based on Role and Tenant
-    if (user.role.name === "SUPER_ADMIN") {
+    if (user.role?.name === "SUPER_ADMIN") {
         return { success: true, redirect: "/saas" };
     }
 
     return { success: true, redirect: "/dashboard" };
+    } catch (error: any) {
+        console.error("Login Error:", error);
+        return { success: false, error: `Server Error: ${error?.message || "Unknown error"}` };
+    }
 }
 
 export async function logoutAction() {
