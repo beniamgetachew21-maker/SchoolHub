@@ -126,7 +126,7 @@ export default function MarketingLayout({
           <div className="flex gap-6 uppercase tracking-widest font-bold">
             <Link href="#" className="hover:text-white">Privacy Policy</Link>
             <Link href="#" className="hover:text-white">Terms of Use</Link>
-            <Link href="#" className="hover:text-white">Sitemap</Link>
+            <Link href="/saas" className="hover:text-amber-400 text-slate-500/50 transition-colors">Platform Admin</Link>
           </div>
         </div>
       </footer>
