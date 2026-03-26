@@ -3,12 +3,46 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { getAllTenantsWithSubscriptions, getAllSubscriptionPlans } from "@/lib/saas-actions";
 import { Building, Users, CreditCard, Activity, TrendingUp, ShieldAlert, HeartPulse } from "lucide-react";
 
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 export default async function GlobalDashboard() {
-  const tenants = await getAllTenantsWithSubscriptions();
-  const plans = await getAllSubscriptionPlans();
+  // Guard
+  const session = (await cookies()).get("session")?.value;
+  if (!session) {
+      redirect("/login");
+  }
+
+  const payload = await decrypt(session);
+  if (!payload || payload.role !== "SUPER_ADMIN") {
+      redirect("/login");
+  }
+
+  let tenants: any[] = [];
+  let plans: any[] = [];
+  let error = null;
+
+  try {
+    tenants = await getAllTenantsWithSubscriptions();
+    plans = await getAllSubscriptionPlans();
+  } catch (e: any) {
+    console.error("SaaS Dashboard Fetch Error:", e);
+    error = e.message;
+  }
 
   const activeTenants = tenants.filter(t => t.status === "Active");
-  const trhreatTenants = tenants.filter(t => t.status !== "Active");
+  const threatTenants = tenants.filter(t => t.status !== "Active");
+
+  if (error) {
+      return (
+          <div className="p-8 text-center space-y-4">
+              <h1 className="text-2xl font-bold text-red-600">Database Connection Error</h1>
+              <p className="text-slate-500">The platform was unable to connect to the database. Please check your DATABASE_URL.</p>
+              <pre className="p-4 bg-slate-100 rounded text-xs text-left max-w-xl mx-auto overflow-auto">{error}</pre>
+          </div>
+      );
+  }
 
   return (
     <div className="p-8 space-y-8 max-w-7xl mx-auto">
