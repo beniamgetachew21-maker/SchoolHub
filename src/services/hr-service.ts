@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { BaseService, ServiceResponse } from "./base-service";
 import { revalidatePath } from "next/cache";
+import bcrypt from "bcryptjs";
 
 export class HrService extends BaseService {
 
@@ -76,21 +77,65 @@ export class HrService extends BaseService {
         }
     }
 
-    async addEmployee(data: any): Promise<ServiceResponse<any>> {
+    async addEmployee(data: any, createAccount?: { roleId: string; password?: string }): Promise<ServiceResponse<any>> {
         try {
             const { tenant } = await this.getContext();
             const employeeId = "EMP" + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-            const employee = await prisma.employee.create({
-                data: {
-                    ...data,
-                    tenantId: tenant.id,
-                    employeeId
+            const employeeCode = "EC" + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+
+            const result = await prisma.$transaction(async (tx) => {
+                const employee = await tx.employee.create({
+                    data: {
+                        ...data,
+                        tenantId: tenant.id,
+                        employeeId,
+                        employeeCode,
+                        salary: Number(data.salary || 0),
+                        status: data.status || "Active"
+                    }
+                });
+
+                if (createAccount) {
+                    const password = createAccount.password || "School123!"; // Default temporary password
+                    const passwordHash = await bcrypt.hash(password, 10);
+                    
+                    await tx.user.create({
+                        data: {
+                            tenantId: tenant.id,
+                            email: data.email,
+                            passwordHash,
+                            roleId: createAccount.roleId,
+                            entityId: employee.employeeId,
+                            entityType: "Employee"
+                        }
+                    });
+                }
+
+                return employee;
+            });
+
+            revalidatePath('/hr/directory');
+            return this.response(result);
+        } catch (error: any) {
+            console.error("ADD_EMPLOYEE_ERROR:", error);
+            return this.response(null, error.message);
+        }
+    }
+
+    async getRoles(): Promise<ServiceResponse<any[]>> {
+        try {
+            const { tenant } = await this.getContext();
+            const roles = await prisma.role.findMany({
+                where: {
+                    OR: [
+                        { tenantId: tenant.id },
+                        { tenantId: null } // Global roles if any
+                    ]
                 }
             });
-            revalidatePath('/hr/directory');
-            return this.response(employee);
+            return this.response(roles);
         } catch (error: any) {
-            return this.response(null, error.message);
+            return this.response([], error.message);
         }
     }
 

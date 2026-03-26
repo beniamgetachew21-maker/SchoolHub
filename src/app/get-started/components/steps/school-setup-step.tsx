@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { StepShell, StepFooter } from "../step-shell";
-import { School, Upload, Eye, EyeOff } from "lucide-react";
-import { useState, useRef } from "react";
+import { School, Upload } from "lucide-react";
+import { useRef } from "react";
 
 type Props = { data: OnboardingData; updateData: (p: Partial<OnboardingData>) => void; onNext: () => void; onBack: () => void };
 
@@ -15,21 +15,14 @@ const ADDIS_SUBCITIES = [
 
 export function SchoolSetupStep({ data, updateData, onNext, onBack }: Props) {
   const school = data.school;
-  const admin = data.admin;
-  
-  const [showPassword, setShowPassword] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const setSch = (key: keyof typeof school) => (e: React.ChangeEvent<HTMLInputElement>) =>
     updateData({ school: { ...school, [key]: e.target.value } });
-    
-  const setAdm = (key: keyof typeof admin) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    updateData({ admin: { ...admin, [key]: e.target.value } });
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Create a temporary object URL for preview
       const url = URL.createObjectURL(file);
       updateData({ school: { ...school, logoUrl: url } });
     }
@@ -43,9 +36,6 @@ export function SchoolSetupStep({ data, updateData, onNext, onBack }: Props) {
     schoolEmail: !school.contactEmail || !isEmailValid(school.contactEmail),
     schoolPhone: !isPhoneValid(school.contactPhone),
     subcity: !school.subcity,
-    adminName: !admin.name,
-    adminEmail: !admin.email || !isEmailValid(admin.email),
-    adminPassword: !admin.password || admin.password.length < 6,
   };
 
   const isComplete = !Object.values(errors).some(Boolean);
@@ -184,62 +174,6 @@ export function SchoolSetupStep({ data, updateData, onNext, onBack }: Props) {
                   errors.schoolEmail && school.contactEmail ? "border-rose-400/50 focus-visible:ring-rose-400 text-rose-200" : "border-white/10"
                 }`} 
               />
-            </div>
-          </div>
-        </div>
-
-        {/* --- System Admin Account --- */}
-        <div className="space-y-4 pt-4">
-          <div className="flex items-center gap-2 pb-2 border-b border-white/10">
-            <h3 className="text-xs font-black text-amber-400 uppercase tracking-widest">System Administrator</h3>
-          </div>
-          <p className="text-xs text-white/50">This account will have full access to configure the ERP.</p>
-
-          <div className="space-y-1.5">
-            <Label className="text-white/70 text-xs">Admin Name *</Label>
-            <Input 
-              placeholder="Abebe Kebede" 
-              value={admin.name} 
-              onChange={setAdm("name")} 
-              className={`bg-white/5 text-white placeholder:text-white/30 rounded-xl h-11 transition-colors ${
-                admin.name === "" ? "border-rose-400/50 focus-visible:ring-rose-400" : "border-white/10"
-              }`} 
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <Label className="text-white/70 text-xs">Admin Email *</Label>
-              <Input 
-                type="email" 
-                placeholder="admin@school.com" 
-                value={admin.email} 
-                onChange={setAdm("email")} 
-                className={`bg-white/5 text-white placeholder:text-white/30 rounded-xl h-11 transition-colors ${
-                  errors.adminEmail && admin.email ? "border-rose-400/50 focus-visible:ring-rose-400 text-rose-200" : "border-white/10"
-                }`} 
-              />
-            </div>
-            <div className="space-y-1.5 relative mb-4">
-              <Label className="text-white/70 text-xs">Password *</Label>
-              <div className="relative">
-                <Input 
-                  type={showPassword ? "text" : "password"} 
-                  value={admin.password} 
-                  onChange={setAdm("password")} 
-                  className={`bg-white/5 text-white rounded-xl h-11 pr-10 transition-colors ${
-                    errors.adminPassword && admin.password ? "border-amber-400/50 focus-visible:ring-amber-400" : "border-white/10"
-                  }`} 
-                />
-                <button 
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              </div>
-              {errors.adminPassword && admin.password && <p className="text-[10px] text-amber-400 absolute">Must be at least 6 characters</p>}
             </div>
           </div>
         </div>

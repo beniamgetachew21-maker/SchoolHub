@@ -29,11 +29,6 @@ export type OnboardingData = {
     language: string;
     logoUrl: string;
   };
-  admin: {
-    name: string;
-    email: string;
-    password: string;
-  };
   branches: Array<{ name: string; subcity: string; capacity: number }>;
   academic: {
     yearName: string;
@@ -52,7 +47,6 @@ export type OnboardingData = {
 
 const INITIAL_DATA: OnboardingData = {
   school: { name: "", address: "", contactEmail: "", contactPhone: "", schoolType: "Private", city: "Addis Ababa", subcity: "", language: "English", logoUrl: "" },
-  admin: { name: "", email: "", password: "" },
   branches: [{ name: "Main Campus", subcity: "", capacity: 500 }],
   academic: {
     yearName: "2025/2026",

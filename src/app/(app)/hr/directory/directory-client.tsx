@@ -7,7 +7,7 @@ import Link from "next/link"
 import {
     Briefcase, Building2, Calendar, Mail, Phone,
     Search, UserPlus, FileText, BadgeCheck, MoreHorizontal,
-    GraduationCap, Plus, Save, User, ChevronLeft, ChevronRight
+    GraduationCap, Plus, Save, User, ChevronLeft, ChevronRight, Loader2
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -26,6 +26,8 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { toast } from "@/hooks/use-toast";
+import { inviteStaffAction, getTenantRolesAction } from "@/lib/actions/user-actions";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const STATUS_COLORS: Record<string, string> = {
     Active: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
@@ -100,16 +102,45 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
     // Controlled search input with debounced URL update
     const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
     const [isAddOpen, setIsAddOpen] = useState(false);
-    
+    const [submitting, setSubmitting] = useState(false);
+    const [roles, setRoles] = useState<any[]>([]);
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        department: "",
+        designation: "",
+        salary: "",
+        dateOfJoining: new Date().toISOString().split('T')[0],
+        gender: "Prefer not to say",
+        dob: "1990-01-01",
+        status: "Active"
+    });
+
+    const [systemAccess, setSystemAccess] = useState(false);
+    const [selectedRoleId, setSelectedRoleId] = useState("");
+
+    // Fetch roles on open
+    useEffect(() => {
+        if (isAddOpen) {
+            getTenantRolesAction().then(res => {
+                if (res.success) {
+                    setRoles(res.roles);
+                    if (res.roles.length > 0 && !selectedRoleId) {
+                        setSelectedRoleId(res.roles[0].id);
+                    }
+                }
+            });
+        }
+    }, [isAddOpen, selectedRoleId]);
+
     // Fetch departments once for the filter
     const [departments, setDepartments] = useState<string[]>(["All"]);
     useEffect(() => {
         // In a real app we'd fetch this from a distinct-query action
         // For now, we'll try to get it if we haven't already.
-        import("@/lib/actions").then(m => {
-             // If there's a getDepartments action, use it. Otherwise placeholder.
-             return ["All", "Academic", "Administration", "Finance", "IT Support", "Security", "Support Staff"];
-        }).then(depts => setDepartments(depts));
+        const depts = ["All", "Academic", "Administration", "Finance", "IT Support", "Security", "Support Staff"];
+        setDepartments(depts);
     }, []);
 
     const deptFilter = searchParams.get("dept") || "All";
@@ -150,6 +181,43 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
 
     const handlePageChange = (page: number) => {
         router.push(`?${createQueryString({ page: page.toString() })}`);
+    };
+
+    const handleInviteSubmit = async () => {
+        if (!formData.name || !formData.email || !formData.department) {
+            toast({ title: "Required Fields Missing", description: "Please enter name, email and department.", variant: "destructive" });
+            return;
+        }
+
+        setSubmitting(true);
+        try {
+            const createAccount = systemAccess ? { roleId: selectedRoleId } : undefined;
+            const res = await inviteStaffAction(formData, createAccount);
+            
+            if (res.success) {
+                toast({ title: "Staff Member Onboarded", description: `${formData.name} has been added successfully.` });
+                setIsAddOpen(false);
+                setFormData({
+                    name: "",
+                    email: "",
+                    department: "",
+                    designation: "",
+                    salary: "",
+                    dateOfJoining: new Date().toISOString().split('T')[0],
+                    gender: "Prefer not to say",
+                    dob: "1990-01-01",
+                    status: "Active"
+                });
+                setSystemAccess(false);
+                router.refresh();
+            } else {
+                toast({ title: "Error", description: res.error || "Failed to add staff member.", variant: "destructive" });
+            }
+        } catch (error: any) {
+            toast({ title: "Error", description: error.message, variant: "destructive" });
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
@@ -383,15 +451,26 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
                             <div className="grid grid-cols-2 gap-x-4 gap-y-6">
                                 <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Full Name</Label>
-                                    <Input placeholder="John Doe" className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" />
+                                    <Input 
+                                        placeholder="John Doe" 
+                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                        value={formData.name}
+                                        onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                    />
                                 </div>
                                 <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Email</Label>
-                                    <Input type="email" placeholder="john@example.com" className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" />
+                                    <Input 
+                                        type="email" 
+                                        placeholder="john@example.com" 
+                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                        value={formData.email}
+                                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                    />
                                 </div>
                                 <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Department</Label>
-                                    <Select>
+                                    <Select value={formData.department} onValueChange={v => setFormData({ ...formData, department: v })}>
                                         <SelectTrigger className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm"><SelectValue placeholder="Select dept" /></SelectTrigger>
                                         <SelectContent>
                                             <SelectItem value="Academics">Academics</SelectItem>
@@ -403,19 +482,68 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
                                 </div>
                                 <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Designation</Label>
-                                    <Input placeholder="e.g. Senior Teacher" className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" />
+                                    <Input 
+                                        placeholder="e.g. Senior Teacher" 
+                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                        value={formData.designation}
+                                        onChange={e => setFormData({ ...formData, designation: e.target.value })}
+                                    />
                                 </div>
                                 <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Base Salary (ETB)</Label>
-                                    <Input type="number" placeholder="45000" className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" />
+                                    <Input 
+                                        type="number" 
+                                        placeholder="45000" 
+                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                        value={formData.salary}
+                                        onChange={e => setFormData({ ...formData, salary: e.target.value })}
+                                    />
                                 </div>
                                 <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Joining Date</Label>
-                                    <Input type="date" className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" />
+                                    <Input 
+                                        type="date" 
+                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                        value={formData.dateOfJoining}
+                                        onChange={e => setFormData({ ...formData, dateOfJoining: e.target.value })}
+                                    />
                                 </div>
+
+                                <div className="col-span-2 border-t border-slate-100 pt-4 mt-2">
+                                    <div className="flex items-center space-x-2">
+                                        <Checkbox id="systemAccess" checked={systemAccess} onCheckedChange={(v) => setSystemAccess(!!v)} />
+                                        <div className="grid gap-1.5 leading-none">
+                                            <label htmlFor="systemAccess" className="text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                                Grant System Access
+                                            </label>
+                                            <p className="text-[11px] text-muted-foreground italic">Creates a user account so this staff member can log in.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {systemAccess && (
+                                    <div className="space-y-2 col-span-2 animate-in fade-in slide-in-from-top-2">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-emerald-600">Assign System Role</Label>
+                                        <Select value={selectedRoleId} onValueChange={setSelectedRoleId}>
+                                            <SelectTrigger className="border-emerald-200 bg-emerald-50/10 focus:ring-emerald-500 h-10 shadow-sm">
+                                                <SelectValue placeholder="Select a role" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {roles.map(role => (
+                                                    <SelectItem key={role.id} value={role.id}>{role.name}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                )}
                             </div>
-                            <Button className="w-full h-11 bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold rounded-xl mt-4 shadow-sm" onClick={() => setIsAddOpen(false)}>
-                                <Save className="mr-2 h-4 w-4" /> Save Employee Profile
+                            <Button 
+                                className="w-full h-11 bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold rounded-xl mt-4 shadow-sm" 
+                                onClick={handleInviteSubmit}
+                                disabled={submitting}
+                            >
+                                {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
+                                {submitting ? "Onboarding Staff..." : "Save Employee Profile"}
                             </Button>
                         </div>
                     </SheetContent>

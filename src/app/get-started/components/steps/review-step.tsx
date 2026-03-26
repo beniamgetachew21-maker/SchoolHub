@@ -59,7 +59,6 @@ export function ReviewStep({ data, onBack, onComplete, submitting, goToStep, err
             `<b>${data.school.name || "(Unnamed)"}</b>`,
             `${data.school.schoolType || "Private"} Institution`,
             `${data.school.city}, ${data.school.subcity}`,
-            `Admin: ${data.admin?.name} (${data.admin?.email})`,
           ]}
         />
         

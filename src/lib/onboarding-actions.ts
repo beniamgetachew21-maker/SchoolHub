@@ -22,31 +22,32 @@ export async function setupInstitutionAction(config: any) {
 }
 
 import { redirect } from "next/navigation";
+import { getSession } from "@/lib/auth";
 
 export async function completeOnboardingAction(data: any) {
   try {
-    const result = await prisma.$transaction(async (tx) => {
-      // 1. Update or create Tenant (using domain-less create for now)
-      const domain = data.school.name
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9-]/g, "") + ".localhost";
+    const session = await getSession();
+    if (!session || !session.tenantId) {
+        throw new Error("Unauthorized: No active session or tenant found.");
+    }
 
-      let tenant = await tx.tenant.findFirst({ where: { domain } });
-      if (tenant) {
-        throw new Error("A school with this name is already registered. Please choose a different name or contact support.");
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Update existing Tenant
+      let tenant = await tx.tenant.findUnique({ where: { id: session.tenantId } });
+      if (!tenant) {
+        throw new Error("Tenant not found.");
       }
 
-      tenant = await tx.tenant.create({
+      tenant = await tx.tenant.update({
+        where: { id: session.tenantId },
         data: {
           name: data.school.name,
-          domain,
           contactEmail: data.school.contactEmail,
           contactPhone: data.school.contactPhone,
           address: data.school.address,
           institutionType: data.school.schoolType, // "Private" | "Public"
           language: data.school.language,
-          // Custom mapping if you add these to the schema later
+          logoUrl: data.school.logoUrl,
         },
       });
 
@@ -137,14 +138,15 @@ export async function completeOnboardingAction(data: any) {
               tenantId: tenant.id,
               studentId: `STU-${tenant.id.slice(0, 4)}-${Date.now()}-${i}`,
               admissionNumber: `ADM-${(5001 + i).toString()}`,
-              firstName: s.name.split(" ")[0] || "Unknown",
-              lastName: s.name.split(" ")[1] || "Unknown",
-              dateOfBirth: "2010-01-01",
+              name: s.name || "Unknown",
+              className: s.className,
+              parent: "TBD Parent",
+              email: `student${i}@example.com`,
+              dob: "2010-01-01",
               gender: "Unknown",
-              grade: s.className,
               enrollmentDate: new Date().toISOString(),
               status: "Active",
-              photoUrl: "",
+              avatarUrl: "",
             },
           });
         }
@@ -165,26 +167,7 @@ export async function completeOnboardingAction(data: any) {
         }
       }
 
-      // 8. Create Admin User
-      if (data.admin?.name && data.admin?.email) {
-        // Find or create admin role
-        let adminRole = await tx.role.findFirst({ where: { name: "System Admin", tenantId: tenant.id } });
-        if (!adminRole) {
-          adminRole = await tx.role.create({ data: { name: "System Admin", tenantId: tenant.id } });
-        }
-        
-        // Very basic mock hashing for demo purposes; standard bcrypt should be used in prod
-        const generateHash = (pw: string) => `mock_hash_${pw}`; 
-        
-        await tx.user.create({
-          data: {
-            tenantId: tenant.id,
-            email: data.admin.email,
-            passwordHash: generateHash(data.admin.password),
-            roleId: adminRole.id,
-          }
-        });
-      }
+      // 8. Admin User is already created and logged in, skip creation.
 
       return { tenant };
     });
