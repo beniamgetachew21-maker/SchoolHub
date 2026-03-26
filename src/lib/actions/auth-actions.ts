@@ -61,6 +61,11 @@ export async function loginAction(tenantDomain: string, formData: any) {
         path: "/"
     });
 
+    // 6. Redirect Based on Role and Tenant
+    if (user.role.name === "SUPER_ADMIN") {
+        return { success: true, redirect: "/saas" };
+    }
+
     return { success: true, redirect: "/dashboard" };
 }
 
