@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { getAllTenantsWithSubscriptions, getAllSubscriptionPlans } from "@/lib/saas-actions";
 import { Building, Users, CreditCard, Activity, TrendingUp, ShieldAlert, HeartPulse } from "lucide-react";
