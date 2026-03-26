@@ -16,13 +16,13 @@ export default function MarketingLayout({
       {/* Utility Bar - Topmost */}
       <div className="bg-brand-dark text-white py-2 px-6 flex justify-between items-center text-xs font-medium border-b border-white/10">
         <div className="flex items-center gap-6">
-          <Link href="/parents-students" className="hover:text-brand-orange transition-colors flex items-center gap-1">
+          <Link href="#" className="hover:text-brand-orange transition-colors flex items-center gap-1">
             {t("parentsStudents")}
           </Link>
-          <Link href="/support" className="hover:text-brand-orange transition-colors">
+          <Link href="#" className="hover:text-brand-orange transition-colors">
             Support
           </Link>
-          <Link href="/community" className="hover:text-brand-orange transition-colors">
+          <Link href="#" className="hover:text-brand-orange transition-colors">
             Community
           </Link>
         </div>
