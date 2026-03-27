@@ -16,13 +16,13 @@ export default function MarketingLayout({
       {/* Utility Bar - Topmost */}
       <div className="bg-brand-dark text-white py-2 px-6 flex justify-between items-center text-xs font-medium border-b border-white/10">
         <div className="flex items-center gap-6">
-          <Link href="#" className="hover:text-brand-orange transition-colors flex items-center gap-1">
+          <Link href="/parents-students" className="hover:text-brand-orange transition-colors flex items-center gap-1">
             {t("parentsStudents")}
           </Link>
-          <Link href="#" className="hover:text-brand-orange transition-colors">
+          <Link href="/request-demo" className="hover:text-brand-orange transition-colors">
             Support
           </Link>
-          <Link href="#" className="hover:text-brand-orange transition-colors">
+          <Link href="/plans" className="hover:text-brand-orange transition-colors">
             Community
           </Link>
         </div>
@@ -45,18 +45,18 @@ export default function MarketingLayout({
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
-            <div className="flex items-center gap-1 text-white/90 font-semibold hover:text-white cursor-pointer group">
-              {t("solutions")} <ChevronDown className="h-4 w-4 group-hover:rotate-180 transition-transform" />
-            </div>
-            <div className="flex items-center gap-1 text-white/90 font-semibold hover:text-white cursor-pointer group">
-              {t("impact")} <ChevronDown className="h-4 w-4 group-hover:rotate-180 transition-transform" />
-            </div>
+            <Link href="/#features" className="flex items-center gap-1 text-white/90 font-semibold hover:text-white">
+              {t("solutions")}
+            </Link>
+            <Link href="/parents-students" className="flex items-center gap-1 text-white/90 font-semibold hover:text-white">
+              {t("impact")}
+            </Link>
             <Link href="/plans" className="text-white/90 font-semibold hover:text-white">
               {t("plans")}
             </Link>
-            <div className="flex items-center gap-1 text-white/90 font-semibold hover:text-white cursor-pointer group">
-              {t("resources")} <ChevronDown className="h-4 w-4 group-hover:rotate-180 transition-transform" />
-            </div>
+            <Link href="/request-demo" className="flex items-center gap-1 text-white/90 font-semibold hover:text-white">
+              {t("resources")}
+            </Link>
           </nav>
         </div>
 
@@ -93,19 +93,19 @@ export default function MarketingLayout({
           <div>
             <h4 className="font-bold text-lg mb-6">Our Solutions</h4>
             <ul className="space-y-4 text-slate-400 text-sm">
-              <li><Link href="#" className="hover:text-white transition-colors">Student Information System</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Learning Management</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Unified Finance & HR</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Analytics & Insights</Link></li>
+              <li><Link href="/#features" className="hover:text-white transition-colors">Student Information System</Link></li>
+              <li><Link href="/#features" className="hover:text-white transition-colors">Learning Management</Link></li>
+              <li><Link href="/plans" className="hover:text-white transition-colors">Unified Finance & HR</Link></li>
+              <li><Link href="/plans" className="hover:text-white transition-colors">Analytics & Insights</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-bold text-lg mb-6">Stakeholders</h4>
             <ul className="space-y-4 text-slate-400 text-sm">
-              <li><Link href="#" className="hover:text-white transition-colors">For Districts</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">For Teachers</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">For Parents</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">For Students</Link></li>
+              <li><Link href="/request-demo" className="hover:text-white transition-colors">For Districts</Link></li>
+              <li><Link href="/request-demo" className="hover:text-white transition-colors">For Teachers</Link></li>
+              <li><Link href="/parents-students" className="hover:text-white transition-colors">For Parents</Link></li>
+              <li><Link href="/parents-students" className="hover:text-white transition-colors">For Students</Link></li>
             </ul>
           </div>
           <div>
@@ -124,8 +124,9 @@ export default function MarketingLayout({
         <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 text-slate-500 text-xs flex flex-col md:flex-row justify-between items-center gap-4">
           <p>© 2026 EthioEdu. All rights reserved.</p>
           <div className="flex gap-6 uppercase tracking-widest font-bold">
-            <Link href="#" className="hover:text-white">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white">Terms of Use</Link>
+            <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
+             
+            <Link href="/terms" className="hover:text-white">Terms of Use</Link>
             <Link href="/saas" className="hover:text-amber-400 text-slate-500/50 transition-colors">Platform Admin</Link>
           </div>
         </div>
