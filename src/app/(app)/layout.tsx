@@ -2,6 +2,7 @@ import { SidebarProvider, Sidebar, SidebarInset } from "@/components/ui/sidebar"
 import { SidebarNav } from "@/components/layout/sidebar-nav";
 import { Header } from "@/components/layout/header";
 import { getCurrentTenant } from "@/lib/tenant";
+import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
@@ -12,6 +13,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }>) {
   const tenant = await getCurrentTenant();
+  const session = await getSession();
   const isImpersonating = (await cookies()).has("impersonated_tenant_id");
 
   // Fetch the primary admin specifically for this tenant to display their credentials
@@ -21,6 +23,7 @@ export default async function AppLayout({
   });
 
   const userStr = JSON.stringify(adminUser || { name: 'School Admin', role: 'ADMIN' });
+  const userRole = session?.role || "Admin";
 
   // 1. Check if the Institutional account is Suspended
   if (tenant.status === "Suspended") {
@@ -39,7 +42,7 @@ export default async function AppLayout({
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarNav tenantName={tenant.name} logoUrl={tenant.logoUrl} />
+        <SidebarNav tenantName={tenant.name} logoUrl={tenant.logoUrl} userRole={userRole} />
       </Sidebar>
       <SidebarInset>
         <Header 

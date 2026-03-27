@@ -57,12 +57,14 @@ interface NavItem {
 
 interface NavSection {
     title: string;
+    id: string;
     items: NavItem[];
 }
 
 const navSections: NavSection[] = [
     {
         title: "Administration",
+        id: "administration",
         items: [
             { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
             { href: "/admin/core", label: "Core Admin", icon: ShieldCheck, basePath: "/admin/core" },
@@ -72,6 +74,7 @@ const navSections: NavSection[] = [
     },
     {
         title: "Student Lifecycle",
+        id: "student_lifecycle",
         items: [
             { href: "/students", label: "SIS (Profiles)", icon: Users, basePath: "/students" },
             { href: "/admissions/applications", label: "Admissions", icon: UserPlus, basePath: "/admissions" },
@@ -80,6 +83,7 @@ const navSections: NavSection[] = [
     },
     {
         title: "Academic Excellence",
+        id: "academic_excellence",
         items: [
             { href: "/lms/courses", label: "LMS (Learning)", icon: BookOpen, basePath: "/lms" },
             { href: "/academics/timetable", label: "Scheduling", icon: CalendarClock, basePath: "/academics/timetable" },
@@ -90,6 +94,7 @@ const navSections: NavSection[] = [
     },
     {
         title: "Campus Operations",
+        id: "campus_operations",
         items: [
             { href: "/finance/fees", label: "Finance & Billing", icon: DollarSign, basePath: "/finance" },
             { href: "/inventory/dashboard", label: "Inventory", icon: Package, basePath: "/inventory" },
@@ -97,14 +102,19 @@ const navSections: NavSection[] = [
             { href: "/hostel/dashboard", label: "Hostel/Dorms", icon: Bed, basePath: "/hostel" },
             { href: "/library/books", label: "Library System", icon: BookMarked, basePath: "/library" },
         ]
-    },
-    {
-        title: "Financial Management",
-        items: [
-            { href: "/finance", label: "Financial Overview", icon: DollarSign, basePath: "/finance" },
-        ]
     }
 ];
+
+// RBAC Mapping: Define which modules each role can see
+const ROLE_PERMISSIONS: Record<string, string[]> = {
+    "SUPER_ADMIN": ["*"],
+    "Super Admin": ["*"],
+    "ADMIN": ["*"],
+    "Admin": ["*"],
+    "Teacher": ["academic_excellence"], // Only Academics
+    "Accountant": ["campus_operations", "administration"], // Finance/Inventory + Dashboard
+    "Registrar": ["student_lifecycle", "administration"], // SIS/Admissions + Dashboard
+};
 
 const studentsSubmenu = [
     { href: "/students", label: "Student Directory" },
@@ -216,8 +226,35 @@ const inventorySubmenu = [
 ];
 
 
-export function SidebarNavComponent({ tenantName = "EthioEdu", logoUrl }: { tenantName?: string, logoUrl?: string | null }) {
+export function SidebarNavComponent({ 
+    tenantName = "EthioEdu", 
+    logoUrl,
+    userRole = "Admin" 
+}: { 
+    tenantName?: string, 
+    logoUrl?: string | null,
+    userRole?: string 
+}) {
     const pathname = usePathname();
+
+    // Filter sections based on permissions
+    const visibleSections = React.useMemo(() => {
+        const allowedModules = ROLE_PERMISSIONS[userRole] || ROLE_PERMISSIONS["Admin"];
+        if (allowedModules.includes("*")) return navSections;
+        
+        return navSections.filter(section => 
+            (section as any).id === "administration" || allowedModules.includes((section as any).id)
+        ).map(section => {
+             // For non-admins, if it's the administration section, only show Dashboard
+             if ((section as any).id === "administration") {
+                 return {
+                     ...section,
+                     items: section.items.filter(i => i.href === "/dashboard")
+                 };
+             }
+             return section;
+        });
+    }, [userRole]);
 
     const checkActive = React.useCallback((item: { href: string; basePath?: string }) => {
         if (item.basePath) {
@@ -283,7 +320,7 @@ export function SidebarNavComponent({ tenantName = "EthioEdu", logoUrl }: { tena
             </SidebarHeader>
 
             <div className="flex-1 overflow-y-auto p-2 space-y-4">
-                {navSections.map(section => (
+                {visibleSections.map(section => (
                     <div key={section.title}>
                         <p className="text-xs text-muted-foreground px-2 pt-2 pb-1 font-medium select-none">{section.title}</p>
                         <SidebarMenu>

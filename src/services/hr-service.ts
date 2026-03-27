@@ -95,9 +95,12 @@ export class HrService extends BaseService {
                     }
                 });
 
+                let tempPassword = null;
+
                 if (createAccount) {
-                    const password = createAccount.password || "School123!"; // Default temporary password
-                    const passwordHash = await bcrypt.hash(password, 10);
+                    // Generate a random 8-character password if not provided
+                    tempPassword = createAccount.password || Math.random().toString(36).slice(-8) + "!";
+                    const passwordHash = await bcrypt.hash(tempPassword, 10);
                     
                     await tx.user.create({
                         data: {
@@ -109,9 +112,16 @@ export class HrService extends BaseService {
                             entityType: "Employee"
                         }
                     });
+
+                    // Simulated Email Invitation
+                    console.log(`--- [INVITATION SENT] ---`);
+                    console.log(`To: ${data.email}`);
+                    console.log(`Subject: Your SchoolHub Account is Ready`);
+                    console.log(`Credentials: Email: ${data.email} / Password: ${tempPassword}`);
+                    console.log(`--------------------------`);
                 }
 
-                return employee;
+                return { ...employee, tempPassword };
             });
 
             revalidatePath('/hr/directory');

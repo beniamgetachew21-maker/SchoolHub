@@ -119,6 +119,7 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
 
     const [systemAccess, setSystemAccess] = useState(false);
     const [selectedRoleId, setSelectedRoleId] = useState("");
+    const [invitedPassword, setInvitedPassword] = useState<string | null>(null);
 
     // Fetch roles on open
     useEffect(() => {
@@ -195,21 +196,31 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
             const res = await inviteStaffAction(formData, createAccount);
             
             if (res.success) {
-                toast({ title: "Staff Member Onboarded", description: `${formData.name} has been added successfully.` });
-                setIsAddOpen(false);
-                setFormData({
-                    name: "",
-                    email: "",
-                    department: "",
-                    designation: "",
-                    salary: "",
-                    dateOfJoining: new Date().toISOString().split('T')[0],
-                    gender: "Prefer not to say",
-                    dob: "1990-01-01",
-                    status: "Active"
-                });
-                setSystemAccess(false);
-                router.refresh();
+                const tempPwd = (res.employee as any)?.tempPassword;
+                if (tempPwd) {
+                    setInvitedPassword(tempPwd);
+                    toast({ 
+                        title: "Account Created!", 
+                        description: `Note: Temporary password is ${tempPwd}. Please copy it now.`,
+                        duration: 10000 
+                    });
+                } else {
+                    toast({ title: "Staff Member Onboarded", description: `${formData.name} has been added successfully.` });
+                    setIsAddOpen(false);
+                    setFormData({
+                        name: "",
+                        email: "",
+                        department: "",
+                        designation: "",
+                        salary: "",
+                        dateOfJoining: new Date().toISOString().split('T')[0],
+                        gender: "Prefer not to say",
+                        dob: "1990-01-01",
+                        status: "Active"
+                    });
+                    setSystemAccess(false);
+                    router.refresh();
+                }
             } else {
                 toast({ title: "Error", description: res.error || "Failed to add staff member.", variant: "destructive" });
             }
@@ -444,108 +455,163 @@ export function DirectoryClient({ employees, totalCount, totalPages, currentPage
                 <Sheet open={isAddOpen} onOpenChange={setIsAddOpen}>
                     <SheetContent className="sm:max-w-xl bg-white border-l border-slate-200 overflow-y-auto">
                         <SheetHeader className="pb-6 border-b border-slate-100 mb-6">
-                            <SheetTitle className="text-2xl font-black text-slate-900 tracking-tight">Onboard New Employee</SheetTitle>
-                            <SheetDescription className="text-slate-500">Enter base profile details to create an employee record.</SheetDescription>
+                            <SheetTitle className="text-2xl font-black text-slate-900 tracking-tight">
+                                {invitedPassword ? "Account Created!" : "Onboard New Employee"}
+                            </SheetTitle>
+                            <SheetDescription className="text-slate-500">
+                                {invitedPassword 
+                                    ? "Provide these credentials to the staff member so they can log in." 
+                                    : "Enter base profile details to create an employee record."}
+                            </SheetDescription>
                         </SheetHeader>
-                        <div className="grid gap-6">
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Full Name</Label>
-                                    <Input 
-                                        placeholder="John Doe" 
-                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
-                                        value={formData.name}
-                                        onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                    />
-                                </div>
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Email</Label>
-                                    <Input 
-                                        type="email" 
-                                        placeholder="john@example.com" 
-                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
-                                        value={formData.email}
-                                        onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                    />
-                                </div>
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Department</Label>
-                                    <Select value={formData.department} onValueChange={v => setFormData({ ...formData, department: v })}>
-                                        <SelectTrigger className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm"><SelectValue placeholder="Select dept" /></SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="Academics">Academics</SelectItem>
-                                            <SelectItem value="Admin">Administration</SelectItem>
-                                            <SelectItem value="Finance">Finance</SelectItem>
-                                            <SelectItem value="IT">IT Support</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Designation</Label>
-                                    <Input 
-                                        placeholder="e.g. Senior Teacher" 
-                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
-                                        value={formData.designation}
-                                        onChange={e => setFormData({ ...formData, designation: e.target.value })}
-                                    />
-                                </div>
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Base Salary (ETB)</Label>
-                                    <Input 
-                                        type="number" 
-                                        placeholder="45000" 
-                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
-                                        value={formData.salary}
-                                        onChange={e => setFormData({ ...formData, salary: e.target.value })}
-                                    />
-                                </div>
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Joining Date</Label>
-                                    <Input 
-                                        type="date" 
-                                        className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
-                                        value={formData.dateOfJoining}
-                                        onChange={e => setFormData({ ...formData, dateOfJoining: e.target.value })}
-                                    />
-                                </div>
 
-                                <div className="col-span-2 border-t border-slate-100 pt-4 mt-2">
-                                    <div className="flex items-center space-x-2">
-                                        <Checkbox id="systemAccess" checked={systemAccess} onCheckedChange={(v) => setSystemAccess(!!v)} />
-                                        <div className="grid gap-1.5 leading-none">
-                                            <label htmlFor="systemAccess" className="text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                                                Grant System Access
-                                            </label>
-                                            <p className="text-[11px] text-muted-foreground italic">Creates a user account so this staff member can log in.</p>
+                        {invitedPassword ? (
+                            <div className="space-y-6 py-6 border-2 border-emerald-100 rounded-3xl bg-emerald-50/50 p-6 animate-in fade-in zoom-in-95">
+                                <div className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label className="text-[10px] font-black uppercase text-emerald-700 tracking-wider">Email Address</Label>
+                                        <div className="bg-white border-emerald-200 p-3 rounded-xl font-mono text-sm border flex items-center justify-between">
+                                            <span>{formData.email}</span>
+                                            <Button variant="ghost" size="sm" className="h-7 text-emerald-600 font-bold" onClick={() => navigator.clipboard.writeText(formData.email)}>Copy</Button>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label className="text-[10px] font-black uppercase text-emerald-700 tracking-wider">Temporary Password</Label>
+                                        <div className="bg-white border-emerald-200 p-3 rounded-xl font-mono text-sm border flex items-center justify-between">
+                                            <span>{invitedPassword}</span>
+                                            <Button variant="ghost" size="sm" className="h-7 text-emerald-600 font-bold" onClick={() => navigator.clipboard.writeText(invitedPassword)}>Copy</Button>
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <blockquote className="p-3 border-l-4 border-emerald-500 bg-emerald-100/50 text-[11px] font-medium text-emerald-800 leading-relaxed italic">
+                                    "System credentials have been generated. The user will be prompted to update their profile after their first login."
+                                </blockquote>
 
-                                {systemAccess && (
-                                    <div className="space-y-2 col-span-2 animate-in fade-in slide-in-from-top-2">
-                                        <Label className="text-[11px] font-black uppercase tracking-widest text-emerald-600">Assign System Role</Label>
-                                        <Select value={selectedRoleId} onValueChange={setSelectedRoleId}>
-                                            <SelectTrigger className="border-emerald-200 bg-emerald-50/10 focus:ring-emerald-500 h-10 shadow-sm">
-                                                <SelectValue placeholder="Select a role" />
-                                            </SelectTrigger>
+                                <Button 
+                                    className="w-full bg-[#114C35] hover:bg-[#0a2e20] text-white font-bold h-12 rounded-xl mt-4"
+                                    onClick={() => {
+                                        setIsAddOpen(false);
+                                        setInvitedPassword(null);
+                                        setFormData({
+                                            name: "",
+                                            email: "",
+                                            department: "",
+                                            designation: "",
+                                            salary: "",
+                                            dateOfJoining: new Date().toISOString().split('T')[0],
+                                            gender: "Prefer not to say",
+                                            dob: "1990-01-01",
+                                            status: "Active"
+                                        });
+                                        setSystemAccess(false);
+                                        router.refresh();
+                                    }}
+                                >
+                                    Finish & View Directory
+                                </Button>
+                            </div>
+                        ) : (
+                            <div className="grid gap-6">
+                                <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+                                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Full Name</Label>
+                                        <Input 
+                                            placeholder="John Doe" 
+                                            className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                            value={formData.name}
+                                            onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Email</Label>
+                                        <Input 
+                                            type="email" 
+                                            placeholder="john@example.com" 
+                                            className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                            value={formData.email}
+                                            onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Department</Label>
+                                        <Select value={formData.department} onValueChange={v => setFormData({ ...formData, department: v })}>
+                                            <SelectTrigger className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm"><SelectValue placeholder="Select dept" /></SelectTrigger>
                                             <SelectContent>
-                                                {roles.map(role => (
-                                                    <SelectItem key={role.id} value={role.id}>{role.name}</SelectItem>
-                                                ))}
+                                                <SelectItem value="Academics">Academics</SelectItem>
+                                                <SelectItem value="Admin">Administration</SelectItem>
+                                                <SelectItem value="Finance">Finance</SelectItem>
+                                                <SelectItem value="IT">IT Support</SelectItem>
                                             </SelectContent>
                                         </Select>
                                     </div>
-                                )}
+                                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Designation</Label>
+                                        <Input 
+                                            placeholder="e.g. Senior Teacher" 
+                                            className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                            value={formData.designation}
+                                            onChange={e => setFormData({ ...formData, designation: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Base Salary (ETB)</Label>
+                                        <Input 
+                                            type="number" 
+                                            placeholder="45000" 
+                                            className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                            value={formData.salary}
+                                            onChange={e => setFormData({ ...formData, salary: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                                        <Label className="text-[11px] font-black uppercase tracking-widest text-[#114C35]">Joining Date</Label>
+                                        <Input 
+                                            type="date" 
+                                            className="border-slate-200 focus-visible:ring-[#114C35] h-10 shadow-sm" 
+                                            value={formData.dateOfJoining}
+                                            onChange={e => setFormData({ ...formData, dateOfJoining: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <div className="col-span-2 border-t border-slate-100 pt-4 mt-2">
+                                        <div className="flex items-center space-x-2">
+                                            <Checkbox id="systemAccess" checked={systemAccess} onCheckedChange={(v) => setSystemAccess(!!v)} />
+                                            <div className="grid gap-1.5 leading-none">
+                                                <label htmlFor="systemAccess" className="text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                                    Grant System Access
+                                                </label>
+                                                <p className="text-[11px] text-muted-foreground italic">Creates a user account so this staff member can log in.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {systemAccess && (
+                                        <div className="space-y-2 col-span-2 animate-in fade-in slide-in-from-top-2">
+                                            <Label className="text-[11px] font-black uppercase tracking-widest text-emerald-600">Assign System Role</Label>
+                                            <Select value={selectedRoleId} onValueChange={setSelectedRoleId}>
+                                                <SelectTrigger className="border-emerald-200 bg-emerald-50/10 focus:ring-emerald-500 h-10 shadow-sm">
+                                                    <SelectValue placeholder="Select a role" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {roles.map(role => (
+                                                        <SelectItem key={role.id} value={role.id}>{role.name}</SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    )}
+                                </div>
+                                <Button 
+                                    className="w-full h-11 bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold rounded-xl mt-4 shadow-sm" 
+                                    onClick={handleInviteSubmit}
+                                    disabled={submitting}
+                                >
+                                    {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
+                                    {submitting ? "Onboarding Staff..." : "Save Employee Profile"}
+                                </Button>
                             </div>
-                            <Button 
-                                className="w-full h-11 bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold rounded-xl mt-4 shadow-sm" 
-                                onClick={handleInviteSubmit}
-                                disabled={submitting}
-                            >
-                                {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-                                {submitting ? "Onboarding Staff..." : "Save Employee Profile"}
-                            </Button>
-                        </div>
+                        )}
                     </SheetContent>
                 </Sheet>
             </div>
