@@ -34,11 +34,12 @@ export async function loginAction(tenantDomain: string, formData: any) {
 
     // 3. Verify password
     // Note: For existing seeded users, passwords might be plain text if they were manually inserted.
-    // In a real app, we ALWAYS use bcrypt.
-    const isPasswordValid = await bcrypt.compare(password, user.passwordHash).catch(() => {
-        // Fallback for plain text passwords in dev/seed
-        return password === user.passwordHash;
-    });
+    let isPasswordValid = await bcrypt.compare(password, user.passwordHash).catch(() => false);
+    
+    // Explicit fallback because bcrypt.compare might return false instead of throwing for plain text strings
+    if (!isPasswordValid) {
+        isPasswordValid = password === user.passwordHash;
+    }
 
     if (!isPasswordValid) {
         return { success: false, error: "Invalid password." };
