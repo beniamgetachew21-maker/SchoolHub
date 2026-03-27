@@ -36,6 +36,21 @@ export async function middleware(request: NextRequest) {
         tenantDomain = hostname;
     }
 
+    // --- NEW VERCEL BYPASS ---
+    const tenantQuery = url.searchParams.get('tenant');
+    let setTenantCookie = false;
+    
+    if (tenantQuery) {
+        tenantDomain = tenantQuery;
+        setTenantCookie = true;
+    } else {
+        const tenantCookie = request.cookies.get('demo_tenant')?.value;
+        if (tenantCookie && tenantDomain === 'default') {
+            tenantDomain = tenantCookie;
+        }
+    }
+    // -------------------------
+
     // Identify locale (Cookie > Header > Default)
     const locales = ['en', 'am', 'om'];
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
@@ -59,13 +74,19 @@ export async function middleware(request: NextRequest) {
     requestHeaders.set('x-next-intl-locale', locale);
 
     // Special routing for tenants mapping to their respective portals
+    let response = NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        },
+    });
+
     if (tenantDomain !== 'default') {
         const session = request.cookies.get("session")?.value;
         const isLoginPage = url.pathname === '/login';
 
         if (!session) {
             if (!isLoginPage) {
-                return NextResponse.rewrite(new URL('/login', request.url), {
+                response =  NextResponse.rewrite(new URL('/login', request.url), {
                     request: { headers: requestHeaders }
                 });
             }
@@ -80,30 +101,27 @@ export async function middleware(request: NextRequest) {
             // (Note: This requires knowing the subdomain in the session or re-fetching)
             
             if (!payload && !isLoginPage) {
-                 return NextResponse.rewrite(new URL('/login', request.url), {
+                 response = NextResponse.rewrite(new URL('/login', request.url), {
                     request: { headers: requestHeaders }
                 });
-            }
-
-            // Redirect away from login if already has a valid session
-            if (isLoginPage && payload) {
-                return NextResponse.redirect(new URL('/dashboard', request.url));
+            } else if (isLoginPage && payload) {
+                // Redirect away from login if already has a valid session
+                response = NextResponse.redirect(new URL('/dashboard', request.url));
             }
         }
 
         if (url.pathname === '/') {
-            return NextResponse.rewrite(new URL('/login', request.url), {
+            response = NextResponse.rewrite(new URL('/login', request.url), {
                 request: { headers: requestHeaders }
             });
         }
     }
 
-    // Continue the request with the modified headers
-    return NextResponse.next({
-        request: {
-            headers: requestHeaders,
-        },
-    });
+    if (setTenantCookie) {
+        response.cookies.set('demo_tenant', tenantDomain, { path: '/', maxAge: 60 * 60 * 24 * 7 });
+    }
+
+    return response;
 }
 
 export const config = {

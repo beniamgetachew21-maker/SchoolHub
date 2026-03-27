@@ -125,19 +125,22 @@ export default function LoginForm({ tenantName, domain }: { tenantName: string, 
                     type="button"
                     onClick={() => {
                         if (tenantSearch) {
+                            const hostname = window.location.hostname;
+                            const isVercel = hostname.includes("vercel.app");
+                            
+                            if (isVercel) {
+                                window.location.href = `/login?tenant=${tenantSearch}`;
+                                return;
+                            }
+
                             let targetHost = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
                             
                             if (!targetHost) {
-                                const hostname = window.location.hostname;
                                 const isIP = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(hostname);
                                 
                                 if (!isIP && hostname !== "localhost") {
-                                    if (hostname.includes("vercel.app")) {
-                                        targetHost = hostname; // Vercel preview URL itself is the root
-                                    } else {
-                                        const parts = window.location.host.split('.');
-                                        targetHost = parts.length > 2 ? parts.slice(1).join('.') : window.location.host;
-                                    }
+                                    const parts = window.location.host.split('.');
+                                    targetHost = parts.length > 2 ? parts.slice(1).join('.') : window.location.host;
                                 } else {
                                     targetHost = "localhost:3000";
                                 }
